@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/shoppingcart/db" VERSION="20100916" COMMENT="XMLDB file for Moodle mod/shoppingcart"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="shoppingcart" COMMENT="Default comment for shoppingcart, please edit me" NEXT="shoppingcart_store_inventory">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Course shoppingcart activity belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="name field for moodle instances" PREVIOUS="course" NEXT="intro"/>
+        <FIELD NAME="intro" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="General introduction of the shoppingcart activity" PREVIOUS="name" NEXT="introformat"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)" PREVIOUS="intro" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="introformat" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="shoppingcart_store_inventory" COMMENT="This table will contain all the items available in the shop" PREVIOUS="shoppingcart" NEXT="shoppingcart_payment_method">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="name" NEXT="price"/>
+        <FIELD NAME="price" TYPE="float" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="description" NEXT="active"/>
+        <FIELD NAME="active" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="price" NEXT="creationdate"/>
+        <FIELD NAME="creationdate" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="active" NEXT="lastmodification"/>
+        <FIELD NAME="lastmodification" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="creationdate" NEXT="referenceid"/>
+        <FIELD NAME="referenceid" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="lastmodification" NEXT="type"/>
+        <FIELD NAME="type" TYPE="char" LENGTH="15" NOTNULL="true" DEFAULT="ITEM" SEQUENCE="false" ENUM="true" ENUMVALUES="'ITEM', 'PACKAGE', 'PACKAGE ITEM'" PREVIOUS="referenceid" NEXT="billable"/>
+        <FIELD NAME="billable" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="type" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="name" UNIQUE="true" FIELDS="name"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="shoppingcart_payment_method" COMMENT="This table will contain all the available payment methods" PREVIOUS="shoppingcart_store_inventory" NEXT="shoppingcart_user_payment">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="name" NEXT="merchantid"/>
+        <FIELD NAME="merchantid" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="description" NEXT="merchantkey"/>
+        <FIELD NAME="merchantkey" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="merchantid" NEXT="servertype"/>
+        <FIELD NAME="servertype" TYPE="char" LENGTH="22" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="merchantkey" NEXT="currency"/>
+        <FIELD NAME="currency" TYPE="char" LENGTH="3" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="servertype" NEXT="type"/>
+        <FIELD NAME="type" TYPE="char" LENGTH="15" NOTNULL="true" DEFAULT="NO PAYMENT" SEQUENCE="false" ENUM="true" ENUMVALUES="'PAYMENT', 'NO PAYMENT'" PREVIOUS="currency" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_user_payment" COMMENT="This table will contain the type of paymemt for every user" PREVIOUS="shoppingcart_payment_method" NEXT="shoppingcart_order">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="email"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="payment"/>
+        <FIELD NAME="payment" TYPE="int" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="email"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_order" COMMENT="This table will contain the order information" PREVIOUS="shoppingcart_user_payment" NEXT="shoppingcart_order_summary">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="6" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="purchasedate"/>
+        <FIELD NAME="purchasedate" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="userid" NEXT="lastmodification"/>
+        <FIELD NAME="lastmodification" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="purchasedate" NEXT="fulfillmentorderstate"/>
+        <FIELD NAME="fulfillmentorderstate" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="lastmodification" NEXT="financialorderstate"/>
+        <FIELD NAME="financialorderstate" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="fulfillmentorderstate" NEXT="ordernumber"/>
+        <FIELD NAME="ordernumber" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="financialorderstate" NEXT="total"/>
+        <FIELD NAME="total" TYPE="float" LENGTH="15" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="ordernumber" NEXT="cancelled"/>
+        <FIELD NAME="cancelled" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="total" NEXT="payment"/>
+        <FIELD NAME="payment" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="cancelled"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="userid"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_order_summary" COMMENT="This table will contain the order description" PREVIOUS="shoppingcart_order" NEXT="shoppingcart_log">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="orderid"/>
+        <FIELD NAME="orderid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="itemid"/>
+        <FIELD NAME="itemid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="orderid" NEXT="quantity"/>
+        <FIELD NAME="quantity" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="itemid" NEXT="unitprice"/>
+        <FIELD NAME="unitprice" TYPE="float" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="quantity" NEXT="cancelled"/>
+        <FIELD NAME="cancelled" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="unitprice"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="itemid"/>
+        <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="shoppingcart_store_inventory" REFFIELDS="id" PREVIOUS="primary" NEXT="orderid"/>
+        <KEY NAME="orderid" TYPE="foreign" FIELDS="orderid" REFTABLE="shoppingcart_order" REFFIELDS="id" PREVIOUS="itemid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_log" COMMENT="This table will contain the modification in the inventory" PREVIOUS="shoppingcart_order_summary" NEXT="shoppingcart_package_summary">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="description"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="300" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="date"/>
+        <FIELD NAME="date" TYPE="datetime" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="description"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_package_summary" COMMENT="This table will contain the packages items" PREVIOUS="shoppingcart_log" NEXT="shoppingcart_preassignment">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="6" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="packageid"/>
+        <FIELD NAME="packageid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="itemid"/>
+        <FIELD NAME="itemid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="packageid" NEXT="quantity"/>
+        <FIELD NAME="quantity" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="itemid" NEXT="price"/>
+        <FIELD NAME="price" TYPE="float" NOTNULL="true" UNSIGNED="true" DEFAULT="0.0" SEQUENCE="false" ENUM="false" PREVIOUS="quantity"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="packageid"/>
+        <KEY NAME="packageid" TYPE="foreign" FIELDS="packageid" REFTABLE="shoppingcart_store_inventory" REFFIELDS="id" PREVIOUS="primary" NEXT="itemid"/>
+        <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="shoppingcart_store_inventory" REFFIELDS="id" PREVIOUS="packageid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="shoppingcart_preassignment" COMMENT="This table will contain the assignments of items to courses" PREVIOUS="shoppingcart_package_summary">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" ENUM="false" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="itemid"/>
+        <FIELD NAME="itemid" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="courseid" NEXT="quantity"/>
+        <FIELD NAME="quantity" TYPE="int" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="itemid" NEXT="assignmentdate"/>
+ 		<FIELD NAME="assignmentdate" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="quantity" NEXT="lastmodification"/>
+        <FIELD NAME="lastmodification" TYPE="datetime" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="assignmentdate" NEXT="active"/>
+        <FIELD NAME="active" TYPE="binary" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="lastmodification"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="courseid"/>
+        <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" PREVIOUS="primary" NEXT="itemid"/>
+        <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="shoppingcart_store_inventory" REFFIELDS="id" PREVIOUS="courseid"/>        
+      </KEYS>
+    </TABLE>
+  </TABLES>
+  <STATEMENTS>
+    <STATEMENT NAME="insert log_display" TYPE="insert" TABLE="log_display" COMMENT="Initial insert of records on table log_display. Each record describes how data will be showed by log reports." NEXT="insert payment methods">
+      <SENTENCES>
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('shoppingcart', 'add', 'shoppingcart', 'name')" />
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('shoppingcart', 'update', 'shoppingcart', 'name')" />
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('shoppingcart', 'view', 'shoppingcart', 'name')" />
+      </SENTENCES>
+    </STATEMENT>
+    <STATEMENT NAME="insert payment methods" TYPE="insert" TABLE="shoppingcart_payment_method" COMMENT="Initial insert of records on table payment_methods." PREVIOUS="insert log_display">
+      <SENTENCES>
+        <SENTENCE TEXT="(name, description, merchantid, merchantkey, servertype, currency, type) VALUES ('Google checkout sandbox', 'Sandbox', '369263219659530', '9mumsrr2wMyNuFaZRB91rg', 'sandbox', 'USD', 'PAYMENT')" />
+        <SENTENCE TEXT="(name, description, merchantid, merchantkey, servertype, currency, type) VALUES ('No payment checkout', 'No monetary payment required', 'NA', 'NA', 'NA', 'NA', 'NO PAYMENT')" />
+      </SENTENCES>
+    </STATEMENT>
+  </STATEMENTS>
+</XMLDB>

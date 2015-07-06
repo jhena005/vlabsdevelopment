@@ -1,0 +1,270 @@
+#wrapper {
+	background: #fff;
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	position: relative;
+	top: 10px;
+}
+
+#wrapper .container a:link,#wrapper .container a:visited {
+	text-decoration: underline;
+}
+
+#wrapper h1 {
+	margin: 0.5em 1em;
+}
+
+#clear {
+	clear: both;
+}
+
+#checkoutButtonsContainer {
+	margin-top: 25px;
+}
+
+#checkoutButtonsContainer div {
+	float: left;
+}
+
+#checkoutbuttoncontainer {
+	padding: 10px;
+	text-align: right;
+}
+
+#wrapper div.container {
+	width: 800px;
+	margin-bottom: 40px;
+	margin-right: 40px;
+	margin-left: 20px;
+}
+
+#wrapper div.hidden {
+	position: absolute;
+	left: -10000px;
+}
+
+#wrapper .page-title {
+	float: left;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+#wrapper .tableTop {
+	line-height: 2em;
+	margin: 0.2em 0;
+	text-align: right;
+}
+
+.note{
+	line-height: 1em;
+	margin: 0.2em 0;
+	text-align: left;
+	color:red;
+	float:left;
+}
+
+#wrapper #preview {
+	position: relative;
+	top: .5em;
+	line-height: 2em;
+	margin: 0.2em 0;
+	text-align: left;
+}
+
+/*Checkout*/
+#checkoutContainer label {
+	float: none;
+	width: 100%;
+}
+
+#checkoutContainer textarea {
+	float: none;
+	width: 100%;
+}
+
+/*Forms*/
+form {
+	margin: 0;
+	padding: 0;
+}  /* Standard margin and padding reset, normally done on the body */
+legend {
+	color: #000; /* IE styles legends with blue text by default */
+	margin-left: -7px;
+	/* A hack that only ie reads to position the legend in the same place cross browser */
+}
+
+fieldset {
+	border: 0px solid #dedede;
+	/* Default fieldset borders vary cross browser, so make them the same */
+}
+
+fieldset div {
+	overflow: hidden; /* Contain the floating elements */
+	display: inline-block; /* Give layout in ie to contain float */
+}
+
+fieldset div {
+	display: block;
+}  /* Reset element back to block leaving layout in ie */
+label {
+	float: left;
+	/* Take out of flow so the input starts at the same height */
+	width: 7em; /* Set a width so the inputs line up */
+}
+
+.radio {
+	position: relative;
+	/* Position so children are relative to this container */
+	border: 0; /* Remove the border */
+}
+
+.radio span {
+	position: absolute; /* Take the content of the legend out of flow */
+	top: 0;
+	left: 0; /* and position it to the top left of the fieldset */
+	width: 5em; /* Same width as labels */
+}
+
+.radio ul {
+	margin-left: 5em;
+	/* Since the legend is out of flow. set margin, so inputs are inline */
+	list-style: none; /* Dont want bullets */
+}
+
+.radio li {
+	position: relative; /* Fix a bug in IE zoom functionality */
+	display: inline; /* Display the inputs in a line */
+	white-space: nowrap;
+	/* We dont want a label to wrap between the input and label */
+}
+
+.radio label,.radio input {
+	width: auto;
+	/* Reset the width on the label from the 5em, set earlier */
+	float: none; /* Reset the float from left on the label, set earlier */
+	vertical-align: middle; /* Align the radio buttons with the inputs */
+}
+
+.clear {
+	clear: both;
+}
+
+form fieldset div label,form fieldset div input,form fieldset div select
+	{
+	display: block;
+	margin-bottom: 7px;
+	float: left;
+}
+
+form fieldset div label {
+	width: 7em;
+}
+
+form fieldset div select,form fieldset div input {
+	width: 14em;
+	 margin-bottom: -0.2em;
+}
+
+form fieldset div.formColumn {
+	float: left;
+	width: 25em;
+	margin: 1em 0em 0em 2em
+}
+
+form fieldset div.formNoColumn {
+	clear: both;
+	width: 42em;
+	margin: 0em 0em 0em 2em
+}
+
+div.formNoColumn textarea {
+	width: 34em;
+	height: 3em;
+}
+
+
+.descriptionDetails {
+    clear: left;
+    margin-left: 4em;
+    width: 36em;
+}
+
+.buttonColumnDetails {
+	float: right;
+	width: 6em;
+	margin-left: 4em
+}
+
+#storeTable tr {
+	line-height: 2em;
+}
+
+#storeTable tr td {
+	vertical-align: top;
+}
+
+.clear {
+	clear: both;
+}
+
+table.display tbody tr.even:hover {
+	cursor: pointer;
+	background-color: #c5dbec
+}
+
+table.display tbody tr.odd:hover {
+	cursor: pointer;
+	background-color: #c5dbec
+}
+
+table.display tbody tr.even:hover td.sorting_1 {
+	cursor: pointer;
+	background-color: #c5dbec
+}
+
+table.display tbody tr.odd:hover td.sorting_1 {
+	cursor: pointer;
+	background-color: #c5dbec
+}
+
+.formRow{
+	width: 22em;
+	height: 2.6em;
+	margin: 0 0 0 0;
+	text-align: left;
+}
+
+.twoRadio input{
+	margin: 0.5em 0 0 0.15em;
+}
+
+input[type=checkbox]{
+	width:1em;
+}
+
+
+
+
+.message{
+	text-align: center;
+}
+
+.message .image img{
+	margin: 10px 0 10px 0;
+}
+
+.loading .image{
+	padding: 0;
+	margin: 0;
+}
+
+#tabs .message p{
+	margin: -10px 0 10px 0;
+	padding: 0;
+	color: #555;
+	font-size: 0.8em;
+}
+
+
+#tabs .message .error{
+	color: #cd0a0a;
+}

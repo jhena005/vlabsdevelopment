@@ -1,0 +1,703 @@
+<?php
+//require_once((dirname(dirname(dirname(__FILE__)))).'/config.php');
+//require_once(dirname(dirname(__FILE__)).'/lib.php');
+require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/libraries/configuration.php');
+
+class TableRows extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+    }
+}
+
+
+
+function db_execute($sql)
+{
+    return eF_executeQuery($sql, false);
+    //log($sql);
+
+}
+
+
+function db_getrecords($sql)
+{
+    //log($sql);
+    $result = eF_executeQuery($sql);
+    return $result;
+}
+
+
+function db_getrecord($sql)
+{
+
+    $result = eF_executeQuery($sql);
+    return $result;
+}
+
+//Orders
+
+function db_getOrders()
+{	
+
+$sql = "SELECT * FROM module_vlabs_shoppingcart_order ORDER BY lastmodification";
+//$result  = eF_getTableData('module_vlabs_shoppingcart_order','*','','lastmodification');
+$result = eF_executeQuery($sql);
+//print_r("db_getOrders data:");
+//print_r($result);
+return $result;
+
+}
+
+
+
+function db_getOrdersByEmail($email)
+{	
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_order WHERE email = '".$email."' ORDER BY id";
+
+    return eF_executeQuery($sql);
+}
+
+function db_getOrdersByUser($userid)
+{	
+	//original 	$sql = "SELECT * FROM mdl_shoppingcart_order WHERE userid = ".$userid." ORDER BY lastmodification";
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_order WHERE userid = ".$userid;
+    return eF_executeQuery($sql);
+}
+
+function db_getOrdersWithPackage($packageid)
+{
+	
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_order_summary WHERE itemid =' . $packageid;
+	$result  = eF_executeQuery($sql);
+    return $result;
+}
+
+
+function db_addNoPaymentOrder($userid, $ordernumber)
+{
+	$nowMillis = 1000 * strtotime(date(DATE_ATOM));
+
+    $sql = "INSERT INTO mdl_shoppingcart_order (userid, purchasedate, lastmodification,"
+            . "ordernumber, financialorderstate, fulfillmentorderstate, cancelled, payment)"
+            . "VALUES (" . $userid . ",'" . $nowMillis . "','" . $nowMillis . "','"
+            . $ordernumber . "', 'NO PAYMENT', 'PENDING APPROVAL',0,0);";
+            
+    //print_r($sql);
+
+    return eF_executeQuery($sql, false);     
+            
+}
+
+function db_addGoogleCheckoutOrder($email, $ordernumber, $purchaseDate,$fulfillmentorderstate, $financialorderstate){
+	
+	$user = db_getUserByEmail($email);
+	
+	$purchaseDateMillis = 1000 * strtotime($purchaseDate);
+	
+	$sql = "INSERT INTO mdl_shoppingcart_order (userid, purchasedate, lastmodification,"
+		." ordernumber, financialorderstate, fulfillmentorderstate, cancelled, payment) VALUES ("
+		."". $user->id. ","
+		."'". $purchaseDateMillis. "',"
+		."'". $purchaseDateMillis . "',"
+        ."'". $ordernumber . "',"
+        ."'". $fulfillmentorderstate."',"
+        ."'". $financialorderstate."',"
+        ."0,"
+        ."1)";
+        
+
+    return eF_executeQuery($sql, false);     
+            
+}
+
+
+
+function db_modifyGoogleCheckoutOrder($new_financial_state,$new_fulfillment_order,$date,$ordernumber){
+
+	$dateMillis = 1000 * strtotime($date);
+	$sql = 'UPDATE mdl_shoppingcart_order SET financialorderstate = "' . $new_financial_state . '", fulfillmentorderstate = "' . $new_fulfillment_order . '", lastmodification = "' . $dateMillis . '" WHERE ordernumber = "' . $ordernumber . '";';
+    return eF_executeQuery($sql, false);
+	
+}
+
+
+function db_addOrderItem($orderid,$itemid,$quantity,$price)
+{
+	$sql = "INSERT INTO mdl_shoppingcart_order_summary (orderid, itemid, quantity, unitprice, cancelled) VALUES (" . $orderid. "," . $itemid . "," . $quantity . ",".$price.", 0);";	
+	return eF_executeQuery($sql, false);       
+}
+function db_cancelOrderItem($orderid,$itemid)
+{
+	$sql = "UPDATE mdl_shoppingcart_order_summary SET cancelled = 1 where orderid =" . $orderid. " and itemid=" . $itemid ;
+	return eF_executeQuery($sql, false);       
+}
+
+function db_cancelOrder($orderid)
+{	
+	$orderItems = db_getOrderItems($orderid);
+	foreach ($orderItems as $orderItem){
+		db_cancelOrderItem($orderid, $orderItem->itemid);
+	}
+	$sql = "UPDATE mdl_shoppingcart_order SET cancelled = 1, fulfillmentorderstate= 'CANCELLED'  where id =" . $orderid ;
+    return eF_executeQuery($sql, false);       
+}
+
+function db_cancelGoogleCheckoutOrder($orderid)
+{	
+	$sql = "UPDATE mdl_shoppingcart_order SET cancelled = 1, fulfillmentorderstate= 'WILL_NOT_DELIVER', financialorderstate = 'CANCELLATION IN PROCESS'  where id =" . $orderid ;
+    return eF_executeQuery($sql, false);       
+}
+
+function db_setOrderRefund($orderid, $refund)
+{	
+	$sql = "UPDATE mdl_shoppingcart_order SET refund = ".$refund."  where id =" . $orderid ;
+    return eF_executeQuery($sql, false);       
+}
+
+function db_getActiveOrderItems($orderid)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_order_summary WHERE cancelled = 0 and orderid = ' . $orderid . ';';
+	return eF_executeQuery($sql);
+}
+
+function db_getCancelledOrderItems($orderid)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_order_summary WHERE cancelled = 1 and orderid = ' . $orderid . ';';
+	return eF_executeQuery($sql);
+}
+
+function db_getOrderItem($orderid, $itemid)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_order_summary WHERE cancelled = 0 and orderid = ' . $orderid . ' and itemid = ' . $itemid . ';';
+	return eF_executeQuery($sql);
+}
+
+function db_getOrderItemById($id)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_order_summary WHERE id = ' . $id . ';';
+	return array_pop(eF_executeQuery($sql));
+}
+
+function db_getOrderByOrderNumber($ordernumber)
+{
+	$sql = "SELECT * FROM mdl_shoppingcart_order WHERE ordernumber = '" . $ordernumber . "'";
+	
+	//print_r($sql);
+
+    return eF_executeQuery($sql);
+	
+}
+
+function db_modifyOrderTotal($orderid, $total)
+{
+	$sql = "UPDATE mdl_shoppingcart_order SET total=" . $total . " WHERE id =" . $orderid;
+	
+	//print_r($sql);
+	
+    return eF_executeQuery($sql, false);
+	
+	
+}
+
+function db_getOrderItems($orderid)
+{
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_order_summary WHERE orderid = ' . $orderid . ';';
+	return eF_executeQuery($sql);
+}
+
+
+
+function db_approveOrder($orderid)
+{
+
+	$sql = "UPDATE module_vlabs_shoppingcart_order SET ";
+	$sql .= "lastmodification='" . date(DATE_ATOM) . "' , ";
+	$sql .= "financialorderstate ='NO PAYMENT' , ";
+	$sql .= "fulfillmentorderstate= 'APPROVED' ";
+	$sql .= "WHERE id =" . $orderid;
+
+	return eF_executeQuery($sql, false); //jh not sure if we need to use 'false' argument here??
+}
+
+function db_declineOrder($orderid)
+{
+	$sql = "UPDATE mdl_shoppingcart_order SET ";
+	$sql .= "lastmodification='" . date(DATE_ATOM) . "' , ";
+	$sql .= "financialorderstate ='NO PAYMENT' , ";
+	$sql .= "fulfillmentorderstate= 'DECLINED' ";
+	$sql .= "WHERE id =" . $orderid;
+
+	return eF_executeQuery($sql, false);
+	
+	
+}
+
+function db_deleteOrder($orderid){
+	
+	$sql="DELETE FROM  mdl_shoppingcart_order_summary WHERE orderid =".$orderid;
+	eF_executeQuery($sql,false);
+	$sql="DELETE FROM  mdl_shoppingcart_order WHERE id =".$orderid;
+	eF_executeQuery($sql,false);
+	
+}
+
+
+//Packages
+function db_getPackages()
+{
+
+    $sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE type ='PACKAGE'";
+    $result = eF_executeQuery($sql);	
+    return $result;
+	
+}
+
+
+
+function db_getPackageSummary($packageid)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_package_summary WHERE packageid = ' . $packageid . ';';
+	$result = eF_executeQuery($sql);
+	return $result;
+	
+}
+
+function db_getElegibleItemsForPackage($packageid)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory ';
+	$sql .= 'WHERE type IN ("PACKAGE ITEM","ITEM") and active=1 and ';
+	$sql .= 'billable =(SELECT billable FROM mdl_shoppingcart_store_inventory WHERE id = ' . $packageid . ') and ';
+	$sql .= 'not exists (SELECT * FROM mdl_shoppingcart_package_summary WHERE itemid = mdl_shoppingcart_store_inventory.id and packageid = ' . $packageid . ');';
+	$result = eF_executeQuery($sql);
+	return $result;
+	
+}
+
+function db_addPackage($packagename,$packagedesc ,$active , $billable)
+{
+	$sql = 'INSERT INTO mdl_shoppingcart_store_inventory'
+	. '(name, description, quantity, price, unlimited, active, referenceid, billable, type, creationdate, lastmodification)'
+	. 'VALUES ("' . $packagename . '","' . $packagedesc . '",null,0.0,false, '.$active.',null,'
+	. $billable . ',"PACKAGE","' . date(DATE_ATOM) . '","' . date(DATE_ATOM) . '");';
+	
+	return eF_executeQuery($sql, false);
+}
+
+
+function db_modifyPackage($packageid,$packagename,$packagedesc ,$active , $billable){
+	$sql = 'UPDATE mdl_shoppingcart_store_inventory SET ';
+	$sql .='name= "' . $packagename . '",';
+	$sql .='description= "' . $packagedesc . '",';
+	$sql .='quantity= 0,';
+	$sql .='price=  null,';
+	$sql .='unlimited=  1,';
+	$sql .='active= ' . $active . ',';
+	$sql .='referenceid= null,';
+	$sql .='billable=  ' . $billable . ',';
+	$sql .='type= "PACKAGE",';
+	$sql .='lastmodification= "' . date(DATE_ATOM) . '" ';
+	$sql .='WHERE id= ' . $packageid . '';
+
+	return eF_executeQuery($sql, false);
+}
+
+function db_deletePackage($packageid)
+{
+	
+	$sql = 'DELETE FROM mdl_shoppingcart_store_inventory WHERE id= ' . $packageid . '';
+	return eF_executeQuery($sql, false);
+	
+}
+
+function db_getPackageStatus($packageId)
+{
+	$sql = "SELECT * FROM mdl_shoppingcart_store_inventory WHERE id =".$packageId;
+    $result = eF_executeQuery($sql);
+    return $result[$packageId]->active;
+	
+}
+
+
+function db_changePackageStatus($packageId)
+{
+	$status = db_getPackageStatus($packageId);
+
+	if($status==0)
+		$newstatus=1;
+	else
+		$newstatus=0;
+		
+		
+	$sql = "UPDATE mdl_shoppingcart_store_inventory SET active = ".$newstatus ." WHERE id= " . $packageId;
+	return eF_executeQuery($sql, false);
+}
+
+
+function db_setPackageTotal($packageid, $total)
+{
+	$sql = "UPDATE mdl_shoppingcart_store_inventory SET price = ".$total ." WHERE id= " . $packageid;
+	return eF_executeQuery($sql, false);
+}
+
+function db_addItemToPackage($itemid,$itemqty ,$packageid , $price)
+{
+	$sql = 'INSERT INTO mdl_shoppingcart_package_summary (itemid, quantity, packageid, price) ';
+	$sql .='VALUES (' . $itemid . ',' . $itemqty . ',' . $packageid . ',' . $price . ')';
+	return eF_executeQuery($sql, false);
+}
+
+
+function db_updatePackageTotal($packageid)
+{
+	$items = db_getPackageItems($packageid);
+	$total = 0;
+	foreach ($items as $item)
+	{
+		$total +=($item->price * $item->quantity);
+	}
+	
+	
+	return db_setPackageTotal($packageid, $total);
+	
+}
+
+function db_getPackageItems($packageid)
+{
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE packageid = ".$packageid;
+	return  eF_executeQuery($sql);	
+	
+}
+
+
+function db_getPackageItem($id)
+{
+	$sql = "SELECT * FROM mdl_shoppingcart_package_summary WHERE id = ".$id;
+	return  array_pop(eF_executeQuery($sql));	
+	
+}
+
+function db_getPackageItemByPackageAndItem($packageId, $itemId)
+{
+	$sql = "SELECT * FROM mdl_shoppingcart_package_summary WHERE packageid = ".$packageId." and itemid = ".$itemId;
+	//print_r($sql);
+	return  array_pop(eF_executeQuery($sql));	
+	
+}
+
+function db_deletePackageItem($id, $packageid)
+{
+	
+	$sql  = 'DELETE FROM mdl_shoppingcart_package_summary ';
+	$sql .= 'WHERE id = ' . $id;
+
+	if(eF_executeQuery($sql, false))
+	{
+		if(db_updatePackageTotal($packageid))
+			return true;
+	}else {
+			return false;
+	}
+
+	return false;
+	
+	
+}
+//Store
+ 
+ function db_getInventory()
+{
+
+	//echo '<script type="text/javascript">alert("In db_getInventory")</script>';
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE type IN ('ITEM','PACKAGE ITEM') ORDER BY lastmodification";
+	 
+	//$result  = eF_getTableData('module_vlabs_shoppingcart_store_inventory','*','','');
+	$result = eF_executeQuery($sql);
+
+	//print_r("db_getInventory data:");
+	//print_r($result);
+    //return eF_executeQuery($sql);
+	return $result;
+}
+
+ 
+function db_getItemsByReference($reference)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("ITEM");';
+	return eF_executeQuery($sql);
+	
+}
+
+
+function db_getPackageItemsByReference($reference)
+{
+	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("PACKAGE ITEM");';
+	return eF_executeQuery($sql);
+	
+}
+
+	
+
+function db_getItem($id)
+{
+	
+
+
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE id =" . $id . ";";
+	$items  = eF_executeQuery($sql);
+	//return $items[$id];
+/*
+	$itemid = "";	
+	$itemname ="";
+	$itemtype = "";
+	$itemdescription = "";
+
+	foreach ($items as $i){
+	$itemid = $i['id'];
+	$itemname = $i['name'];
+	$itemtype = $i['type'];
+	$itemdescription = $i['description'];
+	}
+*/
+	//echo '<script type="text/javascript">alert("In db_getItem, itemid= '. $itemid  . ' itemname= '.$itemname . '")</script>';
+	
+//	return array($itemid,$itemname,$itemtype,$itemdescription);
+
+	return $items;
+}
+
+
+function db_getItemByName($name)
+{
+	
+	$sql = "SELECT * from mdl_shoppingcart_store_inventory WHERE name = '" . str_replace("'", "''",$name) . "';";     
+    $response = eF_executeQuery($sql);
+    return array_pop(eF_executeQuery($sql));
+
+}
+
+
+function db_addItem($itemname,$itemdesc, $itemid, $itemprice, $billable,$referenceid, $type, $active)
+{
+
+	$sql = 'INSERT INTO mdl_shoppingcart_store_inventory(';
+	$sql .= 'name, ';
+	$sql .= 'description, ';
+	$sql .= 'active, ';
+	$sql .= 'referenceid, ';
+	$sql .= 'type, ';
+
+	
+	$sql .= 'billable, ';
+	if($billable=="true")
+		$sql .= 'price, ';
+	
+	$sql .= 'creationdate, ';
+	$sql .= 'lastmodification ';
+
+	$sql .= ') VALUES (';
+	$sql .= '"' . $itemname . '","';
+	$sql .=  $itemdesc . '",';
+	$sql .=  $active . ',';
+	$sql .= '"' . $referenceid . '",';
+	$sql .= '"'.$type . '",';
+
+	
+	$sql .= $billable . ',';
+	if($billable=="true")
+		$sql .=  $itemprice . ', ';
+
+	$sql .= '"'.date(DATE_ATOM) . '",';
+	$sql .= '"'.date(DATE_ATOM) . '"';
+
+	
+	$sql .= ');';
+	
+	//print_r($sql);
+	
+	return eF_executeQuery($sql, false);
+	
+}
+
+
+function db_getUserByEmail($email)
+{
+	$sql = "SELECT * FROM mdl_user WHERE LOWER(email) = '" . strtolower($email) . "'";
+    return eF_executeQuery($sql);	
+	
+}
+
+
+function db_getUserById($userid)
+{
+	$sql = "SELECT * FROM users WHERE login = '".$userid."'";
+    return eF_executeQuery($sql);	
+}
+
+
+function db_getOrderById($orderid)
+{
+
+    $sql = "SELECT * FROM module_vlabs_shoppingcart_order WHERE id =" . $orderid;
+    return eF_executeQuery($sql);
+    
+	
+}
+
+
+//Pre assignments
+
+
+function db_addPreasssignment($id, $courseid, $itemid, $quantity, $active){
+	$sql = "INSERT INTO mdl_shoppingcart_preassignment (id, courseid, itemid, quantity, assignmentdate, lastmodification, active)".
+			"VALUES ('".$id."',".$courseid.",".$itemid.",".$quantity.",'".date(DATE_ATOM)."','".date(DATE_ATOM) . "',".$active.")";
+	//print_r($sql);
+	return eF_executeQuery($sql, false);
+	
+}
+
+function db_modifyPreasssignment($id, $courseid, $itemid, $quantity, $active){
+	$sql = "UPDATE mdl_shoppingcart_preassignment SET courseid=".$courseid.", itemid= ".$itemid.", quantity=".$quantity.", lastmodification='".date(DATE_ATOM) . "', active=".$active." WHERE id='".$id."'";
+	return eF_executeQuery($sql, false);
+	
+}
+
+function db_cancelPreasssignment($id){
+	$sql = "UPDATE mdl_shoppingcart_preassignment SET active=0 WHERE id='".$id."'";
+	return eF_executeQuery($sql, false);	
+}
+
+function db_deletePreassignment($id){
+	$sql ="DELETE FROM mdl_shoppingcart_preassignment WHERE id='".$id."'";
+	return eF_executeQuery($sql, false);
+}
+
+function db_getPreassignmentsByCourse($courseid){
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_preassignment WHERE courseid =".$courseid;
+	$result = eF_executeQuery($sql);	
+	return $result;
+}
+
+function db_getPreassignments(){
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_preassignment";
+	$result = eF_executeQuery($sql);
+	return $result;
+}
+
+function db_getPreassignmentById($id){
+	$sql = "SELECT * FROM mdl_shoppingcart_preassignment WHERE id='".$id."'";
+	return eF_executeQuery($sql);
+}
+
+function db_getPreassignment($courseid, $itemid){
+	$sql = "SELECT * FROM mdl_shoppingcart_preassignment WHERE courseid =".$courseid." and itemid=".$itemid." and active = 1";	
+	//print_r($sql);
+	return eF_executeQuery($sql);	
+}
+
+
+function db_getCoursesByUser($userid){
+	
+	$sql = "SELECT * FROM mdl_course WHERE id in ".
+				"(SELECT instanceid FROM mdl_context WHERE contextlevel = 50 AND id in ".
+					"(SELECT contextid FROM mdl_role_assignments WHERE userid =".$userid." and roleid = 5))";
+	
+	return eF_executeQuery($sql);
+	
+}
+
+function db_getCourses(){
+	
+	$sql = "SELECT * FROM mdl_course";
+	return eF_executeQuery($sql);
+	
+}
+
+
+function db_getCourseById($courseid){
+	//echo '<script type="text/javascript">alert("in db.php db_getCourseById courseid ='. $courseid .'")</script>';
+	$sql = "SELECT * FROM courses WHERE id =".$courseid;  //originally mdl_course
+	$result  = eF_executeQuery($sql);
+	return $result;
+	
+}
+
+function db_getEnrollments(){
+	
+	$enrollments = array();
+		
+	$sql = "SELECT * FROM moodle.mdl_role_assignments WHERE roleid = 5 and 
+		contextid IN (SELECT id FROM moodle.mdl_context WHERE contextlevel = 50) ORDER BY id";
+	
+
+	$result  = eF_executeQuery($sql);
+
+	foreach ($result as $e){
+		$sql = "SELECT * FROM mdl_context WHERE id = $e->contextid ORDER BY id";
+		$context = eF_executeQuery($sql);
+		
+		$enrollment = array(
+			"enrollmentId"=>$e->id,
+			"courseId"=>$context->instanceid,
+			"userId"=>$e->userid
+		);
+		array_push($enrollments, $enrollment);
+		
+	}
+	
+	return $enrollments;
+}
+
+function db_getAdministrators(){
+	
+	$sql = "SELECT userid FROM mdl_role_assignments WHERE roleid IN (SELECT id FROM mdl_role WHERE name = 'Administrator')";
+   return eF_executeQuery($sql);
+	
+}
+
+
+function db_getUserTimeZone($userId){
+		//jh modified to use efront timezone info
+   	//jh original: $sql = "SELECT data FROM mdl_user_info_data WHERE userid = ".$userId." and fieldid = 4";
+	$sql = "SELECT timezone FROM users WHERE userid = ".$userId;
+	return eF_executeQuery($sql);
+	
+}
+
+function db_setUserTimeZone($userId, $timeZoneId){
+   	try {
+   		
+   		$sql = "UPDATE mdl_user_info_data SET data ='".$timeZoneId."' WHERE userid = ".$userId." and fieldid = 4";
+	    eF_executeQuery($sql,false);
+	    
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }	
+}
+
+function db_getUserName($userId){
+   	try {
+   		
+   		$sql = "SELECT username FROM mdl_user WHERE id = ".$userId;
+	    $username = eF_executeQuery($sql);
+        return $username;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+        return null;
+    }	
+}
+
+
+
+?>

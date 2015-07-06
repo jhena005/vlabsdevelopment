@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<module>
+	<title>Module Shoppingcart</title>
+	<author>Johann Henao</author>
+	<date>2015 05 15</date>
+	<version>1.0</version>
+	<description>VLABS PROJECT</description>
+	<className>module_shoppingcart</className>
+	<requires>3.6.8</requires>
+</module>

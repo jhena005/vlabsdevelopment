@@ -1,0 +1,10 @@
+.LV_invalid_field{
+	border:1px solid #cd0a0a;
+}
+
+.LV_validation_message{
+	font-size: 0.7em;
+	color: #cd0a0a;
+	margin: 0 0 -0.2em 0;
+	padding: 0;
+}
