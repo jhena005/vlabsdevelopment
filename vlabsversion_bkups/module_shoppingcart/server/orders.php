@@ -376,32 +376,74 @@ if ($action == "reloadOrders") {
 		$orderid = "";
 	}
 	
-	$adminId = $_SESSION["userid"];
-	$timeZoneId = db_getUserTimeZone($adminId)->data;
-	$compatibleTimezone = substr($timeZoneId,10);
-	date_default_timezone_set($compatibleTimezone);
+	if (isset($_POST['userid'])) {
+		$userlogin = $_POST['userid'];
+	} else {
+		$userlogin = "";
+	}
+
+
+	$adminId = userlogin;//jh original =$_SESSION["userid"];
+	$userdata = db_getUserById($userlogin);
+
+	$timeZoneId = "";
+
+	foreach ($userdata as $u){
+		$timeZoneId = $u['timezone'];
+	}
+
+	date_default_timezone_set($timeZoneId);
+
+	//jh not needed on efront $compatibleTimezone = substr($timeZoneId,10);
+	//jh not needed on efront date_default_timezone_set($compatibleTimezone);
 	
 	//Get order details
 	$dbOrder = db_getOrderById($orderid);
+
+	$dbOrder_userid = "";
+	$dbOrder_ordernumber = "";
+	foreach($dbOrder as $dbO){
+		$dbOrder_userid = $dbO['userid'];
+		$dbOrder_ordernumber = $dbO['ordernumber'];
+	}
 
 	//Update order in database
 	$success = db_declineOrder($orderid);
 
 	//Send email
-	$user= db_getUserById($dbOrder->userid);
-	$body= '<p>Order '.$dbOrder->ordernumber.' has been declined.<p>';
-	sendEmail($user, 'Order Declined', $body);
+	$user= db_getUserById($dbOrder_userid);
+	$body= '<p>Order '.$dbOrder_ordernumber.' has been declined.<p>';
+	//sendEmail($user, 'Order Declined', $body);  jh NOTE: come back to this !!!
 	
 	//Get order details
 	$order = db_getOrderById($orderid);
-	$o = array("id"=>$order->id,
-			"ordernumber"=>$order->ordernumber,
-			"username"=>$user->username,
-			"purchasedate"=>date(DATE_ATOM, ($order->purchasedate/1000)),
-			"lastmodification"=>$order->lastmodification ,
-			"fulfillmentorderstate"=>$order->fulfillmentorderstate,
-			"financialorderstate"=>$order->financialorderstate ,
-			"total"=>$order->total
+	$order_ordernumber = "";
+	$order_purchasedate = "";
+	$order_lastmodification = "";
+	$order_fulfillmentorderstate ="";
+	$order_financialorderstate = "";
+	$order_total = "";
+	$order_id = "";
+
+	foreach($order as $o){
+		$order_ordernumber = $o['ordernumber'];
+		$order_purchasedate = $o['purchasedate'];
+		$order_lastmodification = $o['lastmodification'];
+		$order_fulfillmentorderstate = $o['fulfillmentorderstate'];
+		$order_financialorderstate = $o['ninancialorderstate'];
+		$order_total = $o['total'];
+		$order_id = $o['id'];
+	}
+
+
+	$o = array("id"=>$order_id,
+			"ordernumber"=>$order_ordernumber,
+			"username"=>$user_username,
+			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
+			"lastmodification"=>$order_lastmodification ,
+			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
+			"financialorderstate"=>$order_financialorderstate ,
+			"total"=>$order_total
 			);	
 	
 	$response = array("success"=>$success, "order"=>$o);
@@ -414,16 +456,43 @@ if ($action == "reloadOrders") {
 	} else {
 		$orderid = "";
 	}
+
+	if (isset($_POST['userid'])) {
+		$userlogin = $_POST['userid'];
+	} else {
+		$userlogin = "";
+	}
 	
-	$adminId = $_SESSION["userid"];
-	$timeZoneId = db_getUserTimeZone($adminId)->data;
-	$compatibleTimezone = substr($timeZoneId,10);
-	date_default_timezone_set($compatibleTimezone);
+	$adminId = $userlogin; //jh original = $_SESSION["userid"];
+
+	$userdata = db_getUserById($userlogin);
+
+	$timeZoneId = "";
+
+	foreach ($userdata as $u){
+		$timeZoneId = $u['timezone'];
+	}
+
+	date_default_timezone_set($timeZoneId);
 
 	//initialize refund
 	$refundAmount = 0;
 	
 	$dbOrder =  db_getOrderById($orderid);
+	$dbOrder_payment = "";
+	$dbOrder_id = "";
+	$dbOrder_refund= "";
+	$dbOrder_ordernumber = "";
+	$dbOrder_userid = "";
+
+	foreach($dbOrder as $dbO){
+		$dbOrder_payment = $dbO['payment'];
+		$dbOrder_id = $dbO['id'];
+		$dbOrder_refund= $dbO['refund'];
+		$dbOrder_ordernumber = $dbO['ordernumber'];
+		$dbOrder_userid = $dbO['userid'];
+	}
+	
 	$dbOrderItems = db_getOrderItems($orderid);
 
 	$assignmentsResponse = cancelTransaction($orderid);
@@ -434,28 +503,29 @@ if ($action == "reloadOrders") {
 	$i=0;	
 	foreach ($dbOrderItems as $dbOrderItem){
 		$ar = $assignmentsResponse[$i++];
-		$subtotal = $dbOrderItem->quantity*$dbOrderItem->unitprice;
+		$subtotal = $dbOrderItem['quantity']*$dbOrderItem['unitprice'];
 		$partialRefund = ($subtotal*$ar->percentageReturned)/100;	
 		$refundAmount = $refundAmount + $partialRefund;	
 	}
 	
 	//Google checkout orders
-	if($dbOrder->payment){
+	if($dbOrder_payment){
 
 		if($refundAmount>0){
 			
-			db_setOrderRefund($dbOrder->id, $dbOrder->refund+$refundAmount);
+			db_setOrderRefund($dbOrder_id, $dbOrder_refund+$refundAmount);
 			
 			//Refund total or partial item price 
-			$gresponse = $Grequest->SendRefundOrder($dbOrder->ordernumber,$refundAmount,
+			/*jh NOTE:  Discussed with Dr. Sadjadi on 7/6/2015 that we will not use the google request methods for now.
+			$gresponse = $Grequest->SendRefundOrder($dbOrder_ordernumber,$refundAmount,
 										"Order has been refunded by the store administrator.".
 										"Contact the administrator for further details.");
-
+			
 			if($gresponse[0]==200){
 				//If the refund amount is not the total of the orderItem, 
 				//item cannot be cancelled
 
-				$gresponse  = $Grequest->SendCancelOrder($dbOrder->ordernumber, 
+				$gresponse  = $Grequest->SendCancelOrder($dbOrder_ordernumber, 
 								"Order has been cancelled by the store.".
 				 				"Contact the administrator for further details.");
 						
@@ -467,11 +537,14 @@ if ($action == "reloadOrders") {
 					$message = "Google checkout has not allowed to cancel the order ".$dbOrder->ordernumber.".";
 				}
 
+
 			}else{
 				$success = false;
 				$message = "Google checkout has not allowed to refund the quantity of ".$refundAmount." to the order ".$dbOrder->ordernumber.".";
 			}
-				
+
+			end jh */
+			$message = "Refunds not available through this system, please contact the administrator for further details.";				
 		}else{
 			$success = false;
 			$message = "Order could not be cancelled because all items have been consumed by the buyer.";
@@ -482,32 +555,55 @@ if ($action == "reloadOrders") {
 	}
 
 	if($success){
-		$body= '<p>Order '.$dbOrder->ordernumber.' has been cancelled.<p>';
+		$body= '<p>Order '.$dbOrder_ordernumber.' has been cancelled.<p>';
 	}else{
 		$body= '<p>The cancellation of your order has not been completed. The reason is:<cite>'.$message.'</cite><p>';
 		
 	}
 	//Send email
-	$user= db_getUserById($dbOrder->userid);
+	$user= db_getUserById($dbOrder_userid);
+	$user_name = "";
+	foreach($user as $u){
+		$user_name = $u['name'];
+	}
 	// sms: 5/19/2011
 	// sendEmail($user, 'Order['.$dbOrder->ordernumber.'] Cancellation', $body);
 
 	
 	//Get updated order info
 	$order = db_getOrderById($orderid);
-	$o = array("id"=>$order->id,
-			"ordernumber"=>$order->ordernumber,
-			"username"=>$user->username,
-			"purchasedate"=>date(DATE_ATOM, ($order->purchasedate/1000)),
-			"lastmodification"=>$order->lastmodification ,
-			"fulfillmentorderstate"=>$order->fulfillmentorderstate,
-			"financialorderstate"=>$order->financialorderstate ,
-			"total"=>$order->total
+	$order_id = "";
+	$order_ordernumber = "";
+	$order_purchasedate = "";
+	$order_fulfillmentorderstate = "";
+	$order_financialorderstate = "";
+	$order_total = "";
+	$order_lastmodification = "";
+	foreach($order as $o){
+		$order_id = $o['id'];
+		$order_ordernumber = $o['ordernumber'];
+		$order_purchasedate = $o['purchasedate'];
+		$order_fulfillmentorderstate = $o['fulfillmentorderstate'];
+		$order_financialorderstate = $o['financialorderstate'];
+		$order_total = $o['total'];
+		$order_lastmodification = $o['lastmodification'];
+	}
+
+
+
+	$o = array("id"=>$order_id,
+			"ordernumber"=>$order_ordernumber,
+			"username"=>$user_username,
+			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
+			"lastmodification"=>$order_lastmodification ,
+			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
+			"financialorderstate"=>$order_financialorderstate ,
+			"total"=>$order_total
 			);	
 			
 	$response = array("success"=>$success, "message"=>$message, "order"=>$o);		
 	echo json_encode($response);
-	
+
 	
 }else if ($action == "cancelOrderItem") {
 
@@ -517,37 +613,80 @@ if ($action == "reloadOrders") {
 		$id = "";
 	}
 
+    if (isset($_POST['userid'])) {
+        $userlogin = $_POST['userid'];
+    } else {
+        $userlogin = "";
+    }
+
 	//initilize refund
 	$refundAmount=0;
 
-	$dbOrderItem = db_getOrderItemById($id);	
-	$dbOrder = db_getOrderById($dbOrderItem->orderid);
-	$dbItem = db_getItem($dbOrderItem->itemid);
+	$dbOrderItem = db_getOrderItemById($id);
+    $dbOrderItem_orderid = "";
+    $dbOrderItem_itemid = "";
+    $dbOrderItem_quantity = "";
+    $dbOrderItem_cancelled = "";
+
+    foreach($dbOrderItem as $dbOI){
+        $dbOrderItem_orderid = $dbOI['orderid'];
+        $dbOrderItem_itemid = $dbOI['orderid'];
+        $dbOrderItem_quantity = $dbOI['quantity'];
+        $dbOrderItem_cancelled = $dbO['cancelled'];
+    }
+
+	$dbOrder = db_getOrderById($dbOrderItem_orderid);
+    $dbOrder_ordernumber ="";
+    $dbOrder_id = "";
+    $dbOrder_payment = "";
+    $dbOrder_userid = "";
+    foreach($dbOrder as $dbO){
+        $dbOrder_ordernumber = $dbO['ordernumber'];
+        $dbOrder_id = $dbO['id'];
+        $dbOrder_payment = $dbO['payment'];
+        $dbOrder_userid = $dbO['userid'];
+    }
+
+	$dbItem = db_getItem($dbOrderItem_itemid);
+    $dbItem_id = "";
+    $dbItem_referenceid = "";
+    $dbItem_name = "";
+
+    foreach($dbItem as $dbI){
+        $dbItem_id = $dbI['id'];
+        $dbItem_referenceid = $dbI['id'];
+        $dbItem_name = $dbI['name'];
+    }
 	$success = true;
 	$message="";
 	
 	$assignmentsRequest = array();
 	
 	if($dbItem->type=="PACKAGE"){
-		$packageItems = db_getPackageItems($dbItem->id);
+		$packageItems = db_getPackageItems($dbItem_id);
 		foreach ($packageItems as $pi){
-			$item = db_getItem($pi->itemid);
-			$assignment = array("creditTypeId"=>$item->referenceid,
-								"quantity"=>$pi->quantity,
-								"purchaseId"=>$dbOrder->ordernumber."".$dbItem->id,
-								"active"=>!$pi->cancelled
+			$item = db_getItem($pi['itemid']);
+            $item_referenceid = "";
+            foreach($item as $i){
+                $item_referenceid = $i['referenceid'];
+            }
+
+			$assignment = array("creditTypeId"=>$item_referenceid,
+								"quantity"=>$pi['quantity'],
+								"purchaseId"=>$dbOrder_ordernumber."".$dbItem_id,
+								"active"=>!$pi['cancelled']
 								);
 			array_push($assignmentsRequest, $assignment);			
 		}
 		
-		$assignmentsResponse = ws_cancelQuotaAssignment($assignmentsRequest);
+		$assignmentsResponse = ws_cancelQuotaAssignment($assignmentsRequest); //jh NOTE: come back to this !!! 7/7/2015
 		
 //		print_r($assignmentsResponse);
 	
 		$i=0;		
 		foreach ($packageItems as $pi){
-			$percentageReturned = $assignmentsResponse[$i++]->percentageReturned;
-			$subtotal = $pi->quantity*$dbOrderItem->quantity*$pi->price;
+			$percentageReturned = $assignmentsResponse[$i++]->percentageReturned; //jh NOTE: this is tied to the above call!!
+			$subtotal = $pi['quantity']*$dbOrderItem_quantity*$pi['price'];
 			$partialRefund = ($subtotal * $percentageReturned)/100;	
 			$refundAmount = $refundAmount + $partialRefund;		
 			
@@ -559,9 +698,9 @@ if ($action == "reloadOrders") {
 //		echo "refund total ".$refundAmount;
 	}else{
 		$assignment = array("creditTypeId"=>$dbItem->referenceid,
-							"quantity"=>$dbOrderItem->quantity,
-							"purchaseId"=>$dbOrder->ordernumber,
-							"active"=>!$dbOrderItem->cancelled
+							"quantity"=>$dbOrderItem_quantity,
+							"purchaseId"=>$dbOrder_ordernumber,
+							"active"=>!$dbOrderItem_cancelled
 							);	
 		array_push($assignmentsRequest, $assignment);
 		
@@ -579,220 +718,258 @@ if ($action == "reloadOrders") {
 
 
 	//Google checkout order items
-	if($dbOrder->payment){
+	if($dbOrder_payment){
 		
 		if($refundAmount>0){
-			
-			$itemToCancel = array();			
-			//create a google item
-			$gitem = new GoogleItem($dbItem->name, // Item name
-			$dbItem->description, // Item description
-			$dbOrderItem->quantity, // Quantity
-			$dbItem->price); // Unit price
+            /*jh NOTE:  Discussed with Dr. Sadjadi on 7/6/2015 that we will not use the google request methods for now.
 
-			//set item unique id 
-			$gitem->SetMerchantItemId($dbItem->id);		 
-			array_push($itemsToCancel, $gitem);
+            $itemToCancel = array();
+            //create a google item
+            $gitem = new GoogleItem($dbItem->name, // Item name
+            $dbItem->description, // Item description
+            $dbOrderItem->quantity, // Quantity
+            $dbItem->price); // Unit price
 
-			//Refund total or partial item price 
+            //set item unique id
+            $gitem->SetMerchantItemId($dbItem->id);
+            array_push($itemsToCancel, $gitem);
 
-			$gresponse = $Grequest->SendRefundOrder($dbOrder->ordernumber,$refundAmount,
-										"Item has been refunded by the administrator of the quota store.".
-										"Contact the administrator for further details.");
+            //Refund total or partial item price
 
-			if($gresponse[0]==200){
-				//If the refund amount is not the total of the orderItem, 
-				//item cannot be cancelled
-				
-				db_setOrderRefund($dbOrder->id, $dbOrder->refund+$refundAmount);
-				
-				if($percentageReturned==1){
-					$gresponse = $Grequest->SendCancelItems($dbOrder->ordernumber, $itemsToCancel, 
-										"Item has been cancelled by the administrator of the quota store.".
-										"Contact the administrator for further details.");
-							
-					if($gresponse[0]==200){
-						db_cancelOrderItem($dbOrder->id, $dbItem->id);
-						$success = true;
-						
-					}else{
-						$success = false;
-						$message = "Google could not cancel item ". $dbItem->name;	
-					}
-				}else{
-					db_cancelOrderItem($dbOrder->id, $dbItem->id);
-					$success = true;
-				}
-			}else{
-				$success = false;
-				$message = "Google could not refund the amount of ".$refundAmount." to the order ".$dbOrder->ordernumber.".";	
-			}
 
-		}else{
-			$success = false;	
-			$message = "Item ". $dbItem->name." could not be cancelled because it has been consumed by the buyer.";				
-		}
-		
-	}else{
-		$success = db_cancelOrderItem($dbOrder->id, $dbItem->id);
-		if($success){
-			$body= '<p>The item '.$dbItem->name.' from order '.$dbOrder->ordernumber.' has been cancelled.<p>';
-		}else{
-			$message = "Item could not be cancelled in database";
-			$body= '<p>The cancellation of item '.$dbItem->name.' from order '.$dbOrder->ordernumber.' has not been completed.<p>';
-		}
+            $gresponse = $Grequest->SendRefundOrder($dbOrder->ordernumber,$refundAmount,
+                                        "Item has been refunded by the administrator of the quota store.".
+                                        "Contact the administrator for further details.");
 
-	}
-	
-	$itemsCancelled = db_getCancelledOrderItems($dbOrder->id);
-	$items = db_getOrderItems($dbOrder->id);
-	
-	if(count($items) == count($itemsCancelled)){
-		if($dbOrder->payment){
-			db_cancelGoogleCheckoutOrder($dbOrder->id);
-			$gresponse  = $Grequest->SendCancelOrder($dbOrder->ordernumber, 
-									"Order has been cancelled due to a partial or complete refund.".
-					 				"Contact the administrator for further details.");			
-		}else{
-			db_cancelOrder($dbOrder->id);
-			$body= '<p>Order '.$dbOrder->ordernumber.' has been cancelled.<p>';
-			$user= db_getUserById($dbOrder->userid);
-			// sms: 5/19/2011
-			// sendEmail($user, 'Order['.$dbOrder->ordernumber.'] Cancellation', $body);
-						
-		}
+            if($gresponse[0]==200){
+                //If the refund amount is not the total of the orderItem,
+                //item cannot be cancelled
 
-	}
-		
-	$orderitem = db_getOrderItemById($id);
-	$subtotal = $orderitem->quantity * $orderitem->unitprice;			
-	$item = db_getItem($orderitem->itemid);
-	$user= db_getUserById($dbOrder->userid);	
-	$description = ord_getItemDescription($item->id, $dbOrder->id);
-	
-	$oi = array(
-		"id"=>$orderitem->id,
-	    "itemid"=>$item->id,
-		"name"=>$item->name,
-		"type"=>$item->type,
-		"description"=>$item->description,
-		"quantity"=>$orderitem->quantity,
-		"price"=>$orderitem->unitprice ,
-		"subtotal"=>$subtotal,
-		"cancelled"=>$orderitem->cancelled,
-		"description"=>$description	
-	);
-	
-	if($success){
-		$body= '<p>The item '. $dbItem->name.' from order '.$dbOrder->ordernumber.' has been cancelled.<p>';
-	}else{
-		$body= '<p>The item '. $dbItem->name.' from order '.$dbOrder->ordernumber.' has not been cancelled. The reason is: <cite>'.$message.'</cite><p>';
+                db_setOrderRefund($dbOrder->id, $dbOrder->refund+$refundAmount);
 
-	}
+                if($percentageReturned==1){
+                    $gresponse = $Grequest->SendCancelItems($dbOrder->ordernumber, $itemsToCancel,
+                                        "Item has been cancelled by the administrator of the quota store.".
+                                        "Contact the administrator for further details.");
 
-	// sms: 5/19/2011
-	// sendEmail($user, 'Item Cancellation from order['.$dbOrder->ordernumber.']', $body);
-	
-	$response = array("success"=>$success, "orderitem"=>$oi, "message"=>$message);		
-	echo json_encode($response);
-		
+                    if($gresponse[0]==200){
+                        db_cancelOrderItem($dbOrder->id, $dbItem->id);
+                        $success = true;
+
+                    }else{
+                        $success = false;
+                        $message = "Google could not cancel item ". $dbItem->name;
+                    }
+                }else{
+                    db_cancelOrderItem($dbOrder->id, $dbItem->id);
+                    $success = true;
+                }
+            }else{
+                $success = false;
+                $message = "Google could not refund the amount of ".$refundAmount." to the order ".$dbOrder->ordernumber.".";
+            }
+
+         $message = "Refunds not available through this system, please contact the administrator for further details.";
+        jh end*/
+        }else{
+            $success = false;
+            $message = "Item ". $dbItem->name." could not be cancelled because it has been consumed by the buyer.";
+
+
+        }
+
+
+    }else{
+        $success = db_cancelOrderItem($dbOrder_id, $dbItem_id);
+        if($success){
+            $body= '<p>The item '.$dbItem_name.' from order '.$dbOrder_ordernumber.' has been cancelled.<p>';
+        }else{
+            $message = "Item could not be cancelled in database";
+            $body= '<p>The cancellation of item '.$dbItem_name.' from order '.$dbOrder_ordernumber.' has not been completed.<p>';
+        }
+
+    }
+
+    $itemsCancelled = db_getCancelledOrderItems($dbOrder_id);
+    $items = db_getOrderItems($dbOrder_id);
+
+    if(count($items) == count($itemsCancelled)){
+        if($dbOrder_payment){
+
+            /* jh as mentioned in above NOTE, google events will be omited for now
+            db_cancelGoogleCheckoutOrder($dbOrder_id);
+            $gresponse  = $Grequest->SendCancelOrder($dbOrder->ordernumber,
+                                    "Order has been cancelled due to a partial or complete refund.".
+                                     "Contact the administrator for further details.");
+
+            */
+        }else{
+            db_cancelOrder($dbOrder_id);
+            $body= '<p>Order '.$dbOrder_ordernumber.' has been cancelled.<p>';
+            $user= db_getUserById($dbOrder_userid);
+            // sms: 5/19/2011
+            // sendEmail($user, 'Order['.$dbOrder->ordernumber.'] Cancellation', $body);
+
+        }
+
+    }
+
+        $orderitem = db_getOrderItemById($id);
+        $orderitem_quantity = "";
+        $orderitem_unitprice = "";
+        $orderitem_itemid = "";
+        $orderitem_cancelled = "";
+
+     foreach($oderitem as $oi){
+         $orderitem_quantity = $oi['quantity'];
+         $orderitem_unitprice = $oi['unitprice'];
+         $orderitem_itemid = $oi['itemid'];
+         $orderItem_cancelled = $oi['cancelled'];
+     }
+
+
+    $subtotal = $orderitem_quantity * $orderitem_unitprice;
+    $item = db_getItem($orderitem_itemid);
+    $item_id = "";
+    $item_name = "";
+    $item_type = "";
+    $item_description = "";
+
+    foreach($item as $i){
+        $item_id = $i['id'];
+        $item_name = $i['name'];
+        $item_type = $i['type'];
+        $item_description = $i['description'];
+    }
+
+    $user= db_getUserById($dbOrder_userid);
+
+
+    $description = ord_getItemDescription($item_id, $dbOrder_id);
+
+    $oi = array(
+        "id"=>$orderitem_id,
+        "itemid"=>$item_id,
+        "name"=>$item_name,
+        "type"=>$item_type,
+        "description"=>$item_description,
+        "quantity"=>$orderitem_quantity,
+        "price"=>$orderitem_unitprice ,
+        "subtotal"=>$subtotal,
+        "cancelled"=>$orderitem_cancelled,
+        "description"=>$description
+    );
+
+    if($success){
+        $body= '<p>The item '. $dbItem_name.' from order '.$dbOrder_ordernumber.' has been cancelled.<p>';
+    }else{
+        $body= '<p>The item '. $dbItem_name.' from order '.$dbOrder_ordernumber.' has not been cancelled. The reason is: <cite>'.$message.'</cite><p>';
+
+    }
+
+    // sms: 5/19/2011
+    // sendEmail($user, 'Item Cancellation from order['.$dbOrder->ordernumber.']', $body);
+
+    $response = array("success"=>$success, "orderitem"=>$oi, "message"=>$message);
+    echo json_encode($response);
+
 }
 
 function ord_getItemDescription($itemid, $orderid){
 
-	//Test with ordernumber:  IA4f310f1212c9b
+    //Test with ordernumber:  IA4f310f1212c9b
 
 
 
-	
-	$order = db_getOrderById($orderid);  //jh candidate for removal since this info was already obtained in calling section:  reloadOrderItems.  maybe is better to pass these individual values as arguments???
-	//printr($order);
+
+    $order = db_getOrderById($orderid);  //jh candidate for removal since this info was already obtained in calling section:  reloadOrderItems.  maybe is better to pass these individual values as arguments???
+    //printr($order);
 
 
-	$order_userid = "";
-	foreach($order as $o)
-	{
-		$order_userid = $o['userid'];
-	}
+    $order_userid = "";
+    foreach($order as $o)
+    {
+        $order_userid = $o['userid'];
+    }
 
-	$item = db_getItem($itemid);  //jh again candidate for removal, this was already obtained in calling section. maybe is better to pass these individual values as arguments???
-	$itemtype="";
-	foreach($item as $i)
-	{
-		$itemtype=$i['type'];
-	}
+    $item = db_getItem($itemid);  //jh again candidate for removal, this was already obtained in calling section. maybe is better to pass these individual values as arguments???
+    $itemtype="";
+    foreach($item as $i)
+    {
+        $itemtype=$i['type'];
+    }
 
 //	echo '<script type="text/javascript">alert("In orders.php ord_getItemDescription  after db_getItem itemid= '.$itemid .' orderid= ' . $orderid .'")</script>';
-	
-	$timeZoneId = 'GMT-05:00 US/Eastern'; //jh original was(need input from the Professor): db_getUserTimeZone($order_userid)->data;		
-	$description = "";
-	
-	if($itemtype=="PACKAGE"){	
+
+    $timeZoneId = 'GMT-05:00 US/Eastern'; //jh original was(need input from the Professor): db_getUserTimeZone($order_userid)->data;
+    $description = "";
+
+    if($itemtype=="PACKAGE"){
 
 //	echo '<script type="text/javascript">alert("In orders.php ord_getItemDescription in if package section")</script>';
-		$items = array();		
-		$packageItems = db_getPackageItems($itemid);
+        $items = array();
+        $packageItems = db_getPackageItems($itemid);
 
-		foreach($packageItems as $packageItem){
-			//jh here the logic is getting the items
-			$item = db_getItem($packageItem['itemid']);
-			//$item->quantity = $packageItem->quantity; //replaced by foreach loop below.  I cannot use object->field because getting back  a mixed mysqli array
+        foreach($packageItems as $packageItem){
+            //jh here the logic is getting the items
+            $item = db_getItem($packageItem['itemid']);
+            //$item->quantity = $packageItem->quantity; //replaced by foreach loop below.  I cannot use object->field because getting back  a mixed mysqli array
 
-			foreach($item as $i)
-			{
-				$i['quantity'] = $packageItem['quantity'];
-			}
-					
+            foreach($item as $i)
+            {
+                $i['quantity'] = $packageItem['quantity'];
+            }
 
-			array_push($items, $item);	
+
+            array_push($items, $item);
 //			echo '<script type="text/javascript">alert("in orders.php $packageItems foreach loop i->quantity='. $packageItem['quantity'].'")</script>'; //jh remove this
 
-		}
-		
-	//	echo '<script type="text/javascript">alert("in orders.php after $packageItems foreach loop")</script>'; 
-	//	echo "items array with item array elements";
-	//	var_dump($items);
-		$description .= "<ul>";
+        }
 
-		foreach ($items as $item){	
-			//jh we also need to do a foreach loop for each $item
-			$itemname="";
-			$itemquantity="";
-			$item_referenceid="";
-			//check array size first.
-	//		echo '<script type="text/javascript">alert("in orders.php after $packageItems foreach loop first items foreach loop item size is:'.sizeof($item). '")</script>'; 
-	
-			foreach($item as $i)
-			{
-				//echo "items sub loop, size of item is: " . sizeof($i);
-				$itemname=$i['name'];
-				$itemquantity=$i['quantity'];
-				$item_referenceid=['referenceid'];
-			}
-		
-	//		echo '<script type="text/javascript">alert("in orders.php after $packageItems after foreach items, item before soap call")</script>';
+    //	echo '<script type="text/javascript">alert("in orders.php after $packageItems foreach loop")</script>';
+    //	echo "items array with item array elements";
+    //	var_dump($items);
+        $description .= "<ul>";
 
-			$creditType = ws_getCreditTypeById($item_referenceid); //jh here another getCreditTypeById. Replace with Ajax call
-			//jh CAREFUL!!!! NEED TO TEST IF creditType returned is null else it will look ugly
+        foreach ($items as $item){
+            //jh we also need to do a foreach loop for each $item
+            $itemname="";
+            $itemquantity="";
+            $item_referenceid="";
+            //check array size first.
+    //		echo '<script type="text/javascript">alert("in orders.php after $packageItems foreach loop first items foreach loop item size is:'.sizeof($item). '")</script>';
 
-			//echo '<script type="text/javascript">alert("in orders.php after $packageItems about to dump creditType")</script>'; 
-			//echo "credit type var_dump ";
-			//var_dump($creditType);
-			/* jh reference info, can be deleted
+            foreach($item as $i)
+            {
+                //echo "items sub loop, size of item is: " . sizeof($i);
+                $itemname=$i['name'];
+                $itemquantity=$i['quantity'];
+                $item_referenceid=['referenceid'];
+            }
 
-			INSERT INTO module_vlabs_quotasystem_credit_type (id, name, resource, course_id, policy_id, active, assignable, update_ts) VALUES (84, 'KES-VL-NoExp', 'VIRTUAL LAB', 47, 30, true, true, '2012-02-07 06:44:48.508811-05');
+    //		echo '<script type="text/javascript">alert("in orders.php after $packageItems after foreach items, item before soap call")</script>';
 
-			DROP TABLE IF EXISTS `module_vlabs_quotasystem_credit_type`;
-			CREATE TABLE module_vlabs_quotasystem_credit_type (
-				 id integer NOT NULL,
-				 name character varying(45) NOT NULL,
-				 resource character varying(45) NOT NULL,
-				 course_id integer NOT NULL,
-				 policy_id integer,
-				 active boolean NOT NULL,
-				 assignable boolean NOT NULL,
-				 update_ts timestamp DEFAULT now() ON UPDATE now()
-			 end jh reference info, can be deleted */
+            $creditType = ws_getCreditTypeById($item_referenceid); //jh here another getCreditTypeById. Replace with Ajax call
+            //jh CAREFUL!!!! NEED TO TEST IF creditType returned is null else it will look ugly
+
+            //echo '<script type="text/javascript">alert("in orders.php after $packageItems about to dump creditType")</script>';
+            //echo "credit type var_dump ";
+            //var_dump($creditType);
+            /* jh reference info, can be deleted
+
+            INSERT INTO module_vlabs_quotasystem_credit_type (id, name, resource, course_id, policy_id, active, assignable, update_ts) VALUES (84, 'KES-VL-NoExp', 'VIRTUAL LAB', 47, 30, true, true, '2012-02-07 06:44:48.508811-05');
+
+            DROP TABLE IF EXISTS `module_vlabs_quotasystem_credit_type`;
+            CREATE TABLE module_vlabs_quotasystem_credit_type (
+                 id integer NOT NULL,
+                 name character varying(45) NOT NULL,
+                 resource character varying(45) NOT NULL,
+                 course_id integer NOT NULL,
+                 policy_id integer,
+                 active boolean NOT NULL,
+                 assignable boolean NOT NULL,
+                 update_ts timestamp DEFAULT now() ON UPDATE now()
+             end jh reference info, can be deleted */
 
 				
 			$course = db_getCourseById($creditType->courseId); //jh needs to be put back once credittype ajax call is available

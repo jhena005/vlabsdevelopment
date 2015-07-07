@@ -476,6 +476,7 @@ function ord_cancel(containerId, nTr, orderid)
 	$(containerId).empty();
 	
 	createLoadingDivAfter(containerId,"Cancelling order");
+	var userid= $("#userid").val();
 	
 	 $.ajax({
 	        type: 'POST',
@@ -483,7 +484,8 @@ function ord_cancel(containerId, nTr, orderid)
 	        dataType: 'json',
 	        data: {
 	            action: 'cancelOrder',
-	            orderid:orderid
+	            orderid:orderid,
+					userid:userid
 	        },
 	        success: function(data){
 	        	
@@ -537,6 +539,7 @@ function ord_decline(containerId, nTr, orderid)
 	$(containerId).empty();
 	
 	createLoadingDivAfter(containerId,"Declining order");
+	var userid= $("#userid").val();
 	
     $.ajax({
         type: 'POST',
@@ -544,7 +547,8 @@ function ord_decline(containerId, nTr, orderid)
         dataType: 'json',
         data: {
             action: 'declineOrder',
-            orderid:orderid
+            orderid:orderid,
+				userid:userid
         },
         success: function(data){
         	
