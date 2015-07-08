@@ -1,0 +1,36 @@
+<form>
+    <fieldset>
+    	<div class="formColumn">    	
+	    	<div class="namePackageSpan formRow">
+				<label for="name">Name</label> 
+				<input type="text"name="name" class="namePackage text ui-widget-content ui-corner-all" />
+			</div>
+		</div>
+		
+		<div class="formColumn">
+			<div class="notbillablePackageSpan formRow">
+	        	<label for="notbillable">Not billable</label>
+	        	<input type="checkbox" name="notbillable" checked="checked" class="notbillablePackage" />
+        	</div>
+       
+       		<div class="activePackageSpan formRow">		
+				<label for="active">Active</label>
+				<input type="checkbox" name="active" checked="checked" class="activePackage" />
+			</div>
+       
+        </div>
+        
+        
+        
+		<div class="formNoColumn">	
+			<div class="descriptionPackageSpan">	
+				<label for="description">Description</label> 
+				<textarea name="description"  class=" descriptionPackage text ui-widget-content ui-corner-all" />
+			</div>
+		</div>
+	</fieldset>
+</form>
+<p class="clear" style="text-align: center;">
+	<button class="submit">Save</button>
+	<button class="cancel">Cancel</button>
+</p>

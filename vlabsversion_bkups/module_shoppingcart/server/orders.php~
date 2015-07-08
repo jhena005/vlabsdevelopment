@@ -376,32 +376,74 @@ if ($action == "reloadOrders") {
 		$orderid = "";
 	}
 	
-	$adminId = $_SESSION["userid"];
-	$timeZoneId = db_getUserTimeZone($adminId)->data;
-	$compatibleTimezone = substr($timeZoneId,10);
-	date_default_timezone_set($compatibleTimezone);
+	if (isset($_POST['userid'])) {
+		$userlogin = $_POST['userid'];
+	} else {
+		$userlogin = "";
+	}
+
+
+	$adminId = userlogin;//jh original =$_SESSION["userid"];
+	$userdata = db_getUserById($userlogin);
+
+	$timeZoneId = "";
+
+	foreach ($userdata as $u){
+		$timeZoneId = $u['timezone'];
+	}
+
+	date_default_timezone_set($timeZoneId);
+
+	//jh not needed on efront $compatibleTimezone = substr($timeZoneId,10);
+	//jh not needed on efront date_default_timezone_set($compatibleTimezone);
 	
 	//Get order details
 	$dbOrder = db_getOrderById($orderid);
+
+	$dbOrder_userid = "";
+	$dbOrder_ordernumber = "";
+	foreach($dbOrder as $dbO){
+		$dbOrder_userid = $dbO['userid'];
+		$dbOrder_ordernumber = $dbO['ordernumber'];
+	}
 
 	//Update order in database
 	$success = db_declineOrder($orderid);
 
 	//Send email
-	$user= db_getUserById($dbOrder->userid);
-	$body= '<p>Order '.$dbOrder->ordernumber.' has been declined.<p>';
-	sendEmail($user, 'Order Declined', $body);
+	$user= db_getUserById($dbOrder_userid);
+	$body= '<p>Order '.$dbOrder_ordernumber.' has been declined.<p>';
+	//sendEmail($user, 'Order Declined', $body);  jh NOTE: come back to this !!!
 	
 	//Get order details
 	$order = db_getOrderById($orderid);
-	$o = array("id"=>$order->id,
-			"ordernumber"=>$order->ordernumber,
-			"username"=>$user->username,
-			"purchasedate"=>date(DATE_ATOM, ($order->purchasedate/1000)),
-			"lastmodification"=>$order->lastmodification ,
-			"fulfillmentorderstate"=>$order->fulfillmentorderstate,
-			"financialorderstate"=>$order->financialorderstate ,
-			"total"=>$order->total
+	$order_ordernumber = "";
+	$order_purchasedate = "";
+	$order_lastmodification = "";
+	$order_fulfillmentorderstate ="";
+	$order_financialorderstate = "";
+	$order_total = "";
+	$order_id = "";
+
+	foreach($order as $o){
+		$order_ordernumber = $o['ordernumber'];
+		$order_purchasedate = $o['purchasedate'];
+		$order_lastmodification = $o['lastmodification'];
+		$order_fulfillmentorderstate = $o['fulfillmentorderstate'];
+		$order_financialorderstate = $o['ninancialorderstate'];
+		$order_total = $o['total'];
+		$order_id = $o['id'];
+	}
+
+
+	$o = array("id"=>$order_id,
+			"ordernumber"=>$order_ordernumber,
+			"username"=>$user_username,
+			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
+			"lastmodification"=>$order_lastmodification ,
+			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
+			"financialorderstate"=>$order_financialorderstate ,
+			"total"=>$order_total
 			);	
 	
 	$response = array("success"=>$success, "order"=>$o);
@@ -414,16 +456,43 @@ if ($action == "reloadOrders") {
 	} else {
 		$orderid = "";
 	}
+
+	if (isset($_POST['userid'])) {
+		$userlogin = $_POST['userid'];
+	} else {
+		$userlogin = "";
+	}
 	
-	$adminId = $_SESSION["userid"];
-	$timeZoneId = db_getUserTimeZone($adminId)->data;
-	$compatibleTimezone = substr($timeZoneId,10);
-	date_default_timezone_set($compatibleTimezone);
+	$adminId = $userlogin; //jh original = $_SESSION["userid"];
+
+	$userdata = db_getUserById($userlogin);
+
+	$timeZoneId = "";
+
+	foreach ($userdata as $u){
+		$timeZoneId = $u['timezone'];
+	}
+
+	date_default_timezone_set($timeZoneId);
 
 	//initialize refund
 	$refundAmount = 0;
 	
 	$dbOrder =  db_getOrderById($orderid);
+	$dbOrder_payment = "";
+	$dbOrder_id = "";
+	$dbOrder_refund= "";
+	$dbOrder_ordernumber = "";
+	$dbOrder_userid = "";
+
+	foreach($dbOrder as $dbO){
+		$dbOrder_payment = $dbO['payment'];
+		$dbOrder_id = $dbO['id'];
+		$dbOrder_refund= $dbO['refund'];
+		$dbOrder_ordernumber = $dbO['ordernumber'];
+		$dbOrder_userid = $dbO['userid'];
+	}
+	
 	$dbOrderItems = db_getOrderItems($orderid);
 
 	$assignmentsResponse = cancelTransaction($orderid);
@@ -434,28 +503,29 @@ if ($action == "reloadOrders") {
 	$i=0;	
 	foreach ($dbOrderItems as $dbOrderItem){
 		$ar = $assignmentsResponse[$i++];
-		$subtotal = $dbOrderItem->quantity*$dbOrderItem->unitprice;
+		$subtotal = $dbOrderItem['quantity']*$dbOrderItem['unitprice'];
 		$partialRefund = ($subtotal*$ar->percentageReturned)/100;	
 		$refundAmount = $refundAmount + $partialRefund;	
 	}
 	
 	//Google checkout orders
-	if($dbOrder->payment){
+	if($dbOrder_payment){
 
 		if($refundAmount>0){
 			
-			db_setOrderRefund($dbOrder->id, $dbOrder->refund+$refundAmount);
+			db_setOrderRefund($dbOrder_id, $dbOrder_refund+$refundAmount);
 			
 			//Refund total or partial item price 
-			$gresponse = $Grequest->SendRefundOrder($dbOrder->ordernumber,$refundAmount,
+			/*jh NOTE:  Discussed with Dr. Sadjadi on 7/6/2015 that we will not use the google request methods for now.
+			$gresponse = $Grequest->SendRefundOrder($dbOrder_ordernumber,$refundAmount,
 										"Order has been refunded by the store administrator.".
 										"Contact the administrator for further details.");
-
+			
 			if($gresponse[0]==200){
 				//If the refund amount is not the total of the orderItem, 
 				//item cannot be cancelled
 
-				$gresponse  = $Grequest->SendCancelOrder($dbOrder->ordernumber, 
+				$gresponse  = $Grequest->SendCancelOrder($dbOrder_ordernumber, 
 								"Order has been cancelled by the store.".
 				 				"Contact the administrator for further details.");
 						
@@ -467,11 +537,14 @@ if ($action == "reloadOrders") {
 					$message = "Google checkout has not allowed to cancel the order ".$dbOrder->ordernumber.".";
 				}
 
+
 			}else{
 				$success = false;
 				$message = "Google checkout has not allowed to refund the quantity of ".$refundAmount." to the order ".$dbOrder->ordernumber.".";
 			}
-				
+
+			end jh */
+			$message = "Refunds not available through this system, please contact the administrator for further details.";				
 		}else{
 			$success = false;
 			$message = "Order could not be cancelled because all items have been consumed by the buyer.";
@@ -482,27 +555,50 @@ if ($action == "reloadOrders") {
 	}
 
 	if($success){
-		$body= '<p>Order '.$dbOrder->ordernumber.' has been cancelled.<p>';
+		$body= '<p>Order '.$dbOrder_ordernumber.' has been cancelled.<p>';
 	}else{
 		$body= '<p>The cancellation of your order has not been completed. The reason is:<cite>'.$message.'</cite><p>';
 		
 	}
 	//Send email
-	$user= db_getUserById($dbOrder->userid);
+	$user= db_getUserById($dbOrder_userid);
+	$user_name = "";
+	foreach($user as $u){
+		$user_name = $u['name'];
+	}
 	// sms: 5/19/2011
 	// sendEmail($user, 'Order['.$dbOrder->ordernumber.'] Cancellation', $body);
 
 	
 	//Get updated order info
 	$order = db_getOrderById($orderid);
-	$o = array("id"=>$order->id,
-			"ordernumber"=>$order->ordernumber,
-			"username"=>$user->username,
-			"purchasedate"=>date(DATE_ATOM, ($order->purchasedate/1000)),
-			"lastmodification"=>$order->lastmodification ,
-			"fulfillmentorderstate"=>$order->fulfillmentorderstate,
-			"financialorderstate"=>$order->financialorderstate ,
-			"total"=>$order->total
+	$order_id = "";
+	$order_ordernumber = "";
+	$order_purchasedate = "";
+	$order_fulfillmentorderstate = "";
+	$order_financialorderstate = "";
+	$order_total = "";
+	$order_lastmodification = "";
+	foreach($order as $o){
+		$order_id = $o['id'];
+		$order_ordernumber = $o['ordernumber'];
+		$order_purchasedate = $o['purchasedate'];
+		$order_fulfillmentorderstate = $o['fulfillmentorderstate'];
+		$order_financialorderstate = $o['financialorderstate'];
+		$order_total = $o['total'];
+		$order_lastmodification = $o['lastmodification'];
+	}
+
+
+
+	$o = array("id"=>$order_id,
+			"ordernumber"=>$order_ordernumber,
+			"username"=>$user_username,
+			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
+			"lastmodification"=>$order_lastmodification ,
+			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
+			"financialorderstate"=>$order_financialorderstate ,
+			"total"=>$order_total
 			);	
 			
 	$response = array("success"=>$success, "message"=>$message, "order"=>$o);		

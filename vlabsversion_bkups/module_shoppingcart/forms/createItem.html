@@ -1,0 +1,64 @@
+
+<form>
+	<fieldset>
+		<div class="formColumn">
+	
+			<div class="nameItemSpan formRow">
+				<label for="name">Name</label> 
+				<input type="text"name="name" class="nameItem text ui-corner-all" />
+			</div>
+									
+			<div class="typeItemSpan formRow">			
+				<label for="type">Type</label> 
+				<select name="type" class="typeItem">
+					<option value="ITEM">Single Item</option>
+					<option value="PACKAGE ITEM">Package Item</option>
+				</select>
+			</div>
+			
+			<div class="notbillableItemSpan formRow">			
+				<label for="notbillable">Not billable</label> 
+				<input type="checkbox" name="notbillable" class="notbillableItem" checked="checked"/>
+			</div>			
+		</div>
+
+		<div class="formColumn">
+		
+			<div class="referenceItemSpan formRow">
+				<label for="reference">Reference</label> 
+				<select name="reference" class="referenceItem">
+					<option>Loading...</option>
+				</select>
+			</div>
+
+			<div class="activeItemSpan formRow">		
+				<label for="active">Active</label>
+				<input type="checkbox" name="active" class="activeItem" />
+			</div>
+			
+			<div class="priceItemSpan formRow">			
+				<label for="price">Price</label> 
+				<input type="text" name="price" size="5" class="priceItem text ui-corner-all" />
+			</div>
+
+			
+		</div>	
+
+		<div class="formNoColumn">		
+			
+			<div class="descriptionItemSpan">
+				<label for="description">Description</label> 
+				<textarea name="description" class="descriptionItem text ui-corner-all" ></textarea>
+			</div>
+			
+		</div>
+		
+	</fieldset>
+
+</form>
+<p class="clear" style="text-align: center;">
+	<button class="submit">Save</button>
+	<button class="cancel">Cancel</button>
+</p>
+
+

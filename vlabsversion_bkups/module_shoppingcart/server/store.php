@@ -156,9 +156,25 @@ if ($action == "reload") {
 		$id = "";
 	}
 
-	$item = db_getItem($id);
-	echo json_encode(array("item"=>$item));
-	
+	 $item = db_getItem($id);
+    $formattedItem= array();
+    foreach ($item as $i) {
+        //echo '<script type="text/javascript">alert("In store.php getItem foreach loop")</script>';
+
+        $formattedItem = array("name"=>$i['name'],
+            "type"=>$i['type'],
+            "billable"=>$i['billable'],
+            "active"=>$i['active'],
+            "description"=>$i['description'],
+            "price"=>$i['price'],
+            "referenceid"=>$i['referenceid'] );
+
+        //array_push($formattedItem, $i);
+
+    }
+
+	echo json_encode($formattedItem);
+
 }else if ($action == "getInventory") {
 
  //echo "<script type='text/javascript'>alert('In store.php')</script>";
@@ -168,20 +184,20 @@ if ($action == "reload") {
 	$formattedInventory= array();
 
 	//echo '<script type="text/javascript">alert("Writing to log")</script>';	
-	error_log("store.php getInventory output:\n");
+	//error_log("store.php getInventory output:\n");
 	//error_log(array_values($inventory));
 				
 	foreach ($inventory as $item) {
 		
 
-		if ($item->billable == 1)
-			$price = $item->price;
+		if ($item['billable'] == 1)
+			$price = $item['price'];
 		else
 			$price = 'Not Billable';
 
-		//echo '<script type="text/javascript">alert("about to go into SoapClient call")</script>';	
+		//echo '<script type="text/javascript">alert("about to go into SoapClient call")</script>';
 
-/*
+
 		try {
 			$client = new SoapClient(WSDL_QS, array('location' => LOCATION_QS));
         	$creditType = $client->getCreditTypeById($item->referenceid);
@@ -194,7 +210,7 @@ if ($action == "reload") {
 			$creditType = null;
 	
 	    }
-*/
+
 
 $creditType = "TestCreditType";
 		if($creditType!=null)
@@ -208,7 +224,7 @@ $creditType = "TestCreditType";
 			$item['active'],
 			$item['creationdate']
 			);	
-			error_log("In for each loop ". array_values($i));
+			//error_log("In for each loop ". array_values($i));
 			array_push($formattedInventory, $i);
 		}	
 			
@@ -223,7 +239,7 @@ $creditType = "TestCreditType";
 	try {
 
 		$client = new SoapClient(WSDL_QS, array('location' => LOCATION_QS));
-
+       //echo '<script type="text/javascript">alert("SoapClient call succeeded")</script>';
 		$references = $client->getAssignableCreditTypes();
 		$creditTypes = $references->creditType;
 		$policies = $references->policy;
@@ -252,8 +268,8 @@ $creditType = "TestCreditType";
 			$result = array('references' => $creditTypes);
 
 		}
-		
-		//print_r($result);
+        //echo '<script type="text/javascript">alert("SoapClient call succeeded")</script>';
+		 //var_dump($result);
 
 		echo json_encode($result);
 		
@@ -392,7 +408,7 @@ $creditType = "TestCreditType";
 		$type = "";
 	}
 
-	$sql = 'UPDATE mdl_shoppingcart_store_inventory SET ';
+	$sql = 'UPDATE module_vlabs_shoppingcart_store_inventory SET ';
 	$sql .='name= "' . $itemname . '",';
 	$sql .='description= "' . $itemdesc . '",';
 	$sql .='price=  ' . $itemprice . ',';
@@ -437,7 +453,7 @@ $creditType = "TestCreditType";
 	}else
 	{
 
-		$sql = 'DELETE FROM mdl_shoppingcart_store_inventory ';
+		$sql = 'DELETE FROM module_vlabs_shoppingcart_store_inventory ';
 		$sql .='WHERE id= ' . $itemid . '';
 
 	
@@ -487,13 +503,25 @@ function addPolicyToCreditType($policies, $creditType){
 
 function isItemBeingUsed($itemid) {
 		
-	$sql_orders = 'SELECT * FROM mdl_shoppingcart_order_summary WHERE itemid ='.$itemid;
-	$sql_packages = 'SELECT * FROM mdl_shoppingcart_package_summary WHERE itemid ='.$itemid;
+	$sql_orders = 'SELECT * FROM module_vlabs_shoppingcart_order_summary WHERE itemid ='.$itemid;
+	$sql_packages = 'SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE itemid ='.$itemid;
 
 	$dborders = db_getrecords($sql_orders);
 	$dbpackages = db_getrecords($sql_packages);
 
-	if ($dborders!= null || $dbpackages != null)
+    $dborders_counter = 0;
+    $dbpackages_counter = 0;
+
+    foreach($dborders as $dbO){
+
+        $dborders_counter++;
+    }
+
+    foreach($dbpackages as $dbP){
+        $dbpackages_counter++;
+    }
+
+	if ($dborders_counter > 0 || $dbpackages_counter >0)
 		return true;
 	else
 		return false;

@@ -228,12 +228,12 @@ function db_approveOrder($orderid)
 	$sql .= "fulfillmentorderstate= 'APPROVED' ";
 	$sql .= "WHERE id =" . $orderid;
 
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql, false); //jh not sure if we need to use 'false' argument here??
 }
 
 function db_declineOrder($orderid)
 {
-	$sql = "UPDATE mdl_shoppingcart_order SET ";
+	$sql = "UPDATE module_vlabs_shoppingcart_order SET ";
 	$sql .= "lastmodification='" . date(DATE_ATOM) . "' , ";
 	$sql .= "financialorderstate ='NO PAYMENT' , ";
 	$sql .= "fulfillmentorderstate= 'DECLINED' ";
@@ -533,7 +533,7 @@ function db_addItem($itemname,$itemdesc, $itemid, $itemprice, $billable,$referen
 
 function db_getUserByEmail($email)
 {
-	$sql = "SELECT * FROM mdl_user WHERE LOWER(email) = '" . strtolower($email) . "'";
+	$sql = "SELECT * FROM users WHERE LOWER(email) = '" . strtolower($email) . "'";
     return eF_executeQuery($sql);	
 	
 }

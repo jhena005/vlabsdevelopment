@@ -25,7 +25,7 @@ class TableRows extends RecursiveIteratorIterator {
 
 function db_execute($sql)
 {
-    return eF_executeQuery($sql, false);
+    return eF_executeQuery($sql);
     //log($sql);
 
 }
@@ -162,7 +162,7 @@ function db_cancelGoogleCheckoutOrder($orderid)
 
 function db_setOrderRefund($orderid, $refund)
 {	
-	$sql = "UPDATE mdl_shoppingcart_order SET refund = ".$refund."  where id =" . $orderid ;
+	$sql = "UPDATE module_vlabs_shoppingcart_order SET refund = ".$refund."  where id =" . $orderid ;
     return eF_executeQuery($sql, false);       
 }
 
@@ -233,7 +233,7 @@ function db_approveOrder($orderid)
 
 function db_declineOrder($orderid)
 {
-	$sql = "UPDATE mdl_shoppingcart_order SET ";
+	$sql = "UPDATE module_vlabs_shoppingcart_order SET ";
 	$sql .= "lastmodification='" . date(DATE_ATOM) . "' , ";
 	$sql .= "financialorderstate ='NO PAYMENT' , ";
 	$sql .= "fulfillmentorderstate= 'DECLINED' ";
@@ -491,7 +491,7 @@ function db_getItemByName($name)
 function db_addItem($itemname,$itemdesc, $itemid, $itemprice, $billable,$referenceid, $type, $active)
 {
 
-	$sql = 'INSERT INTO mdl_shoppingcart_store_inventory(';
+	$sql = 'INSERT INTO module_vlabs_shoppingcart_store_inventory(';
 	$sql .= 'name, ';
 	$sql .= 'description, ';
 	$sql .= 'active, ';
@@ -526,14 +526,14 @@ function db_addItem($itemname,$itemdesc, $itemid, $itemprice, $billable,$referen
 	
 	//print_r($sql);
 	
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 	
 }
 
 
 function db_getUserByEmail($email)
 {
-	$sql = "SELECT * FROM mdl_user WHERE LOWER(email) = '" . strtolower($email) . "'";
+	$sql = "SELECT * FROM users WHERE LOWER(email) = '" . strtolower($email) . "'";
     return eF_executeQuery($sql);	
 	
 }

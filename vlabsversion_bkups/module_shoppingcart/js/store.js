@@ -227,6 +227,7 @@ function sto_openForm(containerId, add, nTr, itemId)
 
 function sto_loadForm(containerId, add, nTr, itemId)
 {	
+	//window.alert("On sto_loadForm function");
 	createLoadingDivAfter(containerId,"Loading references");
 	
 	
@@ -397,9 +398,9 @@ function sto_fillOutForm(containerId,itemId, nTr){
 	        },
 	        success: function(data){
 	        	removeLoadingDivAfter(containerId);
-	        	var item = data.item;
+	        	var item = data; //jh original = data.item;
           		
-  				$(containerId+" .nameItem").val(item.name);
+  					$(containerId+" .nameItem").val(item.name);
       			$(containerId+" .typeItem").val(item.type);
       			$(containerId+" .notbillableItem").attr("checked", !(item.billable=="1"));
       			$(containerId+" .activeItem").attr("checked", item.active=="1");

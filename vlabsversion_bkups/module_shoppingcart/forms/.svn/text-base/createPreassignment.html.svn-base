@@ -1,0 +1,31 @@
+
+<form>
+	<fieldset>
+		<div class="formColumn">	
+			<div class="coursePreSpan formRow">
+				<label for="coursePre">Course</label> 
+				<select name="coursePre" class="coursePre">
+					<option>Loading...</option>
+				</select>
+			</div>			
+			<div class="quantiyPreSpan formRow">
+		        <label for="quantityPre">Quantity</label>
+		   		<input type="text" name="quantityPre" class="quantityPre" />
+	   		</div>		
+		</div>
+		<div class="formColumn">			
+			<div class="itemPreSpan formRow">
+				<label for="itemPre">Item</label> 
+				<select name="itemPre" class="itemPre">
+					<option>Loading...</option>
+				</select>
+			</div>			
+		</div>	
+	</fieldset>
+</form>
+<p class="clear" style="text-align: center;">
+	<button class="submit">Save</button>
+	<button class="cancel">Cancel</button>
+</p>
+
+

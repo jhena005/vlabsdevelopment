@@ -172,27 +172,42 @@ function cancelTransaction($orderid){
 	
 	//Get orde details
 	$order = db_getOrderById($orderid);
-	$user = db_getUserById($order->userid);
+	$order_userid = "";
+	$order_ordernumber = "";
+	foreach ($order as $o){
+		$order_userid = $o['userid'];
+		$order_ordernumber = $o['ordernumber'];
+	}
+	
+	$user = db_getUserById($order_userid);
 	$orderItems = db_getOrderItems($orderid);
 		
 	//Prepare request for the quota system cancel call
 	$assignments = array();
 	foreach($orderItems as $orderItem){
-		$item = db_getItem($orderItem->itemid);
-		$type = $item->type;
-				
-		if ($type == "ITEM") {
-			$assignment = array("creditTypeId"=>$item->referenceid,
-							"quantity"=>$orderItem->quantity,
-							"purchaseId"=>$order->ordernumber,
-							"active"=>!$orderItem->cancelled);
+		$item = db_getItem($orderItem['itemid']);
+		$item_type = "";
+		$item_referenceid = "";
+		$item_id = "";
+		
+		foreach($item as $i){
+			$item_type = $i['type'];
+			$item_referenceid = $i['referenceid'];
+			$item_id = $i['id'];
+		}
+		
+		if ($item_type == "ITEM") {
+			$assignment = array("creditTypeId"=>$item_referenceid,
+							"quantity"=>$orderItem['quantity'],
+							"purchaseId"=>$order_ordernumber,
+							"active"=>!$orderItem['cancelled']);
 					
 			array_push($assignments, $assignment);	
         	
-        }else if ($type == "PACKAGE") {
+        }else if ($item_type == "PACKAGE") {
         	
         	//Get package items
-            $packageitems = db_getPackageItems($item->id); 
+            $packageitems = db_getPackageItems($item_id); 
             
             //Initialize array to send a ws request for package items only with rollback true
             $packageItemsArr = array();
@@ -200,12 +215,12 @@ function cancelTransaction($orderid){
             //Save items in request array
             foreach ($packageitems as $packageitem) {
             	
-                $item = db_getItem($packageitem->itemid);
-                $quantity = $orderItem->quantity*$packageitem->quantity;   
-              	$assignment = array( "creditTypeId"=>$item->referenceid, 
+                $item = db_getItem($packageitem['itemid']);
+                $quantity = $orderItem['quantity']*$packageitem['quantity'];   
+              	 $assignment = array( "creditTypeId"=>$item_referenceid, 
                 					 "quantity"=>$quantity, 
-                					 "purchaseId"=>$order->ordernumber."".$orderItem->itemid, 
-                					 "active"=>!$orderItem->cancelled);                      
+                					 "purchaseId"=>$order['ordernumber']."".$orderItem['itemid'], 
+                					 "active"=>!$orderItem['cancelled']);                      
             
             	array_push($assignments, $assignment);	
             }            

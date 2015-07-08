@@ -955,21 +955,6 @@ function ord_getItemDescription($itemid, $orderid){
             //echo '<script type="text/javascript">alert("in orders.php after $packageItems about to dump creditType")</script>';
             //echo "credit type var_dump ";
             //var_dump($creditType);
-            /* jh reference info, can be deleted
-
-            INSERT INTO module_vlabs_quotasystem_credit_type (id, name, resource, course_id, policy_id, active, assignable, update_ts) VALUES (84, 'KES-VL-NoExp', 'VIRTUAL LAB', 47, 30, true, true, '2012-02-07 06:44:48.508811-05');
-
-            DROP TABLE IF EXISTS `module_vlabs_quotasystem_credit_type`;
-            CREATE TABLE module_vlabs_quotasystem_credit_type (
-                 id integer NOT NULL,
-                 name character varying(45) NOT NULL,
-                 resource character varying(45) NOT NULL,
-                 course_id integer NOT NULL,
-                 policy_id integer,
-                 active boolean NOT NULL,
-                 assignable boolean NOT NULL,
-                 update_ts timestamp DEFAULT now() ON UPDATE now()
-             end jh reference info, can be deleted */
 
 				
 			$course = db_getCourseById($creditType->courseId); //jh needs to be put back once credittype ajax call is available
