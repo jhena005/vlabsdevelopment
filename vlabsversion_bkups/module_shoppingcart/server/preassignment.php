@@ -29,19 +29,11 @@ if ($action == "reload") {
 	$formattedPreasssignments = array();
 	
 	foreach ($preassignments as $p){
-		$item = db_getItem($p['itemid']);
+		$item = refactored_db_getItem($p['itemid']);
 		//echo '<script type="text/javascript">alert("foreach loop, preassignment.php source itemid: '. $itemid . '")</script>';
 		$course = db_getCourseById($p['courseid']);
 		$courseid = "";
 		$courseshortn = "";
-
-		$itemid = "";
-		$itemname = "";
-
-		foreach ($item as $i){
-			$itemid = $i['id'];
-			$itemname = $i['name'];
-		}
 
 		foreach ($course as $c)
 		{
@@ -53,8 +45,8 @@ if ($action == "reload") {
 		$preassignment = array($p['id'],
 				$courseid,
 				$courseshortn,
-				$itemid,
-				$itemname,
+				$item['itemid'],
+				$item['itemname'],
 				$p['quantity'],
 				$p['active']);
 		array_push($formattedPreasssignments, $preassignment);
@@ -72,8 +64,8 @@ if ($action == "reload") {
 	
 	foreach ($courses as $c){
 		$course = array(
-				"id"=>$c->id,
-				"name"=>$c->shortname);
+				"id"=>$c['id'],
+				"name"=>$c['name']);
 		array_push($formattedCourses, $course);
 	}
 
@@ -91,6 +83,8 @@ if ($action == "reload") {
 	$courses_arr = array();
 	array_push($courses_arr,$courseId);
 
+    //echo "courseid argument is:" . $courseId . "<br>";
+
 	try {
 		
 		$params = array('courseId' => $courses_arr);
@@ -102,15 +96,23 @@ if ($action == "reload") {
 		else
 			$references = $response->creditType;
 
+       // echo "references: ";
+        //var_dump($references);
 		
 		$items = array();
 		$itemsForPackages = array();
 
 		foreach ($references as $reference) {
 			$itemsbyref = db_getItemsByReference($reference->id);
+
+           //echo "itemsbyref reference->id = ".$reference->id. ": ";
+            //var_dump($itemsbyref);
+
 			if ($itemsbyref != null)
 				$items = array_merge($items, $itemsbyref);
 
+            //echo "after array_merge of items and itemsbyref: ";
+            //var_dump($items);
 			//Get elegible items for packages
 			$itemsForPkgbyref= db_getPackageItemsByReference($reference->id);
 
@@ -124,16 +126,22 @@ if ($action == "reload") {
 
 		if (is_array($items)) {
 			foreach ($items as $item) {
-				$item = array("id"=>$item->id,"name"=>$item->name, "type"=>$item->type);
+				$item = array("id"=>$item['id'],"name"=>$item['name'], "type"=>$item['type']);
 				 array_push($formattedStoreItems, $item);
 			}
+           // echo "formattedStoreItems: ";
+           // var_dump($formattedStoreItems);
 
-			$packages = getPackagesWithItems($itemsForPackages);
+           // echo "itemsForPackages: ";
+           // var_dump($itemsForPackages);
+        if($itemsForPackages!=null) {
+            $packages = getPackagesWithItems($itemsForPackages);
 
-			foreach ($packages as $package) {
-				$item = array("id"=>$package->id,"name"=>$package->name,"type"=>$package->type);				
-				array_push($formattedStoreItems, $item);
-			}
+            foreach ($packages as $package) {
+                $item = array("id" => $package['id'], "name" => $package['name'], "type" => $package['type']);
+                array_push($formattedStoreItems, $item);
+            }
+        }
 		}
 		
 		
@@ -184,32 +192,34 @@ if ($action == "reload") {
 	$id = uniqid("CA",false);
 
 	//Generate purchase id combining order number and item id
-	$item = db_getItem($itemid);
-	$purchaseId = $id."".$item->id;
+	$item = refactored_db_getItem($itemid);
+	$purchaseId = $id."".$item['id'];
 	$course = db_getCourseById($courseid);
-	$preassignment = array(
-						"id"=>$id,
-						"courseId"=>$course->id,
-						"courseName"=>$course->shortname,
-						"itemId"=>$item->id,
-						"itemName"=>$item->name,
-						"quantity"=>$quantity,
-						"active"=>1);
-	
+    $preassignment = array();
+    foreach($course as $c) {
+        $preassignment = array(
+            "id" => $id,
+            "courseId" => $c['id'],
+            "courseName" => $c['shortname'],
+            "itemId" => $item['id'],
+            "itemName" => $item['name'],
+            "quantity" => $quantity,
+            "active" => 1);
+    }
 
 	$assignments = array();
 		
-	if($item->type=="PACKAGE"){
-		$packageItems = db_getPackageItems($item->id);
+	if($item['type']=="PACKAGE"){
+		$packageItems = db_getPackageItems($item['id']);
 		foreach($packageItems as $pi){
-			$item = db_getItem($pi->itemid);
-			$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item->referenceid,
-							"quantity"=>$quantity*$pi->quantity, "active"=>false);
+			$item = refactored_db_getItem($pi['itemid']);
+			$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item['referenceid'],
+							"quantity"=>$quantity*$pi['quantity'], "active"=>false);
 			array_push($assignments, $assignment);
 		}
 	}else{
 
-		$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item->referenceid,
+		$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item['referenceid'],
 							"quantity"=>$quantity, "active"=>false);
 		array_push($assignments, $assignment);
 	}

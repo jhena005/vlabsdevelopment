@@ -190,7 +190,7 @@ class module_shoppingcart extends EfrontModule {
 
 */
 
-	$output = shell_exec('mysql -u root -ppassword -D efront  </opt/lamp/module_vlabs_shoppingcart_data.sql');
+	$output = shell_exec('mysql -u root -ppassword -D efront  </home/jhenao/development/vLabs/Code/WebSite/efront/www/modules/module_vlabs_shoppingcart_data.sql');
 
     	  return true;
  }   
@@ -222,7 +222,7 @@ class module_shoppingcart extends EfrontModule {
 	}
    */
 
-	 	$output = shell_exec('mysqldump -u root -ppassword --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log >/opt/lamp/module_vlabs_shoppingcart_data.sql');
+	 	$output = shell_exec('mysqldump -u root -ppassword --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log >/home/jhenao/development/vLabs/Code/WebSite/efront/www/modules/module_vlabs_shoppingcart_data.sql');
 
         eF_executeQuery("drop table if exists module_vlabs_shoppingcart");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_payment_method");

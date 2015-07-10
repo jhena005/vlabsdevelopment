@@ -56,39 +56,49 @@ if ($action == "reloadPackages") {
 	}
 	
 	$package = db_getItem($packageId);
+    $package_billable = "";
+    $package_array = array();
+
+    if($package!=null) {
+        foreach ($package as $p) {
+            $package_billable = $p['billable'];
+        }
+        array_push($package_array, array("billable"=>$package_billable));
+    }else{
+        array_push($package_array , array("billable"=>"0"));
+    }
 
 	$summary = db_getPackageSummary($packageId);
 	$formattedPackageItems = array();
 	$packageTotal = 0;
-			
-	if(is_array($summary)) {
-		
+
 		foreach ($summary as $packageDetail) {
 			
-			$subtotal = $packageDetail->quantity * $packageDetail->price;
+			$subtotal = $packageDetail['quantity'] * $packageDetail['price'];
 			$total += $subtotal;
 
-			$item = db_getItem($packageDetail->itemid);
+			$item = db_getItem($packageDetail['itemid']);
 
 			if($item!=null)
 			{
-				$packageItem = array($packageDetail->id,
-				$item->id,
-				$item->name,
-				$item->description,
-				$packageDetail->quantity,
-				$item->price,
-				$packageDetail->price,
-				$subtotal
-				);
-				
-				array_push($formattedPackageItems, $packageItem);
+                foreach($item as $i) {
+                    $packageItem = array($packageDetail['id'],
+                        $i['id'],
+                        $i['name'],
+                        $i['description'],
+                        $packageDetail['quantity'],
+                        $i['price'],
+                        $packageDetail['price'],
+                        $subtotal
+                    );
+
+                    array_push($formattedPackageItems, $packageItem);
+                }
 			}
-		}	
-		
+
 	}
 
-	echo json_encode(array("package"=>$package, "items"=>$formattedPackageItems));
+	echo json_encode(array("package"=>$package_array, "items"=>$formattedPackageItems));
 
 }else if($action=="getPkgItem"){
 
@@ -100,20 +110,24 @@ if ($action == "reloadPackages") {
 	}
 
 	
-	$packageDetail = db_getPackageItem($id);	
-	$item = db_getItem($packageDetail->itemid);
-	
-	$subtotal = $packageDetail->quantity * $packageDetail->price;
+	$packageDetail = db_getPackageItem($id);
+    //echo "packageDetail is: ";
+    //var_dump($packageDetail);
+    //echo "packageDetail->itemid is: " . $packageDetail['itemid'];
+	$item = refactored_db_getItem($packageDetail['itemid']);
+	//echo "refactored_db_getItem is: ";
+    //var_dump($item);
+	$subtotal = $packageDetail['quantity'] * $packageDetail['price'];
 				
 	if($item!=null && $packageDetail!=null)
 	{
-		$packageItem = array("id"=>$packageDetail->id,
-		"itemid"=>$item->id,
-		"name"=>$item->name,
-		"description"=>$item->description,
-		"quantity"=>$packageDetail->quantity,
-		"price"=>$item->price,
-		"newprice"=>$packageDetail->price,
+		$packageItem = array("id"=>$packageDetail['id'],
+		"itemid"=>$item['id'],
+		"name"=>$item['name'],
+		"description"=>$item['description'],
+		"quantity"=>$packageDetail['quantity'],
+		"price"=>$item['price'],
+		"newprice"=>$packageDetail['price'],
 		"subtotal"=>$subtotal
 		);
 	}
@@ -148,15 +162,15 @@ if ($action == "reloadPackages") {
 	}
 
 	if (db_addPackage($packagename,$packagedesc ,$active , $billable)) {
-		$package = db_getItemByName($packagename);
+		$package = db_getItemByName($packagename); //jh refactored db call : )
 		
-		$p = array("id"=>$package->id,
-				"name"=>$package->name,
-				"description"=>$package->description,
-				"billable"=>$package->billable,
-				"active"=>$package->active,
-				"price"=>$package->price,
-				"creationdate"=>$package->creationdate
+		$p = array("id"=>$package['id'],
+				"name"=>$package['name'],
+				"description"=>$package['description'],
+				"billable"=>$package['billable'],
+				"active"=>$package['active'],
+				"price"=>$package['price'],
+				"creationdate"=>$package['creationdate']
 				);	
 
 		$result = array('success' => true, 'package' => $p);
@@ -215,28 +229,33 @@ if ($action == "reloadPackages") {
 		$result = array('success' => false, 'message' => 'Package cannot be deleted since it is being referenced in existing orders');
 	} else {
 
+
 		if (db_modifyPackage($packageid,$packagename,$packagedesc ,$active , $billable)) {
-			$package = db_getItem($packageid);
+
+          //$p_array = array();
+			$package = refactored_db_getItem($packageid);
+          /*
 			if(package!=null){
-				
-				$p = array("id"=>$package->id,
-					"name"=>$package->name,
-					"description"=>$package->description,
-					"billable"=>$package->billable,
-					"active"=>$package->active,
-					"price"=>$package->price,
-					"creationdate"=>$package->creationdate
-					);		
-				
+				foreach($package as $p) {
+                    $p_array = array("id" => $p['id'],
+                        "name" => $p['name'],
+                        "description" => $p['description'],
+                        "billable" => $p['billable'],
+                        "active" => $p['active'],
+                        "price" => $p['price'],
+                        "creationdate" => $p['creationdate']
+                    );
+                }
 			}
-	
-			$result = array('success' => true, 'package' => $p);
+	        */
+			$result = array('success' => true, 'package' => $package);
 		} else {
 			$result = array('success' => false, 'message' => "Package could not be modified");
 		}
 	}
 	
 	echo json_encode($result);
+
 } else if ($action == "deletePackage") {
 
 	if (isset($_POST['id'])) {
@@ -269,7 +288,11 @@ if ($action == "reloadPackages") {
 	}
 	
 	$package = db_getItem($packageid);
-	$billable = $package->billable;
+   $package_billable = "";
+   foreach($package as $p){
+       $package_billable = $p['billable'];
+   }
+	$billable = $package_billable;
 	$billable = $billable==1;
 
 
@@ -282,7 +305,7 @@ if ($action == "reloadPackages") {
 		$result = array();
 
 	if ($itemid != "") {
-		$itemtoinclude = db_getItem($itemid);	
+		$itemtoinclude = refactored_db_getItem($itemid);
 		if ($itemtoinclude != null)
 		$result = array_merge($result, $itemtoinclude);
 	}
@@ -291,7 +314,7 @@ if ($action == "reloadPackages") {
 	
 	foreach ($result as $item) {
 		
-		array_push($priceArr, array("id"=>$item->id, "price"=>$item->price));
+		array_push($priceArr, array("id"=>$item['id'], "price"=>$item['price']));
 		
 		
 		if($billable)
@@ -369,19 +392,19 @@ if ($action == "reloadPackages") {
 		if (db_addItemToPackage($itemid,$itemqty ,$packageid , $price)) {
 			db_updatePackageTotal($packageid);
 			$packageDetail = db_getPackageItemByPackageAndItem($packageid, $itemid);		
-			$item = db_getItem($packageDetail->itemid);
+			$item = refactored_db_getItem($packageDetail['itemid']);
 				
-			$subtotal = $packageDetail->quantity * $packageDetail->price;
+			$subtotal = $packageDetail['quantity'] * $packageDetail['price'];
 						
 			if($item!=null && $packageDetail!=null)
 			{
-				$packageItem = array("id"=>$packageDetail->id,
-				"itemid"=>$item->id,
-				"name"=>$item->name,
-				"description"=>$item->description,
-				"quantity"=>$packageDetail->quantity,
-				"price"=>$item->price,
-				"newprice"=>$packageDetail->price,
+				$packageItem = array("id"=>$packageDetail['id'],
+				"itemid"=>$item['id'],
+				"name"=>$item['name'],
+				"description"=>$item['description'],
+				"quantity"=>$packageDetail['quantity'],
+				"price"=>$item['price'],
+				"newprice"=>$packageDetail['price'],
 				"subtotal"=>$subtotal
 				);
 			}
@@ -433,7 +456,7 @@ if ($action == "reloadPackages") {
 
 
 	if (!isPackageBeingUsed($packageid)) {
-		$sql = 'UPDATE mdl_shoppingcart_package_summary ';
+		$sql = 'UPDATE module_vlabs_shoppingcart_package_summary ';
 		$sql .= 'SET quantity = ' . $itemqty . ', ';
 		$sql .= 'price = ' . $price . ' ';
 		$sql .= 'WHERE id  = ' . $id ;
@@ -441,21 +464,21 @@ if ($action == "reloadPackages") {
 		
 		if (db_execute($sql)) {			
 			db_updatePackageTotal($packageid);			
-			$packageDetail = db_getPackageItem($id);	
-			$item = db_getItem($packageDetail->itemid);
+			$packageDetail = db_getPackageItem($id);	//refactored db call : )
+			$item = refactored_db_getItem($packageDetail['itemid']);
 
 			
-			$subtotal = $packageDetail->quantity * $packageDetail->price;
+			$subtotal = $packageDetail['quantity'] * $packageDetail['price'];
 						
 			if($item!=null && $packageDetail!=null)
 			{
-				$packageItem = array("id"=>$packageDetail->id,
-				"itemid"=>$item->id,
-				"name"=>$item->name,
-				"description"=>$item->description,
-				"quantity"=>$packageDetail->quantity,
-				"price"=>$item->price,
-				"newprice"=>$packageDetail->price,
+				$packageItem = array("id"=>$packageDetail['id'],
+				"itemid"=>$item['id'],
+				"name"=>$item['name'],
+				"description"=>$item['description'],
+				"quantity"=>$packageDetail['quantity'],
+				"price"=>$item['price'],
+				"newprice"=>$packageDetail['price'],
 				"subtotal"=>$subtotal
 				);
 			}
@@ -487,8 +510,9 @@ if ($action == "reloadPackages") {
 	if (!isPackageBeingUsed($packageid)) {
 
 		if (db_deletePackageItem($id, $packageid)) {
-			db_updatePackageTotal($packageid);
-			$result = array('success' => true);
+			if(db_updatePackageTotal($packageid)) {
+                $result = array('success' => true);
+            }
 		} else {
 			$result = array('success' => false, 'message' => "Error executing database operation");
 		}
@@ -509,9 +533,13 @@ if ($action == "reloadPackages") {
 		$packageid = 0;
 	}
 
-	$sql = "SELECT billable FROM mdl_shoppingcart_store_inventory WHERE id = " . $packageid;
-	$result = db_getrecord($sql);
-	echo json_encode($result->billable=="1");
+	$sql = "SELECT billable FROM module_vlabs_shoppingcart_store_inventory WHERE id = " . $packageid;
+	$result = eF_ExecuteQuery($sql);
+    $result_billable ="";
+    foreach($result as $r){
+        $result_billable = $r['billable'];
+    }
+	echo json_encode($result_billable=="1");
 	
 }else if ($action == "changeStatus") {
 
@@ -533,7 +561,7 @@ function getPackagesWithItems($items) {
 
 	$values = "(";
 	foreach ($items as $item) {
-		$values.=$item->id . ",";
+		$values.=$item['id'] . ",";
 	}
 
 	$values = substr($values, 0, -1);
@@ -541,24 +569,24 @@ function getPackagesWithItems($items) {
 	$values.=")";
 
 
-	$sql = "SELECT DISTINCT * FROM mdl_shoppingcart_store_inventory WHERE active = 1 and id IN ";
-	$sql .= "(SELECT DISTINCT packageid FROM mdl_shoppingcart_package_summary WHERE itemid IN " . $values . ")";
+	$sql = "SELECT DISTINCT * FROM module_vlabs_shoppingcart_store_inventory WHERE active = 1 and id IN ";
+	$sql .= "(SELECT DISTINCT packageid FROM module_vlabs_shoppingcart_package_summary WHERE itemid IN " . $values . ")";
 	
-	$packages = db_getrecords($sql);
+	$packages = eF_executeQuery($sql);
 	
 	$filteredPackages = array();
 
 	foreach($packages as $p){
 		
 		$addPackage = true;
-		$summary = db_getPackageSummary($p->id);
+		$summary = refactored_db_getPackageSummary($p['id']);
 
 		
 		foreach($summary as $s){
 			$elegible = false;
 
 			foreach ($items as $item) {
-				if($s->itemid == $item->id){
+				if($s['itemid'] == $item['id']){
 					$elegible = true;
 					break;
 				}
@@ -579,15 +607,19 @@ function getPackagesWithItems($items) {
 }
 
 function isPackageBeingUsed($packageid) {
-	$sql = "SELECT * FROM mdl_shoppingcart_order_summary ";
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_order_summary ";
 	$sql .= "WHERE itemid = " . $packageid;
 
 	$order_items = db_getrecords($sql);
+    $counter = 0;
+    foreach($order_items as $o){
+        $counter++;
+    }
 
-	if ($order_items != null)
-	return true;
+	if ($counter > 0)
+	    return true;
 	else
-	return false;
+	    return false;
 }
 
 

@@ -338,7 +338,13 @@ $creditType = "TestCreditType";
 	}
 
 	if (db_addItem($itemname,$itemdesc, $itemid, $itemprice, $billable,$referenceid, $type, $active)) {
+
 		$item = db_getItemByName($itemname);
+
+        //echo '<script type="text/javascript">alert("added item successfully")</script>';
+        //echo "dumping item_array: ";
+        //var_dump($item_array);
+
 		$result = array('success' => true, 'item' => $item);
 	} else {
 		$result = array('success' => false, 'message' => "Item could not be saved");
@@ -427,7 +433,21 @@ $creditType = "TestCreditType";
 	}else{
 		if (db_execute($sql)) {
 		    $item = db_getItem($itemid);
-			$result = array('success' => true, 'item' => $item);
+
+            $i_array = array();
+            foreach($item as $i) {
+                $i_array = array("id"=>$i['id'],
+                    "name"=>$i['name'],
+                    "description"=>$i['description'],
+                    "type"=>$i['type'],
+                    "billable"=>$i['billable'],
+                    "active"=>$i['active'],
+                    "creationdate"=>$i['creationdate']);
+            }
+
+
+
+            $result = array('success' => true, 'item' => $i_array);
 		} else {
 			$result = array('success' => false, 'message' => "Item could not be edited.");
 		}		

@@ -268,36 +268,79 @@ function db_getPackages()
 
 function db_getPackageSummary($packageid)
 {
-	$sql = 'SELECT * FROM mdl_shoppingcart_package_summary WHERE packageid = ' . $packageid . ';';
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE packageid = ' . $packageid . ';';
 	$result = eF_executeQuery($sql);
 	return $result;
 	
 }
 
+function refactored_db_getPackageSummary($packageid)
+{
+    $sql = 'SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE packageid = ' . $packageid . ';';
+    $result = eF_executeQuery($sql);
+
+    $packagesummary_array =array();
+
+    foreach($result as $r){
+        $p_array = array("id"=>$r['id'],
+           "packageid"=>$r['packageid'],
+            "itemid"=>$r['itemid'],
+            "quantity"=>$r['quantity'],
+            "price"=>$r['price']);
+        array_push($packagesummary_array,$p_array);
+    }
+
+
+    return $packagesummary_array;
+
+}
+
 function db_getElegibleItemsForPackage($packageid)
 {
-	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory ';
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_store_inventory ';
 	$sql .= 'WHERE type IN ("PACKAGE ITEM","ITEM") and active=1 and ';
-	$sql .= 'billable =(SELECT billable FROM mdl_shoppingcart_store_inventory WHERE id = ' . $packageid . ') and ';
-	$sql .= 'not exists (SELECT * FROM mdl_shoppingcart_package_summary WHERE itemid = mdl_shoppingcart_store_inventory.id and packageid = ' . $packageid . ');';
+	$sql .= 'billable =(SELECT billable FROM module_vlabs_shoppingcart_store_inventory WHERE id = ' . $packageid . ') and ';
+	$sql .= 'not exists (SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE itemid = module_vlabs_shoppingcart_store_inventory.id and packageid = ' . $packageid . ');';
 	$result = eF_executeQuery($sql);
-	return $result;
+   $elegibleItems_array = array();
+   foreach($result as $r){
+
+       $item_array = array("id"=>$r['id'],
+           "name"=>$r['name'],
+           "description"=>$r['description'],
+           "quantity"=>$r['quantity'],
+           "active"=>$r['active'],
+           "creationdate"=>$r['creationdate'],
+           "lastmodification"=>$r['lastmodification'],
+           "unlimited"=>$r['unlimited'],
+           "referenceid"=>$r['referenceid'],
+           "type"=>$r['type'],
+           "billable"=>$r['billable']);
+
+       array_push($elegibleItems_array,$item_array);
+
+   }
+    //echo "elegibleItems_array is: ";
+    //var_dump($elegibleItems_array);
+
+
+	return $elegibleItems_array;
 	
 }
 
 function db_addPackage($packagename,$packagedesc ,$active , $billable)
 {
-	$sql = 'INSERT INTO mdl_shoppingcart_store_inventory'
+	$sql = 'INSERT INTO module_vlabs_shoppingcart_store_inventory'
 	. '(name, description, quantity, price, unlimited, active, referenceid, billable, type, creationdate, lastmodification)'
 	. 'VALUES ("' . $packagename . '","' . $packagedesc . '",null,0.0,false, '.$active.',null,'
 	. $billable . ',"PACKAGE","' . date(DATE_ATOM) . '","' . date(DATE_ATOM) . '");';
 	
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 }
 
 
 function db_modifyPackage($packageid,$packagename,$packagedesc ,$active , $billable){
-	$sql = 'UPDATE mdl_shoppingcart_store_inventory SET ';
+	$sql = 'UPDATE module_vlabs_shoppingcart_store_inventory SET ';
 	$sql .='name= "' . $packagename . '",';
 	$sql .='description= "' . $packagedesc . '",';
 	$sql .='quantity= 0,';
@@ -310,22 +353,26 @@ function db_modifyPackage($packageid,$packagename,$packagedesc ,$active , $billa
 	$sql .='lastmodification= "' . date(DATE_ATOM) . '" ';
 	$sql .='WHERE id= ' . $packageid . '';
 
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 }
 
 function db_deletePackage($packageid)
 {
 	
-	$sql = 'DELETE FROM mdl_shoppingcart_store_inventory WHERE id= ' . $packageid . '';
-	return eF_executeQuery($sql, false);
+	$sql = 'DELETE FROM module_vlabs_shoppingcart_store_inventory WHERE id= ' . $packageid . '';
+	return eF_executeQuery($sql);
 	
 }
 
 function db_getPackageStatus($packageId)
 {
-	$sql = "SELECT * FROM mdl_shoppingcart_store_inventory WHERE id =".$packageId;
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE id =".$packageId;
     $result = eF_executeQuery($sql);
-    return $result[$packageId]->active;
+    $result_active ="";
+    foreach($result as $r){
+        $result_active = $r["active"];
+    }
+    return $result_active; //jh original  return $result[$packageId]->active;
 	
 }
 
@@ -340,22 +387,22 @@ function db_changePackageStatus($packageId)
 		$newstatus=0;
 		
 		
-	$sql = "UPDATE mdl_shoppingcart_store_inventory SET active = ".$newstatus ." WHERE id= " . $packageId;
-	return eF_executeQuery($sql, false);
+	$sql = "UPDATE module_vlabs_shoppingcart_store_inventory SET active = ".$newstatus ." WHERE id= " . $packageId;
+	return eF_executeQuery($sql);
 }
 
 
 function db_setPackageTotal($packageid, $total)
 {
-	$sql = "UPDATE mdl_shoppingcart_store_inventory SET price = ".$total ." WHERE id= " . $packageid;
-	return eF_executeQuery($sql, false);
+	$sql = "UPDATE module_vlabs_shoppingcart_store_inventory SET price = ".$total ." WHERE id= " . $packageid;
+	return eF_executeQuery($sql);
 }
 
 function db_addItemToPackage($itemid,$itemqty ,$packageid , $price)
 {
-	$sql = 'INSERT INTO mdl_shoppingcart_package_summary (itemid, quantity, packageid, price) ';
+	$sql = 'INSERT INTO module_vlabs_shoppingcart_package_summary (itemid, quantity, packageid, price) ';
 	$sql .='VALUES (' . $itemid . ',' . $itemqty . ',' . $packageid . ',' . $price . ')';
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 }
 
 
@@ -365,7 +412,7 @@ function db_updatePackageTotal($packageid)
 	$total = 0;
 	foreach ($items as $item)
 	{
-		$total +=($item->price * $item->quantity);
+		$total +=($item['price'] * $item['quantity']);
 	}
 	
 	
@@ -383,26 +430,55 @@ function db_getPackageItems($packageid)
 
 function db_getPackageItem($id)
 {
-	$sql = "SELECT * FROM mdl_shoppingcart_package_summary WHERE id = ".$id;
-	return  array_pop(eF_executeQuery($sql));	
-	
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE id = ".$id;
+
+    $items = eF_executeQuery($sql);
+
+    $psummary_array = array();
+    foreach($items as $i) {
+        $p_array = array("id"=>$i['id'],
+            "packageid"=>$i['packageid'],
+            "itemid"=>$i['itemid'],
+            "quantity"=>$i['quantity'],
+            "price"=>$i['price']);
+
+        array_push($psummary_array , $p_array);
+    }
+
+	return  array_pop($psummary_array);
+
+
 }
 
 function db_getPackageItemByPackageAndItem($packageId, $itemId)
 {
-	$sql = "SELECT * FROM mdl_shoppingcart_package_summary WHERE packageid = ".$packageId." and itemid = ".$itemId;
+	$sql = "SELECT * FROM module_vlabs_shoppingcart_package_summary WHERE packageid = ".$packageId." and itemid = ".$itemId;
 	//print_r($sql);
-	return  array_pop(eF_executeQuery($sql));	
+    $result = eF_executeQuery($sql);
+    $items_array = array();
+    $i_array = array();
+    foreach($result as $r) {
+
+        $i_array = array("id" => $r['id'],
+            "packageid" => $r['packageid'],
+            "itemid" => $r['itemid'],
+            "quantity" => $r['quantity'],
+            "price" => $r['price']);
+        array_push($items_array , $i_array);
+    }
+
+
+	return  array_pop($items_array);
 	
 }
 
 function db_deletePackageItem($id, $packageid)
 {
 	
-	$sql  = 'DELETE FROM mdl_shoppingcart_package_summary ';
+	$sql  = 'DELETE FROM module_vlabs_shoppingcart_package_summary ';
 	$sql .= 'WHERE id = ' . $id;
 
-	if(eF_executeQuery($sql, false))
+	if(eF_executeQuery($sql))
 	{
 		if(db_updatePackageTotal($packageid))
 			return true;
@@ -434,16 +510,54 @@ function db_deletePackageItem($id, $packageid)
  
 function db_getItemsByReference($reference)
 {
-	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("ITEM");';
-	return eF_executeQuery($sql);
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("ITEM");';
+	$result =  eF_executeQuery($sql);
+    //jh Refactored db call : )
+    $item_array = array();
+    foreach($result as $r) {
+
+        $item_array = array("id" => $r['id'],
+            "name" => $r['name'],
+            "description" => $r['description'],
+            "quantity" => $r['quantity'],
+            "active" => $r['active'],
+            "creationdate" => $r['creationdate'],
+            "lastmodification" => $r['lastmodification'],
+            "unlimited" => $r['unlimited'],
+            "referenceid" => $r['referenceid'],
+            "type" => $r['type'],
+            "billable" => $r['billable']);
+    }
+
+
+    return $item_array;
 	
 }
 
 
 function db_getPackageItemsByReference($reference)
 {
-	$sql = 'SELECT * FROM mdl_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("PACKAGE ITEM");';
-	return eF_executeQuery($sql);
+	$sql = 'SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE referenceid = "' . $reference . '" and active=1 and type IN ("PACKAGE ITEM");';
+	$result = eF_executeQuery($sql);
+
+    $item_array = array();
+    foreach($result as $r) {
+
+        $item_array = array("id" => $r['id'],
+            "name" => $r['name'],
+            "description" => $r['description'],
+            "quantity" => $r['quantity'],
+            "active" => $r['active'],
+            "creationdate" => $r['creationdate'],
+            "lastmodification" => $r['lastmodification'],
+            "unlimited" => $r['unlimited'],
+            "referenceid" => $r['referenceid'],
+            "type" => $r['type'],
+            "billable" => $r['billable']);
+    }
+
+
+    return $item_array;
 	
 }
 
@@ -457,7 +571,11 @@ function db_getItem($id)
 	$sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE id =" . $id . ";";
 	$items  = eF_executeQuery($sql);
 	//return $items[$id];
-/*
+/* jh 7/8/2015 NOTE:  this was done during the begining of this quest
+   and believe it or not, I was in the right track.  This was the right
+  aproach to handle the dbCalls instead of doing a foreach in every function
+  that calls it.  But as time was of the escense this can be done in a PHASE 2.
+
 	$itemid = "";	
 	$itemname ="";
 	$itemtype = "";
@@ -477,13 +595,54 @@ function db_getItem($id)
 	return $items;
 }
 
+function refactored_db_getItem($id)
+{
+
+
+
+    $sql = "SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE id =" . $id . ";";
+    $result  = eF_executeQuery($sql);
+
+    $item_array = array();
+    foreach($result as $r) {
+
+        $item_array = array("id" => $r['id'],
+            "name" => $r['name'],
+            "description" => $r['description'],
+            "quantity" => $r['quantity'],
+            "active" => $r['active'],
+            "creationdate" => $r['creationdate'],
+            "lastmodification" => $r['lastmodification'],
+            "unlimited" => $r['unlimited'],
+            "referenceid" => $r['referenceid'],
+            "type" => $r['type'],
+            "billable" => $r['billable']);
+    }
+
+
+    return $item_array;
+}
 
 function db_getItemByName($name)
 {
 	
-	$sql = "SELECT * from mdl_shoppingcart_store_inventory WHERE name = '" . str_replace("'", "''",$name) . "';";     
-    $response = eF_executeQuery($sql);
-    return array_pop(eF_executeQuery($sql));
+	$sql = "SELECT * from module_vlabs_shoppingcart_store_inventory WHERE name = '" . str_replace("'", "''",$name) . "';";
+    $item = eF_executeQuery($sql);
+
+    $items_array = array();
+    foreach($item as $i) {
+        $i_array = array("id"=>$i['id'],
+            "name"=>$i['name'],
+            "description"=>$i['description'],
+            "type"=>$i['type'],
+            "billable"=>$i['billable'],
+            "active"=>$i['active'],
+            "creationdate"=>$i['creationdate']);
+
+            array_push($items_array , $i_array);
+    }
+
+    return array_pop($items_array);
 
 }
 
@@ -560,10 +719,10 @@ function db_getOrderById($orderid)
 
 
 function db_addPreasssignment($id, $courseid, $itemid, $quantity, $active){
-	$sql = "INSERT INTO mdl_shoppingcart_preassignment (id, courseid, itemid, quantity, assignmentdate, lastmodification, active)".
+	$sql = "INSERT INTO module_vlabs_shoppingcart_preassignment (id, courseid, itemid, quantity, assignmentdate, lastmodification, active)".
 			"VALUES ('".$id."',".$courseid.",".$itemid.",".$quantity.",'".date(DATE_ATOM)."','".date(DATE_ATOM) . "',".$active.")";
 	//print_r($sql);
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 	
 }
 
@@ -592,6 +751,20 @@ function db_getPreassignmentsByCourse($courseid){
 function db_getPreassignments(){
 	$sql = "SELECT * FROM module_vlabs_shoppingcart_preassignment";
 	$result = eF_executeQuery($sql);
+
+    $result_array = array();
+    foreach($result as $r) {
+
+        $i_array = array("id" => $r['id'],
+            "courseid" => $r['courseid'],
+            "itemid" => $r['itemid'],
+            "quantity" => $r['quantity'],
+            "assignmentdate" => $r['assignmentdate'],
+            "lastmodification"=> $r['lastmodification'],
+            "active" => $r['active']);
+        array_push($result_array , $i_array);
+    }
+
 	return $result;
 }
 
@@ -619,7 +792,7 @@ function db_getCoursesByUser($userid){
 
 function db_getCourses(){
 	
-	$sql = "SELECT * FROM mdl_course";
+	$sql = "SELECT * FROM courses";
 	return eF_executeQuery($sql);
 	
 }
