@@ -623,19 +623,8 @@ if ($action == "reloadOrders") {
 	$refundAmount=0;
 
 	$dbOrderItem = db_getOrderItemById($id);
-    $dbOrderItem_orderid = "";
-    $dbOrderItem_itemid = "";
-    $dbOrderItem_quantity = "";
-    $dbOrderItem_cancelled = "";
 
-    foreach($dbOrderItem as $dbOI){
-        $dbOrderItem_orderid = $dbOI['orderid'];
-        $dbOrderItem_itemid = $dbOI['orderid'];
-        $dbOrderItem_quantity = $dbOI['quantity'];
-        $dbOrderItem_cancelled = $dbO['cancelled'];
-    }
-
-	$dbOrder = db_getOrderById($dbOrderItem_orderid);
+	$dbOrder = db_getOrderById($dbOrderItem['orderid']);
     $dbOrder_ordernumber ="";
     $dbOrder_id = "";
     $dbOrder_payment = "";
@@ -647,22 +636,24 @@ if ($action == "reloadOrders") {
         $dbOrder_userid = $dbO['userid'];
     }
 
-	$dbItem = db_getItem($dbOrderItem_itemid);
+	$dbItem = db_getItem($dbOrderItem['itemid']);
     $dbItem_id = "";
     $dbItem_referenceid = "";
     $dbItem_name = "";
+    $dbItem_type ="";
 
     foreach($dbItem as $dbI){
         $dbItem_id = $dbI['id'];
         $dbItem_referenceid = $dbI['id'];
         $dbItem_name = $dbI['name'];
+        $dbItem_type = $dbI['type'];
     }
 	$success = true;
 	$message="";
 	
 	$assignmentsRequest = array();
 	
-	if($dbItem->type=="PACKAGE"){
+	if($dbItem_type=="PACKAGE"){
 		$packageItems = db_getPackageItems($dbItem_id);
 		foreach ($packageItems as $pi){
 			$item = db_getItem($pi['itemid']);
@@ -697,7 +688,7 @@ if ($action == "reloadOrders") {
 		
 //		echo "refund total ".$refundAmount;
 	}else{
-		$assignment = array("creditTypeId"=>$dbItem->referenceid,
+		$assignment = array("creditTypeId"=>$dbItem_referenceid,
 							"quantity"=>$dbOrderItem_quantity,
 							"purchaseId"=>$dbOrder_ordernumber,
 							"active"=>!$dbOrderItem_cancelled
@@ -773,7 +764,7 @@ if ($action == "reloadOrders") {
         jh end*/
         }else{
             $success = false;
-            $message = "Item ". $dbItem->name." could not be cancelled because it has been consumed by the buyer.";
+            $message = "Item ". $dbItem_name." could not be cancelled because it has been consumed by the buyer.";
 
 
         }
@@ -791,7 +782,7 @@ if ($action == "reloadOrders") {
     }
 
     $itemsCancelled = db_getCancelledOrderItems($dbOrder_id);
-    $items = db_getOrderItems($dbOrder_id);
+    $items = refactored_db_getOrderItems($dbOrder_id);
 
     if(count($items) == count($itemsCancelled)){
         if($dbOrder_payment){
@@ -814,49 +805,27 @@ if ($action == "reloadOrders") {
 
     }
 
-        $orderitem = db_getOrderItemById($id);
-        $orderitem_quantity = "";
-        $orderitem_unitprice = "";
-        $orderitem_itemid = "";
-        $orderitem_cancelled = "";
-
-     foreach($oderitem as $oi){
-         $orderitem_quantity = $oi['quantity'];
-         $orderitem_unitprice = $oi['unitprice'];
-         $orderitem_itemid = $oi['itemid'];
-         $orderItem_cancelled = $oi['cancelled'];
-     }
+    $orderitem = db_getOrderItemById($id);
 
 
-    $subtotal = $orderitem_quantity * $orderitem_unitprice;
-    $item = db_getItem($orderitem_itemid);
-    $item_id = "";
-    $item_name = "";
-    $item_type = "";
-    $item_description = "";
-
-    foreach($item as $i){
-        $item_id = $i['id'];
-        $item_name = $i['name'];
-        $item_type = $i['type'];
-        $item_description = $i['description'];
-    }
+    $subtotal = $orderitem['quantity'] * $orderitem['unitprice'];
+    $item = refactored_db_getItem($orderitem['itemid']);
 
     $user= db_getUserById($dbOrder_userid);
 
 
-    $description = ord_getItemDescription($item_id, $dbOrder_id);
+    $description = ord_getItemDescription($item['id'], $dbOrder_id);
 
     $oi = array(
-        "id"=>$orderitem_id,
-        "itemid"=>$item_id,
-        "name"=>$item_name,
-        "type"=>$item_type,
-        "description"=>$item_description,
-        "quantity"=>$orderitem_quantity,
-        "price"=>$orderitem_unitprice ,
+        "id"=>$orderitem['id'],
+        "itemid"=>$item['id'],
+        "name"=>$item['name'],
+        "type"=>$item['type'],
+        "description"=>$item['description'],
+        "quantity"=>$orderitem['quantity'],
+        "price"=>$orderitem['unitprice'] ,
         "subtotal"=>$subtotal,
-        "cancelled"=>$orderitem_cancelled,
+        "cancelled"=>$orderitem['cancelled'],
         "description"=>$description
     );
 

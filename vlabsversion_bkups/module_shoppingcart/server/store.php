@@ -29,12 +29,12 @@ if ($action == "reload") {
 		$user = "";
 	}
 
-	$timeZoneId = db_getUserTimeZone($user)->data;
+	$timeZoneId = db_getUserTimeZone($user)['timezone'];
 	$courses = getAvailCourses($user);
 	$courses_arr = array();
 
 	foreach ($courses as $course) {
-		array_push($courses_arr, $course->id);
+		array_push($courses_arr, $course['id']);
 	}
 
 	try {
@@ -82,7 +82,7 @@ if ($action == "reload") {
 			
 			foreach ($items as $item) {
 				
-				$detail = sto_getItemDescription($item->id);
+				$detail = sto_getItemDescription($item['id']);
 				
 				foreach ($references as $reference)
 				{
@@ -92,21 +92,21 @@ if ($action == "reload") {
 				}
 				
 				$description = "";				
-				if($item->description !=""){
-					$description = 	$item->description."<br/>";
+				if($item['description'] !=""){
+					$description = 	$item['description']."<br/>";
 				}
 				
 				$price = "Not billable";
 				if($item->billable=="1"){
-					$price = "$".$item->price; 
+					$price = "$".$item['price'];
 				}
 				
 				
 				 $product = array(
 				 'item',
-				 "<strong>".$item->name."</strong>",
+				 "<strong>".$item['name']."</strong>",
 				 sprintf($format, $description , $detail, $price ),
-				 $item->id
+				 $item['id']
 				 );
 				 
 				 array_push($formattedStoreItems, $product);
@@ -117,22 +117,22 @@ if ($action == "reload") {
 			foreach ($packages as $package) {
 				
 				$description = "";				
-				if($item->description !=""){
-					$description = 	$package->description."<br/>";
+				if($item['description'] !=""){
+					$description = 	$package['description']."<br/>";
 				}
 				
 				$price = "Not billable";
-				if($package->billable=="1"){
-					$price = "$".$package->price; 
+				if($package['billable']=="1"){
+					$price = "$".$package['price'];
 				}
 				
-				$detail = sto_getItemDescription($package->id);
+				$detail = sto_getItemDescription($package['id']);
 				
 				$product = array(
 				'package',
 				"<strong>".$package->name."</strong>",
 				sprintf($formatPackage, $description, $detail, $price),
-				$package->id
+				$package['id']
 				);
 				
 				array_push($formattedStoreItems, $product);
@@ -197,7 +197,7 @@ if ($action == "reload") {
 
 		//echo '<script type="text/javascript">alert("about to go into SoapClient call")</script>';
 
-
+        /* jh this needs to get executed, since soap calls are really slow commenting temprarily
 		try {
 			$client = new SoapClient(WSDL_QS, array('location' => LOCATION_QS));
         	$creditType = $client->getCreditTypeById($item->referenceid);
@@ -210,7 +210,7 @@ if ($action == "reload") {
 			$creditType = null;
 	
 	    }
-
+        jh end commenting soap calls */
 
 $creditType = "TestCreditType";
 		if($creditType!=null)
@@ -554,27 +554,27 @@ function sto_getItemDescription($itemid){
 
 	session_start(); 
 	$userId = $_SESSION["userid"]; 
-	$item = db_getItem($itemid);
+	$item = refactored_db_getItem($itemid);
 	$timeZoneId = db_getUserTimeZone($userId)->data;	
 	$description = "";
 	
-	if($item->type=="PACKAGE"){	
+	if($item['type']=="PACKAGE"){
 
 		$items = array();		
-		$packageItems = db_getPackageItems($item->id);
+		$packageItems = db_getPackageItems($item['id']);
 		foreach($packageItems as $packageItem){
-			$item = db_getItem($packageItem->itemid);
-			$item->quantity = $packageItem->quantity;
+			$item = refactored_db_getItem($packageItem['itemid']);
+			$item['quantity'] = $packageItem['quantity'];
 			array_push($items, $item);	
 		}
 		
 		$description .= "<ul>";
 		foreach ($items as $item){				
-			$creditType = ws_getCreditTypeById($item->referenceid);
+			$creditType = ws_getCreditTypeById($item['referenceid']);
 			$course = db_getCourseById($creditType->courseId);
 						
 			$description .= "<li>";
-			$description .= "<strong>".$item->name."(".$item->quantity."):</strong> ";
+			$description .= "<strong>".$item['name']."(".$item['quantity']."):</strong> ";
 			$description .= "This item allows students enrolled in the course ".$course->shortname." to use the resource ".$creditType->resource." for ";	
 			$description .= sto_getPolicyDescription($creditType->policyId, $timeZoneId);			
 			$description .= "</li>";
@@ -583,7 +583,7 @@ function sto_getItemDescription($itemid){
 		
 						
 	}else{	
-		$creditType = ws_getCreditTypeById($item->referenceid);
+		$creditType = ws_getCreditTypeById($item['referenceid']);
 		$course = db_getCourseById($creditType->courseId);
 		
 		$description .=  "This item allows students enrolled in the course ".$course->shortname."  to use the resource ".$creditType->resource." for ";	

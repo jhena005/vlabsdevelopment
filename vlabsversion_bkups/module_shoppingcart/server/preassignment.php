@@ -22,7 +22,7 @@ if ($action == "reload") {
 	
 
 
-	$preassignments = db_getPreassignments();
+	$preassignments = db_getPreassignments(); //refactored db call : )
 
 
 	
@@ -32,19 +32,19 @@ if ($action == "reload") {
 		$item = refactored_db_getItem($p['itemid']);
 		//echo '<script type="text/javascript">alert("foreach loop, preassignment.php source itemid: '. $itemid . '")</script>';
 		$course = db_getCourseById($p['courseid']);
-		$courseid = "";
-		$courseshortn = "";
+		$course_id = "";
+		$course_shortn = "";
 
 		foreach ($course as $c)
 		{
-			$courseid = $c['id'];
-			$courseshortn = $c['shortname'];
+			$course_id = $c['id'];
+			$course_shortn = $c['name'];
 			//echo '<script type="text/javascript">alert("For each loop, preassignment.php courseid: '. $courseid . ' course shortname: '. $courseshortn.'")</script>';
 		}
 
 		$preassignment = array($p['id'],
-				$courseid,
-				$courseshortn,
+				$course_id,
+				$course_shortn,
 				$item['itemid'],
 				$item['itemname'],
 				$p['quantity'],
@@ -96,7 +96,7 @@ if ($action == "reload") {
 		else
 			$references = $response->creditType;
 
-       // echo "references: ";
+        //echo "references: " . PHP_EOL;
         //var_dump($references);
 		
 		$items = array();
@@ -105,32 +105,44 @@ if ($action == "reload") {
 		foreach ($references as $reference) {
 			$itemsbyref = db_getItemsByReference($reference->id);
 
-           //echo "itemsbyref reference->id = ".$reference->id. ": ";
-            //var_dump($itemsbyref);
+           //echo "itemsbyref reference->id = ".$reference->id. ": ". PHP_EOL;
+           //var_dump($itemsbyref);
 
 			if ($itemsbyref != null)
-				$items = array_merge($items, $itemsbyref);
+				array_push($items, $itemsbyref);
 
-            //echo "after array_merge of items and itemsbyref: ";
+            //echo "after array_push of items and itemsbyref: ". PHP_EOL;
             //var_dump($items);
 			//Get elegible items for packages
 			$itemsForPkgbyref= db_getPackageItemsByReference($reference->id);
+          //echo "db_getPackageItemsByReference:  ".PHP_EOL;
+          //var_dump($itemsForPkgbyref);
+          //echo PHP_EOL;
 
 			if ($itemsForPkgbyref != null)
-				$itemsForPackages = array_merge($itemsForPackages, $itemsForPkgbyref);
+				$itemsForPackages = array_push($itemsForPackages, $itemsForPkgbyref);
 
 		}
 
+        //echo "items array after foreach(references)loop:  ".PHP_EOL;
+        //var_dump($items);
+        //echo PHP_EOL;
 
 		$formattedStoreItems = array();
 
 		if (is_array($items)) {
 			foreach ($items as $item) {
-				$item = array("id"=>$item['id'],"name"=>$item['name'], "type"=>$item['type']);
-				 array_push($formattedStoreItems, $item);
+              //echo '<script type="text/javascript">alert("id: '. $item['id']. ' , name:  '. $item['name'] . ' , type: ' .$item['type'] . '")</script>';
+              //echo PHP_EOL;
+              //echo "within foreach items,  item array is: ". PHP_EOL;
+              //echo var_dump($item);
+				$item_array = array("id" => $item['id'],
+                    "name" => $item['name'],
+                    "type" => $item['type']);
+				 array_push($formattedStoreItems, $item_array);
 			}
            // echo "formattedStoreItems: ";
-           // var_dump($formattedStoreItems);
+            //var_dump($formattedStoreItems);
 
            // echo "itemsForPackages: ";
            // var_dump($itemsForPackages);
@@ -154,6 +166,10 @@ if ($action == "reload") {
 				array_push($filteredItems, $item);				
 			}
 		}*/
+
+       //echo PHP_EOL;
+       //echo "before json encode, array is: " . PHP_EOL;
+       //var_dump($formattedStoreItems);
 
 		echo json_encode($formattedStoreItems);
 		
@@ -284,34 +300,48 @@ if ($action == "reload") {
 
 	
 	//Generate purchase id combining order number and item id
-	$item = db_getItem($itemid);
+	$item = refactored_db_getItem($itemid);
+
+    //echo "item array for itemid: " . $itemid . "::" . PHP_EOL;
+    //var_dump($item);
+
 	$course = db_getCourseById($courseid);
+    $course_id = "";
+    $course_name = "";
+    foreach($course as $c){
+
+        $course_id = $c['id'];
+        $course_name = $c['name'];
+    }
 	$preassignmentResponse = array(
 			"id"=>$id,
-			"courseId"=>$course->id,
-			"courseName"=>$course->shortname,
-			"itemId"=>$item->id,
-			"itemName"=>$item->name,
+			"courseId"=>$course_id,
+			"courseName"=>$course_name,
+			"itemId"=>$item['id'],
+			"itemName"=>$item['name'],
 			"quantity"=>$quantity,
 			"active"=>1);
 	
-	$purchaseId = $id."".$item->id;
+	$purchaseId = $id."".$item['id'];
 
 	$assignments = array();
 		
 	$preassignment = db_getPreassignmentById($purchaseId);
-	
+
+    //echo "refactored db call preassignment array is: " . PHP_EOL;
+    //var_dump($preassignment);
+
 	if($item->type=="PACKAGE"){
-		$packageItems = db_getPackageItems($item->id);
+		$packageItems = db_getPackageItems($item['id']);
 		foreach($packageItems as $pi){
-			$item = db_getItem($pi->itemid);
-			$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item->referenceid,
-							"quantity"=>$quantity*$pi->quantity, "active"=>true);
+			$item = refactored_db_getItem($pi['itemid']);
+			$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item['referenceid'],
+							"quantity"=>$quantity*$pi['quantity'], "active"=>true);
 			array_push($assignments, $assignment);
 		}
 	}else{
 
-		$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item->referenceid,
+		$assignment = array("purchaseId"=>$purchaseId, "creditTypeId"=>$item['referenceid'],
 							"quantity"=>$quantity, "active"=>true);
 		array_push($assignments, $assignment);
 	}

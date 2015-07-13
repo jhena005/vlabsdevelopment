@@ -49,56 +49,47 @@ if ($action == "reloadPackages") {
 } else if ($action == "getPackageItems") {
 
 
-	if (isset($_POST['packageId'])) {
-		$packageId = $_POST['packageId'];
-	} else {
-		$packageId = "";
-	}
-	
-	$package = db_getItem($packageId);
-    $package_billable = "";
-    $package_array = array();
-
-    if($package!=null) {
-        foreach ($package as $p) {
-            $package_billable = $p['billable'];
-        }
-        array_push($package_array, array("billable"=>$package_billable));
-    }else{
-        array_push($package_array , array("billable"=>"0"));
+    if (isset($_POST['packageId'])) {
+        $packageId = $_POST['packageId'];
+    } else {
+        $packageId = "";
     }
 
-	$summary = db_getPackageSummary($packageId);
-	$formattedPackageItems = array();
-	$packageTotal = 0;
+    $package = refactored_db_getItem($packageId);
 
-		foreach ($summary as $packageDetail) {
-			
-			$subtotal = $packageDetail['quantity'] * $packageDetail['price'];
-			$total += $subtotal;
+    $summary = refactored_db_getPackageSummary($packageId);
+    $formattedPackageItems = array();
+    $packageTotal = 0;
 
-			$item = db_getItem($packageDetail['itemid']);
+    if(is_array($summary)) {
 
-			if($item!=null)
-			{
-                foreach($item as $i) {
-                    $packageItem = array($packageDetail['id'],
-                        $i['id'],
-                        $i['name'],
-                        $i['description'],
-                        $packageDetail['quantity'],
-                        $i['price'],
-                        $packageDetail['price'],
-                        $subtotal
-                    );
+        foreach ($summary as $packageDetail) {
 
-                    array_push($formattedPackageItems, $packageItem);
-                }
-			}
+            $subtotal = $packageDetail['quantity'] * $packageDetail['price'];
+            $total += $subtotal;
 
-	}
+            $item = refactored_db_getItem($packageDetail['itemid']);
 
-	echo json_encode(array("package"=>$package_array, "items"=>$formattedPackageItems));
+            if($item!=null)
+            {
+                $packageItem = array($packageDetail['id'],
+                    $item['id'],
+                    $item['name'],
+                    $item['description'],
+                    $packageDetail['quantity'],
+                    $item['price'],
+                    $packageDetail['price'],
+                    $subtotal
+                );
+
+                array_push($formattedPackageItems, $packageItem);
+            }
+        }
+
+    }
+
+    echo json_encode(array("package"=>$package, "items"=>$formattedPackageItems));
+	//echo json_encode(array("package"=>$package_array, "items"=>$formattedPackageItems));
 
 }else if($action=="getPkgItem"){
 
@@ -301,14 +292,23 @@ if ($action == "reloadPackages") {
 	
 	$result = db_getElegibleItemsForPackage($packageid);
 
+    //echo "db_getElegibleItemsForPackage is: " .PHP_EOL;
+    //var_dump ($result);
+    //echo PHP_EOL;
+
 	if ($result == null)
 		$result = array();
 
 	if ($itemid != "") {
 		$itemtoinclude = refactored_db_getItem($itemid);
 		if ($itemtoinclude != null)
-		$result = array_merge($result, $itemtoinclude);
+		    $result = array_merge($result, $itemtoinclude);
 	}
+
+    //echo "after array merge: " . PHP_EOL;
+    //var_dump($result);
+    //echo PHP_EOL;
+
 
 	$priceArr = array();
 	
@@ -318,15 +318,20 @@ if ($action == "reloadPackages") {
 		
 		
 		if($billable)
-			$output[] = '<option value="' . $item->id . '">' . $item->name . '- $' . $item->price . '</option>';
+			$output[] = '<option value="' . $item['id'] . '">' . $item['name'] . '- $' . $item['price'] . '</option>';
 		else 
-			$output[] = '<option value="' . $item->id . '">' . $item->name . '- Not billable </option>';
+			$output[] = '<option value="' . $item['id'] . '">' . $item['name'] . '- Not billable </option>';
 	}
 
 
 
 
 	$content = join('', $output);
+
+    //echo "content is: " . PHP_EOL;
+    //var_dump($content);
+    //echo PHP_EOL;
+
 	$response = array("content" => $content,"billable" => $billable, "prices"=>$priceArr);
 	echo json_encode($response);
 	

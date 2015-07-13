@@ -157,8 +157,9 @@ function pre_openForm(containerId, add, nTr, id)
 		            }else{
 		            	content+="<option value=''>No course available</option>";  
 		            }
-	
+						
 		            $(containerId+" .coursePre").html(content);
+						var deleteme = $(containerId+" .coursePre").val();
 		            createLoadingDivAfter(containerId,"Loading items");
 		            $.ajax({
 		                type: 'POST',
@@ -298,6 +299,7 @@ function pre_fillOutForm(containerId,preassignmentId){
 	        	removeLoadingDivAfter(containerId);
 	        	var preassignment = data.preassignment;
   				$(containerId+" .coursePre").val(preassignment.courseid);
+				var deleteme = preassignment.courseid;
   				createLoadingDivAfter(containerId,"Loading items");
   				 $.ajax({
   			        type: 'POST',
