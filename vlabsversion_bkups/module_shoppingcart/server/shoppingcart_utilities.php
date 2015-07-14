@@ -1,17 +1,19 @@
 <?php
 
+
 require_once(dirname(__FILE__).'/checkout/google_checkout/lib/googlecart.php');
 require_once(dirname(__FILE__).'/checkout/google_checkout/lib/googleitem.php');
 require_once(dirname(__FILE__).'/checkout/google_checkout/lib/googleshipping.php');
 require_once(dirname(__FILE__).'/checkout/google_checkout/lib/googletax.php');
 
 
-require_once('checkout/nopayment_checkout/lib/genericcart.php');
-require_once('checkout/nopayment_checkout/lib/genericitem.php');
+require_once(dirname(__FILE__).'/checkout/nopayment_checkout/lib/genericcart.php');
+require_once(dirname(__FILE__).'/checkout/nopayment_checkout/lib/genericitem.php');
+
 
 //require_once("../../../config.php");
-require_once ((dirname(dirname(dirname(dirname(__FILE__))))).'/libraries/configuration.php');
-require_once (dirname(__FILE__).'/lib.php');
+//require_once ((dirname(dirname(dirname(dirname(__FILE__))))).'/libraries/configuration.php');
+require_once (dirname(dirname(__FILE__)).'/lib.php');
 require_once (dirname(__FILE__).'/db/db.php');
 
 
@@ -21,6 +23,9 @@ function cleanCart() {
 	session_start();
 	$user = $_SESSION['userid'];
 	$cart = $_SESSION[$user.'cart'];
+
+    //echo "user is: " . $user .  PHP_EOL;
+    //echo "cart is: " . $cart . PHP_EOL;
 
     if($cart) {
         $items = explode(',', $cart);
@@ -33,7 +38,7 @@ function cleanCart() {
 
             $id = substr($i, 2);
 
-            $sql = 'SELECT * FROM mdl_shoppingcart_store_inventory WHERE id = ' . $id . ' and active =1';
+            $sql = 'SELECT * FROM module_vlabs_shoppingcart_store_inventory WHERE id = ' . $id . ' and active =1';
             $result = db_getrecords($sql);
 
             if ($result == null || (is_array($result) && empty($result))) {
@@ -95,6 +100,8 @@ function showCart() {
 	$user = $_SESSION['userid'];
 	$cart = $_SESSION[$user.'cart'];
 
+
+
     //No payment Checkout
     //----------------------------------
     $genericCart = new GenericCart();
@@ -126,7 +133,7 @@ function showCart() {
     $googlecart->SetEditCartUrl($editCartURL);
     $googlecart->SetContinueShoppingUrl($continueShoppingURL);
     //----------------------------------
-    
+
     if ($cart) {
         $items = explode(',', $cart);
         $contents = array();
@@ -141,17 +148,17 @@ function showCart() {
             $type = substr($i, 0, 1);
             $id = substr($i, 2);
 
-            $item = db_getItem($id);
+            $item = refactored_db_getItem($id);
 
-        	$subtotal = $item->price * $qty;
+        	$subtotal = $item['price'] * $qty;
         	$scitem = array(
-        	$item->name,
-        	$item->description,
-        	$item->price,
+        	$item['name'],
+        	$item['description'],
+        	$item['price'],
         	$qty ,
         	$i,
         	$subtotal,
-        	$item->id,
+        	$item['id'],
         	$type
         	);
 
@@ -159,10 +166,12 @@ function showCart() {
         	 
         	//No payment Checkout
         	//----------------------------------
-        	
-        	if(!$item->billable){
-	        	$genericItem = new GenericItem($item->name, // Item name
-	        	$item->description, // Item description
+
+
+
+        	if(!$item['billable']){
+	        	$genericItem = new GenericItem($item['name'], // Item name
+	        	$item['description'], // Item description
 	        	$qty, // Quantity
 	        	0); // Unit price
 
@@ -172,11 +181,11 @@ function showCart() {
         	//----------------------------------
         	//Google Checkout
         	//----------------------------------
-        	if($item->billable){
-	        	$googleitem = new GoogleItem($item->name, // Item name
-	        	$item->description, // Item description
+        	if($item['billable']){
+	        	$googleitem = new GoogleItem($item['name'], // Item name
+	        	$item['description'], // Item description
 	        	$qty, // Quantity
-	        	$item->price); // Unit price
+	        	$item['price']); // Unit price
 
 	        	$googleitem->SetMerchantItemId($item->id);
 	        	

@@ -1,11 +1,9 @@
 <?php
 
 require_once (dirname(dirname(dirname(__FILE__))).'/db/db.php');
-require_once (dirname(dirname(dirname(__FILE__))).'/mailing.php');
-//require_once($CFG->dirroot.'/user/profile/lib.php'); ****jh, NOTE: 7/13/2015 need to come back to this!***
+require_once (dirname(dirname(dirname)).'mailing.php');
+require_once($CFG->dirroot.'/user/profile/lib.php');
 //require_once ('../../shoppingcart.php');
-
-class object {};
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -106,8 +104,7 @@ if ($action == "proceedToCheckout") {
     $ordernumber = uniqid("IA",false);
 
     //Insert order in database
-    // jh NOTE come back to this one, you need to resolve issue with getting user id if(!db_addNoPaymentOrder(refactored_db_getUserById($userid)['id'], $ordernumber))
-    if(!db_addNoPaymentOrder(4, $ordernumber))
+    if(!db_addNoPaymentOrder($userid, $ordernumber))
     {
     	$result = array("success"=>false, "message" => "Order could not be added");
     	echo json_encode($result);
@@ -115,15 +112,7 @@ if ($action == "proceedToCheckout") {
 
     
     //Get order id in database
-	$dborder = db_getOrderByOrderNumber($ordernumber);
-    $dborder_id = "";
-    $dborder_userid = "";
-
-    foreach($dborder as $d)
-    {
-        $dborder_id = $d['id'];
-        $dborder_userid = $d['userid'];
-    }
+	$dborder = db_getOrderByOrderNumber($ordernumber);	
     $total = 0;
 
     $output[] = '<table rules="all" style="border-color: #666;" cellpadding="10">';
@@ -149,7 +138,7 @@ if ($action == "proceedToCheckout") {
 
     		//Get item from store inventory ans save it in order summary
     		$dbitem = db_getItemByName($item->name);
-    		$success = db_addOrderItem($dborder_id, $dbitem['id'], $item->quantity, $item->price);
+    		$success = db_addOrderItem($dborder->id, $dbitem->id, $item->quantity, $item->price);
 
     		//Insert order summary for this item
     		if (!$success) {
@@ -159,7 +148,7 @@ if ($action == "proceedToCheckout") {
     	}
 
     	if(count($purchaseFailed)>0){
-    		db_deleteOrder($dborder_id);
+    		db_deleteOrder($dborder->id);
     	}
 	
         
@@ -172,8 +161,8 @@ if ($action == "proceedToCheckout") {
         $output[] = '</tr>';
 
         //Get item from store inventory ans save it in order summary
-        $dbitem = db_getItemByName($item->name);
-        $success = db_addOrderItem($dborder_id, $dbitem['id'], $item->quantity, $item->price);
+        $dbitem = getItemByName($item->name);        
+        $success = db_addOrderItem($dborder->id, $dbitem->id, $item->quantity, $item->price);
 
         //Insert order summary for this item
         if (!$success) {
@@ -186,32 +175,30 @@ if ($action == "proceedToCheckout") {
 
     //Send Email to customer
   
-	$buyer = refactored_db_getUserById($dborder_userid);
+	$buyer = db_getUserById($dborder->userid);
 
     // Buyer Information: added by JAM - 06/18/2012	
-    //$profile_fields = profile_user_record($dborder_userid);  jh  7/13/2015 Note: need to look for a comparable function in efront.
-
-
-
+    $profile_fields = profile_user_record($dborder->userid);
+    
     $data = new object();
-    $data->userfullname = $buyer['name'] . " " . $buyer['surname'];
-    $data->firstname = $buyer['name'];
-    $data->lastname = $buyer['surname'];
-    $data->email = $buyer['email'];
-    $data->username = $buyer['login'];
+    $data->userfullname = fullname($buyer);
+    $data->firstname = $buyer->firstname;
+    $data->lastname = $buyer->lastname;
+    $data->email = $buyer->email;
+    $data->username = $buyer->username;
     $data->password = '';   //$buyer->password;
-    $data->gender = "n/a";
-    $data->skypeid = "n/a";
-    $data->kaseyasalesrep = "n/a";
-    $data->maintopic = "n/a";
-    $data->typebundle = "n/a";
-    $data->kaseyacustomerid = "n/a";
-    $data->zone = "n/a";
-    $data->country = "n/a";
-    $data->companyname = "n/a";
-    $data->state = "n/a";
-    $data->firstaccess = "n/a"; //date("D M j G:i:s T Y", $buyer->firstaccess);
-    $data->lastaccess = "n/a"; //date("D M j G:i:s T Y", $buyer->lastaccess);
+    $data->gender = $profile_fields->gender;
+    $data->skypeid = $profile_fields->skypeid;
+    $data->kaseyasalesrep = $profile_fields->kaseyasalesrep;
+    $data->maintopic = $profile_fields->maintopic;
+    $data->typebundle = $profile_fields->typebundle;
+    $data->kaseyacustomerid = $profile_fields->kaseyacustomerid;
+    $data->zone = $profile_fields->zone;
+    $data->country = $buyer->country;
+    $data->companyname = $profile_fields->companyname;
+    $data->state = $profile_fields->state;
+    $data->firstaccess = date("D M j G:i:s T Y", $buyer->firstaccess);
+    $data->lastaccess = date("D M j G:i:s T Y", $buyer->lastaccess);
     
 	
     $body= '<p>The order you recently placed is now pending for approval.'
@@ -223,7 +210,7 @@ if ($action == "proceedToCheckout") {
 
 
     //Send email to Administrators  
-    $body = '<p>A new order has been submitted by <strong>' . $buyer['name'].' '.$buyer['surname'] . '</strong>, which is waiting for your approval.</p>';
+    $body = '<p>A new order has been submitted by <strong>' . $buyer->firstname.' '.$buyer->lastname . '</strong>, which is waiting for your approval.</p>';
     $body .= '<p>First name: '.$data->firstname.'<br/>';
     $body .= 'Last name: '.$data->lastname.'<br/>';
     $body .= 'Gender: '.$data->gender.'<br/><br/>';
@@ -242,13 +229,13 @@ if ($action == "proceedToCheckout") {
     $body .= 'First access: '.$data->firstaccess.'<br/>';
     $body .= 'Last access: '.$data->lastaccess.'</p>';
     $body .= '<p>Please access your moodle account to take further action: : http://ita-portal.cis.fiu.edu/moodle/mod/shoppingcart/view.php?id=156#ordersTab</p>' . join('', $output);
-    $subject = 'New order from ' . $buyer['name'].' '.$buyer['surname'];
+    $subject = 'New order from ' . $buyer->firstname.' '.$buyer->lastname;
     sendEmailToAdministrators($subject, $body);
 
     //Build Thank you page
 
-    $output2[] = "<p>Thank you " . $buyer['name'] . ".</p>";
-    $output2[] = '<p>You will receive an e-mail to '. $buyer['email']. ' with further details.</p>';
+    $output2[] = "<p>Thank you " . $buyer->username . ".</p>";
+    $output2[] = '<p>You will receive an e-mail to '. $buyer->email. ' with further details.</p>';
 
 
     $content = join('', $output2);
@@ -260,33 +247,33 @@ if ($action == "proceedToCheckout") {
      		$message .= $pf->name."\n";
      	}
      	
-  		$result = array("success"=>false, "orderId" => $dborder_id, "message"=>$message);
+  		$result = array("success"=>false, "orderId" => $dborder->id, "message"=>$message);
     
      }else{
-      	$result = array("success"=>true, "orderId" => $dborder_id, "content" => $content,"message"=>"Succesful!");
+      	$result = array("success"=>true, "orderId" => $dborder->id, "content" => $content,"message"=>"Succesful!");
      	
      }
 
     //Remove Items from shopping cart
-    deletePurchasedItems($dborder_id);
+    deletePurchasedItems($dborder->id);   
     echo json_encode($result);
 }
 
 
-function deletePurchasedItems($order_id){
+function deletePurchasedItems($orderid){
 	
 	session_start();
 	$user = $_SESSION['userid'];
 	
-    if($order_id){
-    	$summary = refactored_db_getOrderItems($order_id);
+    if($orderid){
+    	$summary = db_getOrderItems($orderid);
     	foreach($summary as $s){
-    		$item = refactored_db_getItem($s['itemid']);
+    		$item = db_getItem($s->itemid);
     		$prefix = "i-";
-    		if($item['type']=="PACKAGE")
+    		if($item->type=="PACKAGE")
     			$prefix="p-";
     			
-    		$_SESSION[$user.'cart'] = deleteItem($prefix."".$item['id'], $_SESSION[$user.'cart']);
+    		$_SESSION[$user.'cart'] = deleteItem($prefix."".$item->id, $_SESSION[$user.'cart']);	
     	}
     	
     }

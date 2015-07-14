@@ -44,29 +44,21 @@ function saveTransaction($orderid, $payment) {
  
     	//Get item from database
 		
-        $item = db_getItem($orderitem['itemid']);
-		  $item_id = "";
-		  $item_type = "";
-		  $item_referenceid ="";
-			foreach($item as $i){
-				$item_referenceid = $i['referenceid'];
-				$item_type = $i['type'];				
-				$item_id = $i['id'];
-			}
-        
+        $item = refactored_db_getItem($orderitem['itemid']);
+
         //print_r($item);
         
         //Initialize item success assuming it will be true
-        $orderItemsSuccess[$itemIndex] = array("id"=>$item_id, "success"=>false);
+        $orderItemsSuccess[$itemIndex] = array("id"=>$item['id'], "success"=>false);
         
         //Get item type to see if it is a package or not
-        $type = $item_type;
+        $type = $item['type'];
         //echo $item->name."-".$item->type;
         
         if ($type == "ITEM") {
 			//Save item in itemsArr to send the request to the web service
             $quantity = $orderitem['quantity'];
-            array_push($itemsArr, array("creditTypeId"=>$item_referenceid, 
+            array_push($itemsArr, array("creditTypeId"=>$item['referenceid'],
 							            "quantity"=>$quantity, 
 							            "purchaseId"=>$order_ordernumber, 
 							            "active"=>false));
@@ -77,15 +69,8 @@ function saveTransaction($orderid, $payment) {
         	$orderItemsSuccess[$itemIndex]["success"]=true;
 
         	//Get package items
-            $packageitems = db_getPackageItems($item_id); 
-				$packageitem_itemid="";
-				$packageitem_quantity="";
-				foreach($packageitems as $p){
-					$packageitem_quantity = $p['quantity'];
-					$packageitem_itemid = $p['itemid'];
-				}
-				
-            
+            $packageitems = db_getPackageItems($item['id']);
+
             //Initialize array to send a ws request for package items only with rollback true
             $packageItemsArr = array();
 
@@ -95,14 +80,10 @@ function saveTransaction($orderid, $payment) {
             //Save items in request array
             foreach ($packageitems as $packageitem) {
 
-                $item = db_getItem($packageitem_itemid);
-					 $item_referenceid = "";
-					 foreach($item as $i){
-						$item_referenceid = $i['referenceid'];
-					 }
+                $item = refactored_db_getItem($packageitem['itemid']);
 
                 $quantity = $orderitem['quantity']*$packageitem_quantity;   
-                array_push($packageItemsArr, array("creditTypeId"=>$item_referenceid, 
+                array_push($packageItemsArr, array("creditTypeId"=>$item['referenceid'],
 									                "quantity"=>$quantity, 
 									                "purchaseId"=>$order_ordernumber."".$orderitem['itemid'], 
 									                "active"=>false));                      

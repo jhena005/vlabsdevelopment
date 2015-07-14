@@ -107,9 +107,9 @@ if ($action == "add") {
     foreach ($contents as $i => $qty) {
     	$id = substr($i, 2);
     	if(ws_isResourceAvailable($id, $qty)){
-    		$item = db_getItem($id);
+    		$item = refactored_db_getItem($id);
     		$prefix = "i-";
-    		if($item->type=="PACKAGE")
+    		if($item['type']=="PACKAGE")
     			$prefix = "p-";
     		for($i=0;$i<$qty;$i++){
     			if ($newcart) {

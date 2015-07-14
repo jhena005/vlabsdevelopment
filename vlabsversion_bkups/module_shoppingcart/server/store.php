@@ -197,7 +197,7 @@ if ($action == "reload") {
 
 		//echo '<script type="text/javascript">alert("about to go into SoapClient call")</script>';
 
-        /* jh this needs to get executed, since soap calls are really slow commenting temprarily
+        // jh NOTE: this needs to get executed, since soap calls are really slow commenting temporarily
 		try {
 			$client = new SoapClient(WSDL_QS, array('location' => LOCATION_QS));
         	$creditType = $client->getCreditTypeById($item->referenceid);
@@ -210,7 +210,7 @@ if ($action == "reload") {
 			$creditType = null;
 	
 	    }
-        jh end commenting soap calls */
+        //jh end commenting soap calls */
 
 $creditType = "TestCreditType";
 		if($creditType!=null)

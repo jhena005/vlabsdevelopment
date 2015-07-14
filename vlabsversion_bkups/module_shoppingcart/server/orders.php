@@ -303,12 +303,8 @@ if ($action == "reloadOrders") {
 	$itemsCancelled = db_getCancelledOrderItems($orderid);	
 	$cancelledItemsNames = "";
 	foreach ($itemsCancelled as $ic){
-		$item = db_getItem($ic->itemid);
-		$item_name = "";
-		foreach($item as $i){
-			$item_name = $i['name'];
-		}
-		$cancelledItemsNames .= " ".$item_name.",";
+		$item = refactored_db_getItem($ic['itemid']);
+		$cancelledItemsNames .= " ".$item['name'].",";
 	}	
 	$cancelledItemsNames = substr($cancelledItemsNames, 0, -1);
 	$cancelledItemsNames.=".";
@@ -339,6 +335,7 @@ if ($action == "reloadOrders") {
 
 	//Get order updated
 	$order = db_getOrderById($orderid);
+   $order_id = "";
 	$order_ordernumber = "";
 	$order_lastmodification = "";
 	$order_fulfillmentorderstate = "";
@@ -346,6 +343,7 @@ if ($action == "reloadOrders") {
 	$order_total = "";
 	$order_purchasedate = "";
 	foreach($order as $o){
+       $order_id = $o['id'];
 		$order_ordernumber = $o['ordernumber'];
 		$order_lastmodification = $o['lastmodification'];
 		$order_fulfillmentorderstate = $o['fulfillmentorderstate'];
@@ -354,9 +352,9 @@ if ($action == "reloadOrders") {
 		$order_purchasedate = $o['purchasedate'];
 	}
 
-	$o = array("id"=>$order->id,
+	$o = array("id"=>$order_id,
 			"ordernumber"=>$order_ordernumber,
-			"username"=>$user->username,
+			"username"=>$user_name,
 			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
 			"lastmodification"=>$order_lastmodification ,
 			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
@@ -412,6 +410,12 @@ if ($action == "reloadOrders") {
 
 	//Send email
 	$user= db_getUserById($dbOrder_userid);
+
+    $user_name="";
+    foreach($user as $u) {
+
+    $user_name = $u['login'];
+    }
 	$body= '<p>Order '.$dbOrder_ordernumber.' has been declined.<p>';
 	//sendEmail($user, 'Order Declined', $body);  jh NOTE: come back to this !!!
 	
@@ -438,7 +442,7 @@ if ($action == "reloadOrders") {
 
 	$o = array("id"=>$order_id,
 			"ordernumber"=>$order_ordernumber,
-			"username"=>$user_username,
+			"username"=>$user_name,
 			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
 			"lastmodification"=>$order_lastmodification ,
 			"fulfillmentorderstate"=>$order_fulfillmentorderstate,

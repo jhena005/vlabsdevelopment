@@ -6,7 +6,7 @@
  */
 
 
-var shoppingcartphpURL = '/modules/server/shoppingcart/server/shoppingcart.php';
+var shoppingcartphpURL = '/modules/module_shoppingcart/server/shoppingcart.php';
 
 function openShoppingCartTab()
 {
@@ -19,12 +19,15 @@ function reloadShoppingCart()
 	$("#shoppingCartContainer").empty();	
 	createLoadingDivAfter("#shoppingCartContainer","Updating");	
 
+	var userid= $("#userid").val();
+
     $.ajax({
         type: 'POST',
         url: shoppingcartphpURL,
         dataType: 'json',
         data: {
-            action: 'reloadShoppingCart'
+            action: 'reloadShoppingCart',
+				userid:userid
         },
         success: function(data){
         	removeLoadingDivAfter("#shoppingCartContainer");

@@ -51,24 +51,24 @@ function ws_isResourceAvailable($itemId, $qty) {
 	
 	session_start(); 
 	$userId = $_SESSION["userid"]; 
-	$item = db_getItem($itemId);
+	$item = refactored_db_getItem($itemId);
 	
 	$result = true;
 	
-	if($item->type=="PACKAGE"){
-		$packageItems = db_getPackageItem($item->id);
+	if($item['type']=="PACKAGE"){
+		$packageItems = db_getPackageItem($item['id']);
 		
 		foreach ($packageItems as $packageItem){
-			$item = db_getItem($id);
-			if(!ws_isResourceAvailable($item->id, $packageItem->quantity*$qty)){
+			$item = refactored_db_getItem($id);
+			if(!ws_isResourceAvailable($item['id'], $packageItem['quantity']*$qty)){
 				return false;
 			}
 		}		
 	}else{
 		
-		$timeZoneId = db_getUserTimeZone($userId)->data;		
-		$item = db_getItem($itemId);
-	    $creditType = ws_getCreditTypeById($item->referenceid);
+		$timeZoneId = db_getUserTimeZone($userId)['data'];
+		$item = refactored_db_getItem($itemId);
+	    $creditType = ws_getCreditTypeById($item['referenceid']);
 	    $course = db_getCourseById($creditType->courseId);
 	    $policy = ws_getPolicyById($creditType->policyId, $timeZoneId);
 	    $dates = ws_getItemStartAndEndDates($policy, $timeZoneId);
@@ -84,7 +84,7 @@ function ws_isResourceAvailable($itemId, $qty) {
 	        				'quota'=>$quota);
 	        
 			$client = new SoapClient(WSDL_VL, array('location' => LOCATION_VL));
-	        $response = $client->isResourceAvailable($params);
+	       $response = $client->isResourceAvailable($params);
 			$result = $response->success;
 	        
 	    } catch (Exception $e) {

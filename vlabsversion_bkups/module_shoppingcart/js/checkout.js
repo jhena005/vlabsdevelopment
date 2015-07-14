@@ -1,5 +1,5 @@
 
-var checkoutphpURL = '/modules/server/checkout/nopayment_checkout/checkout.php';
+var checkoutphpURL = '/modules/module_shoppingcart/server/checkout/nopayment_checkout/checkout.php';
 
 function checkout()
 {

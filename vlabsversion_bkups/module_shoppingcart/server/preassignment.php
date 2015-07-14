@@ -109,7 +109,7 @@ if ($action == "reload") {
            //var_dump($itemsbyref);
 
 			if ($itemsbyref != null)
-				array_push($items, $itemsbyref);
+				array_merge($items, $itemsbyref);
 
             //echo "after array_push of items and itemsbyref: ". PHP_EOL;
             //var_dump($items);
@@ -120,7 +120,7 @@ if ($action == "reload") {
           //echo PHP_EOL;
 
 			if ($itemsForPkgbyref != null)
-				$itemsForPackages = array_push($itemsForPackages, $itemsForPkgbyref);
+				$itemsForPackages = array_merge($itemsForPackages, $itemsForPkgbyref);
 
 		}
 
@@ -141,8 +141,8 @@ if ($action == "reload") {
                     "type" => $item['type']);
 				 array_push($formattedStoreItems, $item_array);
 			}
-           // echo "formattedStoreItems: ";
-            //var_dump($formattedStoreItems);
+           //echo "formattedStoreItems: " . PHP_EOL;
+           //var_dump($formattedStoreItems);
 
            // echo "itemsForPackages: ";
            // var_dump($itemsForPackages);

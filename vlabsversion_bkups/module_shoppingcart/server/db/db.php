@@ -96,7 +96,7 @@ function db_addNoPaymentOrder($userid, $ordernumber)
             
     //print_r($sql);
 
-    return eF_executeQuery($sql, false);     
+    return eF_executeQuery($sql);
             
 }
 
@@ -252,7 +252,7 @@ function db_approveOrder($orderid)
 	$sql .= "fulfillmentorderstate= 'APPROVED' ";
 	$sql .= "WHERE id =" . $orderid;
 
-	return eF_executeQuery($sql, false); //jh not sure if we need to use 'false' argument here??
+	return eF_executeQuery($sql); //jh not sure if we need to use 'false' argument here??
 }
 
 function db_declineOrder($orderid)
@@ -263,7 +263,7 @@ function db_declineOrder($orderid)
 	$sql .= "fulfillmentorderstate= 'DECLINED' ";
 	$sql .= "WHERE id =" . $orderid;
 
-	return eF_executeQuery($sql, false);
+	return eF_executeQuery($sql);
 	
 	
 }
@@ -271,9 +271,9 @@ function db_declineOrder($orderid)
 function db_deleteOrder($orderid){
 	
 	$sql="DELETE FROM  module_vlabs_shoppingcart_order_summary WHERE orderid =".$orderid;
-	eF_executeQuery($sql,false);
+	eF_executeQuery($sql);
 	$sql="DELETE FROM  module_vlabs_shoppingcart_order WHERE id =".$orderid;
-	eF_executeQuery($sql,false);
+	eF_executeQuery($sql);
 	
 }
 
@@ -743,6 +743,12 @@ function db_getUserById($userid)
 }
 
 
+function refactored_db_getUserById($userid)
+{
+    $sql = "SELECT * FROM users WHERE login = '".$userid."'";
+    return user_array(eF_executeQuery($sql));
+}
+
 function db_getOrderById($orderid)
 {
 
@@ -894,18 +900,18 @@ function courses_array($result){
 function db_getCourseById($courseid){
 	//echo '<script type="text/javascript">alert("in db.php db_getCourseById courseid ='. $courseid .'")</script>';
 	$sql = "SELECT * FROM courses WHERE id =".$courseid;  //originally module_vlabs_course
-	$result  = eF_executeQuery($sql);
+	$result  = courses_array(eF_executeQuery($sql));
 	return $result;
 	
 }
 
 function db_getEnrollments(){
 	
-	$enrollments = array();
-		
+	//$enrollments = array();
+/* jh NOTE:  check with Dr. Sadjadi how he wants to integrate this with efront
 	$sql = "SELECT * FROM moodle.module_vlabs_role_assignments WHERE roleid = 5 and 
 		contextid IN (SELECT id FROM moodle.module_vlabs_context WHERE contextlevel = 50) ORDER BY id";
-	
+
 
 	$result  = eF_executeQuery($sql);
 
@@ -919,15 +925,18 @@ function db_getEnrollments(){
 			"userId"=>$e->userid
 		);
 		array_push($enrollments, $enrollment);
-		
+
+
 	}
 	
 	return $enrollments;
+	*/
+    return null;
 }
 
 function db_getAdministrators(){
 	
-	$sql = "SELECT userid FROM module_vlabs_role_assignments WHERE roleid IN (SELECT id FROM module_vlabs_role WHERE name = 'Administrator')";
+	$sql = "SELECT id FROM users WHERE user_type='administrator'";
    return eF_executeQuery($sql);
 	
 }
@@ -951,6 +960,7 @@ function user_array($result){
             "login" => $r['login'],
             "timezone" => $r['timezone'],
             "name" => $r['name'],
+            "surname" => $r['surname'],
             "email" => $r['email']);
         return array_push($u_array, $u_array);
         }
