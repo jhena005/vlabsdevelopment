@@ -1,0 +1,168 @@
+10
+
+dir
+1129
+svn+ssh://portal@alpha.cis.fiu.edu/var/svn/moodle_vlabs/trunk/mod/shoppingcart/jquery-ui/development-bundle/demos
+svn+ssh://portal@alpha.cis.fiu.edu/var/svn/moodle_vlabs
+
+
+
+2010-09-12T20:43:56.077109Z
+45
+vrami008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10c9603c-e319-405c-8d42-cc8e175c4e4a
+
+show
+dir
+
+resizable
+dir
+
+toggle
+dir
+
+slider
+dir
+
+removeClass
+dir
+
+switchClass
+dir
+
+tabs
+dir
+
+progressbar
+dir
+
+effect
+dir
+
+demos.css
+file
+
+
+
+
+2010-09-18T16:00:08.000000Z
+2e2ec04700af4ac5681a956cfe405c47
+2010-09-12T20:43:56.077109Z
+45
+vrami008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14338
+
+dialog
+dir
+
+accordion
+dir
+
+autocomplete
+dir
+
+selectable
+dir
+
+position
+dir
+
+images
+dir
+
+toggleClass
+dir
+
+droppable
+dir
+
+draggable
+dir
+
+hide
+dir
+
+index.html
+file
+
+
+
+
+2010-09-18T16:00:08.000000Z
+6affdc6d3635c74c2fd261608e2b770d
+2010-09-12T20:43:56.077109Z
+45
+vrami008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15608
+
+datepicker
+dir
+
+button
+dir
+
+sortable
+dir
+
+animate
+dir
+
+addClass
+dir
+

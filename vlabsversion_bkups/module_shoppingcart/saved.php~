@@ -17,7 +17,7 @@
 <?php
 	//grab the theme parameter passed from the url
 	$themeset = $_REQUEST['currentTheme'];
-	echo '<script type="text/javascript">alert("current theme is: ' . $themeset . '")</script>';
+	//echo '<script type="text/javascript">alert("current theme is: ' . $themeset . '")</script>';
 	//include the approriate css for the theme 
 	switch ($themeset) {
 		case 'default':
@@ -41,10 +41,18 @@
 	}
 ?>
 
-
+<!--
 <script type="text/javascript" src="/modules/jquery/jquery-ui/js/jquery-1.4.2.min.js"></script>
+jh repaced below
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
 <script type="text/javascript" src="/modules/jquery/jquery-ui/js/jquery-ui-1.8.4.custom.min.js"></script>
+<!--
 <script type="text/javascript" src="/modules/jquery/jquery-ui/jquery-ui.js"></script>
+jh replaced below
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+
 <script type='text/javascript' src='/modules/jquery/jquery-ui/dataTables/media/js/jquery.dataTables.min.js'></script>
 <script type='text/javascript' src='/modules/jquery/jquery-ui/dataTables/examples/examples_support/jquery.jeditable.js'></script>
 <link type="text/css" href="css/validation.css" rel="stylesheet" />

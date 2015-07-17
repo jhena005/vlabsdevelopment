@@ -60,6 +60,30 @@ return $result;
 
 }
 
+function array_orders($result){
+
+    $o_array = array();
+    if($result!=null){
+        foreach($result as $r) {
+            $row = array("id" => $r['id'],
+                "userid" => $r['userid'],
+                "purchasedate" => $r['purchasedate'],
+                "lastmodification" => $r['lastmodification'],
+                "fulfillmentorderstate" => $r['fulfillmentorderstate'],
+                "financialorderstate" => $r['financialorderstate'],
+                "ordernumber" => $r['ordernumber'],
+                "total" => $r['total'],
+                "cancelled" => $r['cancelled'],
+                "payment" => $r['payment'],
+                "refund" => $r['refund']
+                );
+            array_push($o_array,$row);
+        }
+        return $o_array;
+    }else{
+        return $result;
+    }
+}
 
 
 function db_getOrdersByEmail($email)
@@ -745,7 +769,7 @@ function db_getUserById($userid)
 
 function refactored_db_getUserById($userid)
 {
-    $sql = "SELECT * FROM users WHERE login = '".$userid."'";
+    $sql = "SELECT * FROM users WHERE id =".$userid;
     return user_array(eF_executeQuery($sql));
 }
 
@@ -941,6 +965,12 @@ function db_getAdministrators(){
 	
 }
 
+function db_getAdministrators_new(){
+
+    $sql = "SELECT * FROM users WHERE user_type='administrator'";
+    return eF_executeQuery($sql);
+
+}
 
 function db_getUserTimeZone($userId){
 		//jh modified to use efront timezone info
@@ -962,8 +992,9 @@ function user_array($result){
             "name" => $r['name'],
             "surname" => $r['surname'],
             "email" => $r['email']);
-        return array_push($u_array, $u_array);
+        array_push($u_array, $u_array);
         }
+        return $u_array;
     }else{
         return $result;
     }

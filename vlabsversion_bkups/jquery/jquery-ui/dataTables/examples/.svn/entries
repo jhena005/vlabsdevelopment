@@ -1,0 +1,83 @@
+10
+
+dir
+1129
+svn+ssh://portal@alpha.cis.fiu.edu/var/svn/moodle_vlabs/trunk/mod/shoppingcart/jquery-ui/dataTables/examples
+svn+ssh://portal@alpha.cis.fiu.edu/var/svn/moodle_vlabs
+
+
+
+2010-09-12T20:43:56.077109Z
+45
+vrami008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10c9603c-e319-405c-8d42-cc8e175c4e4a
+
+basic_init
+dir
+
+advanced_init
+dir
+
+api
+dir
+
+examples_support
+dir
+
+server_side
+dir
+
+index.html
+file
+
+
+
+
+2010-10-13T15:50:03.000000Z
+2135b6ed7261956022d43415abee1c4a
+2010-09-12T20:43:56.077109Z
+45
+vrami008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6242
+
+data_sources
+dir
+
+plug-ins
+dir
+

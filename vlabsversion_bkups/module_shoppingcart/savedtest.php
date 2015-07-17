@@ -9,13 +9,13 @@
 
 
 
-
-<link type="text/css" href="/modules/jquery/jquery-ui/css/redmond-light/jquery-ui-1.8.5.custom.css" rel="stylesheet" />
-
-
-
-
 <!--
+<link type="text/css" href="/modules/jquery/jquery-ui/css/redmond-light/jquery-ui-1.8.5.custom.css" rel="stylesheet" />
+-->
+
+
+
+
 <?php
 	//grab the theme parameter passed from the url
 	$themeset = $_GET['theme'];
@@ -41,7 +41,7 @@
 			break;
 	}
 ?>
--->
+
 
 <script type="text/javascript" src="/modules/jquery/jquery-ui/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="/modules/jquery/jquery-ui/js/jquery-ui-1.8.4.custom.min.js"></script>
@@ -74,9 +74,11 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <!-- <link rel="stylesheet" type="text/css" href="css/shoppingcartcss/style.css" /> -->
 
+
 <style type="text/css" media="screen">
 	
-	@import "/modules/jquery/jquery-ui/dataTables/media/css/demo_table_jui.css";
+
+	@import "/modules/jquery/jquery-ui/dataTables/media/css/demo_table_jui.css"; 
 	
 	/*
 	 * Override styles needed due to the mix of three different CSS sources! For proper examples

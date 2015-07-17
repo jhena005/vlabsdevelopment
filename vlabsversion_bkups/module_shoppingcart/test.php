@@ -1,0 +1,2 @@
+aut
+<?php phpinfo(); ?>

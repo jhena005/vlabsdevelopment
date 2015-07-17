@@ -4,6 +4,7 @@ $dirname = '/opt/lamp';
 $filename = 'module_vlabs_shoppingcart_data.sql';
 
 require_once((dirname(dirname(dirname(dirname(__FILE__))))).'/libraries/configuration.php');
+
 session_start();
 
 //This file cannot be called directly, only included.

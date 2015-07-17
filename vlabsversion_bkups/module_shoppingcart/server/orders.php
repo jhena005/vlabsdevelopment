@@ -156,12 +156,19 @@ if ($action == "reloadOrders") {
 
 
 		foreach($orders as $row) {
-//			$user = db_getUserById($order->userid); jh
+			$user = refactored_db_getUserById($row['userid']);
 			$purchaseDate = date(DATE_ATOM, ($row['purchasedate']/1000)); 
-			
+
+          /*
+          if($row['ordernumber']=='IA55a4429095d17') {
+              echo "user array for userid: " . $row['userid']." is ".PHP_EOL;
+              var_dump($user);
+          }
+          */
+
 			$o = array($row['id'],
 			$row['ordernumber'],
-			"admin",
+			$user['name'],
 			$purchaseDate,
 			$row['lastmodification'] ,
 			$row['fulfillmentorderstate'],
@@ -381,7 +388,7 @@ if ($action == "reloadOrders") {
 	}
 
 
-	$adminId = userlogin;//jh original =$_SESSION["userid"];
+	$adminId = $userlogin;//jh original =$_SESSION["userid"];
 	$userdata = db_getUserById($userlogin);
 
 	$timeZoneId = "";
@@ -597,7 +604,7 @@ if ($action == "reloadOrders") {
 
 	$o = array("id"=>$order_id,
 			"ordernumber"=>$order_ordernumber,
-			"username"=>$user_username,
+			"username"=>$user_name,
 			"purchasedate"=>date(DATE_ATOM, ($order_purchasedate/1000)),
 			"lastmodification"=>$order_lastmodification ,
 			"fulfillmentorderstate"=>$order_fulfillmentorderstate,
@@ -681,7 +688,7 @@ if ($action == "reloadOrders") {
 		$i=0;		
 		foreach ($packageItems as $pi){
 			$percentageReturned = $assignmentsResponse[$i++]->percentageReturned; //jh NOTE: this is tied to the above call!!
-			$subtotal = $pi['quantity']*$dbOrderItem_quantity*$pi['price'];
+			$subtotal = $pi['quantity']*$dbOrderItem['quantity']*$pi['price'];
 			$partialRefund = ($subtotal * $percentageReturned)/100;	
 			$refundAmount = $refundAmount + $partialRefund;		
 			

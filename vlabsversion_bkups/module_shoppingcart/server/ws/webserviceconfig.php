@@ -1,15 +1,27 @@
 <?php
 
-//define('WSDL_QS', 'http://localhost:8080/axis2/services/QuotaSystem?wsdl');
-//define('LOCATION_QS', 'http://localhost:8080/axis2/services/QuotaSystem?wsdl');
+require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 
 
+//echo "QUOTA_SYSTEM_WSDL " . $QUOTA_SYSTEM_WSDL;
+//echo "VIRTUAL_LABS_WSDL " . $VIRTUAL_LABS_WSDL;
 
+define('WSDL_QS', "http://".$QUOTA_SYSTEM_WSDL);
+define('LOCATION_QS', "http://".$QUOTA_SYSTEM_WSDL);
+
+define('WSDL_VL', "http://".$VIRTUAL_LABS_WSDL );
+define('LOCATION_VL', "http://".$VIRTUAL_LABS_WSDL );
+
+
+/*
 define('WSDL_QS', 'http://vlabs.cis.fiu.edu:6060/axis2/services/QuotaSystem?wsdl');
 define('LOCATION_QS','http://vlabs.cis.fiu.edu:6060/axis2/services/QuotaSystem?wsdl');
 
+
 define('WSDL_VL', 'http://vlabs.cis.fiu.edu:6060/axis2/services/VirtualLabs?wsdl');
 define('LOCATION_VL','http://vlabs.cis.fiu.edu:6060/axis2/services/VirtualLabs?wsdl');
+*/
+
 
 ini_set("soap.wsdl_cache_enabled", "0");
 

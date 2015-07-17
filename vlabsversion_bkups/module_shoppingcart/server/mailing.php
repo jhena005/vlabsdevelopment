@@ -12,12 +12,13 @@
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 	
-		// TODO once the db_getAdministrators() is fixed, the below lines must be removed. 
+		$admin = user_array(eF_executeQuery("select * from users where login='admin'")); //is fixed, the below lines must be removed.
+
 		// This is just a temporary fix.
 			$content = '<html>';
 			$content .='	<body>';
 			
-			$salutation = '<p>Dear '.$admin->firstname.' '.$admin->lastname.'</p>';
+			$salutation = '<p>Dear '.$admin['name'].' '.$admin['surname'].'</p>';
 			
 			$footer = '<p><em>This is an automated message by the Quota Store.</em></p>';
 		                      	                      
@@ -27,17 +28,27 @@
 			$content .='</html>';
 	
 			$myEmail = 'sadjadi@cs.fiu.edu';
-			mail($myEmail, $subject, $content, $headers);	
-	
+
+          /*
+          echo "about to send email to Dr. Sadjadi: " . $myEmail . PHP_EOL;
+          echo "subject: " .PHP_EOL;
+          var_dump($subject);
+          echo "content: ".PHP_EOL;
+          var_dump($content);
+          echo "headers: ".PHP_EOL;
+          var_dump($headers);
+			mail($myEmail, $subject, $content, $headers);
+	       */
+
 		// TODO This fucntion does not return any admins. It needs to be fixed.
-		$admins = db_getAdministrators();
+		$admins = db_getAdministrators_new();
 		
 		foreach ($admins as $admin){
 			
 			$content = '<html>';
 			$content .='	<body>';
 			
-			$salutation = '<p>Dear '.$admin->firstname.' '.$admin->lastname.'</p>';
+			$salutation = '<p>Dear '.$admin['name'].' '.$admin['surname'].'</p>';
 			
 			$footer = '<p><em>This is an automated message by the Quota Store.</em></p>';
 		                      	                      
@@ -45,8 +56,18 @@
 			
 			$content .='	</body>';
 			$content .='</html>';
-	
-			mail($admin->email, $subject, $content, $headers);	
+
+            /*
+            echo "about to send email to admin: " . $admin['email'] .PHP_EOL;
+            echo "subject: " .PHP_EOL;
+            var_dump($subject);
+            echo "content: ".PHP_EOL;
+            var_dump($content);
+            echo "headers: ".PHP_EOL;
+            var_dump($headers);
+            */
+
+			mail($admin['email'], $subject, $content, $headers);
 		}
 	
 	}
