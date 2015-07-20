@@ -138,6 +138,8 @@ if ($action == "reloadOrders") {
 	//$currentUser = $this -> getCurrentUser();
 	//$currentUser -> getRole($this -> getCurrentLesson());
 	//echo "current user is: ".$currentUser;
+	//echo "root path is: " . G_ROOTPATH;
+
 
 	$orders = db_getOrders();
 
@@ -700,9 +702,9 @@ if ($action == "reloadOrders") {
 //		echo "refund total ".$refundAmount;
 	}else{
 		$assignment = array("creditTypeId"=>$dbItem_referenceid,
-							"quantity"=>$dbOrderItem_quantity,
+							"quantity"=>$dbOrderItem['quantity'],
 							"purchaseId"=>$dbOrder_ordernumber,
-							"active"=>!$dbOrderItem_cancelled
+							"active"=>!$dbOrderItem['cancelled']
 							);	
 		array_push($assignmentsRequest, $assignment);
 		
@@ -859,9 +861,6 @@ function ord_getItemDescription($itemid, $orderid){
 
     //Test with ordernumber:  IA4f310f1212c9b
 
-
-
-
     $order = db_getOrderById($orderid);  //jh candidate for removal since this info was already obtained in calling section:  reloadOrderItems.  maybe is better to pass these individual values as arguments???
     //printr($order);
 
@@ -928,7 +927,7 @@ function ord_getItemDescription($itemid, $orderid){
             }
 
     //		echo '<script type="text/javascript">alert("in orders.php after $packageItems after foreach items, item before soap call")</script>';
-
+            //echo "Right before ws_getCreditTypeById() call";
             $creditType = ws_getCreditTypeById($item_referenceid); //jh here another getCreditTypeById. Replace with Ajax call
             //jh CAREFUL!!!! NEED TO TEST IF creditType returned is null else it will look ugly
 

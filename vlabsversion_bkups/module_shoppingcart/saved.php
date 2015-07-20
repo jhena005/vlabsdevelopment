@@ -21,22 +21,133 @@
 	//include the approriate css for the theme 
 	switch ($themeset) {
 		case 'default':
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/default/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/default/jquery-ui.css" rel="stylesheet">';
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/default/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
+
 			break;
 		case 'blue':
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/blue/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/blue/jquery-ui.css" rel="stylesheet">';
+		
+
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/blue/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
+
 			break;
 		case 'bluehtml':
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/bluehtml/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/bluehtml/jquery-ui.css" rel="stylesheet">';
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/bluehtml/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
+
 			break;
 		case 'green':
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/green/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/green/jquery-ui.css" rel="stylesheet">';
+
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/green/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
 			break;
 		case 'flatgrey':
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/flatgrey/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/flatgrey/jquery-ui.css" rel="stylesheet">';
+
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/flatgrey/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
+
 			break;
 		default:
-			echo '<link type="text/css"  href="/modules/jquery/jquery-ui-themes/themes/default/jquery-ui.css" rel="stylesheet">';
+			echo '<link type="text/css"  href="jquery/jquery-ui-themes/themes/default/jquery-ui.css" rel="stylesheet">';
+			echo	'<style type="text/css" media="screen">';
+	
+			echo	'@import "jquery/jquery-ui-themes/themes/default/demo_table_jui.css";';
+	
+					/*
+					 * Override styles needed due to the mix of three different CSS sources! For proper examples
+					 * please see the themes example in the 'Examples' section of this site
+					 */
+
+			echo		'.dataTables_info { padding-top: 0; }';
+			echo		'.dataTables_paginate { padding-top: 0; }';
+			echo		'.css_right { float: right; }';
+			echo		'#example_wrapper .fg-toolbar { font-size: 0.8em }';
+			echo		'#theme_links span { float: left; padding: 2px 10px; }';
+	
+			echo 	'</style>';
+
+
 			break;
 	}
 ?>
@@ -46,15 +157,15 @@
 jh repaced below
 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
-<script type="text/javascript" src="/modules/jquery/jquery-ui/js/jquery-ui-1.8.4.custom.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui/js/jquery-ui-1.8.4.custom.min.js"></script>
 <!--
 <script type="text/javascript" src="/modules/jquery/jquery-ui/jquery-ui.js"></script>
 jh replaced below
 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
 
-<script type='text/javascript' src='/modules/jquery/jquery-ui/dataTables/media/js/jquery.dataTables.min.js'></script>
-<script type='text/javascript' src='/modules/jquery/jquery-ui/dataTables/examples/examples_support/jquery.jeditable.js'></script>
+<script type='text/javascript' src='jquery/jquery-ui/dataTables/media/js/jquery.dataTables.min.js'></script>
+<script type='text/javascript' src='jquery/jquery-ui/dataTables/examples/examples_support/jquery.jeditable.js'></script>
 <link type="text/css" href="css/validation.css" rel="stylesheet" />
 
 
@@ -73,7 +184,7 @@ jh replaced below
 <script type='text/javascript' src='js/orders.js'></script>
 <script type='text/javascript' src='js/preassignment.js'></script>
 <script type='text/javascript' src='js/timezone.js'></script>
-
+<script type='text/javascript' src='js/dbadmin.js'></script>
 
 
 
@@ -81,9 +192,11 @@ jh replaced below
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <!-- <link rel="stylesheet" type="text/css" href="css/shoppingcartcss/style.css" /> -->
 
+
+<!--
 <style type="text/css" media="screen">
 	
-	@import "/modules/jquery/jquery-ui/dataTables/media/css/demo_table_jui.css";
+	@import "jquery/jquery-ui/dataTables/media/css/demo_table_jui.css";
 	
 	/*
 	 * Override styles needed due to the mix of three different CSS sources! For proper examples
@@ -96,7 +209,10 @@ jh replaced below
 	#theme_links span { float: left; padding: 2px 10px; }
 	
 </style>
+-->
 
+
+<!--
 <style type="text/css">
     div#users-contain { width: 350px; margin: 20px 0; }
     div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
@@ -107,8 +223,8 @@ jh replaced below
         font-family:Lucida Grande,Lucida Sans,Arial,sans-serif;
         font-size:0.8em;
     }
-
 </style>
+-->
 <input id ="userid" type="hidden" value="<?= $_REQUEST['currentUser'] ?>" />
 <input id ="username" type="hidden" value="<?= '' ?>" />
 <input id ="role" type="hidden" value="<?= $_REQUEST['currentRole'] ?>" />

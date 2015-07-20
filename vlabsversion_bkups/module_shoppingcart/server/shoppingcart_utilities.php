@@ -187,7 +187,7 @@ function showCart() {
 	        	$qty, // Quantity
 	        	$item['price']); // Unit price
 
-	        	$googleitem->SetMerchantItemId($item->id);
+	        	$googleitem->SetMerchantItemId($item['id']);
 	        	
 	        	//TODO:Change email to order email
         	    $googleitem->SetEmailDigitalDelivery("mmilani@it-scholars.com");

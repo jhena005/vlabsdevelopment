@@ -12,11 +12,21 @@ define('LOCATION_QS', "http://".$QUOTA_SYSTEM_WSDL);
 define('WSDL_VL', "http://".$VIRTUAL_LABS_WSDL );
 define('LOCATION_VL', "http://".$VIRTUAL_LABS_WSDL );
 
+/*
+echo "WSDL_QS IS:" ;
+echo WSDL_QS;
+echo PHP_EOL;
+echo "WSDL_VL IS:";
+echo WSDL_VL;
+*/
+
 
 /*
 define('WSDL_QS', 'http://vlabs.cis.fiu.edu:6060/axis2/services/QuotaSystem?wsdl');
 define('LOCATION_QS','http://vlabs.cis.fiu.edu:6060/axis2/services/QuotaSystem?wsdl');
 
+WSDL_QS IS:http://vlabs.cis.fiu.edu:6060/axis2/services/QuotaSystem?wsdl
+WSDL_VL IS:http://vlabs.cis.fiu.edu:6060/axis2/services/VirtualLabs?wsdl
 
 define('WSDL_VL', 'http://vlabs.cis.fiu.edu:6060/axis2/services/VirtualLabs?wsdl');
 define('LOCATION_VL','http://vlabs.cis.fiu.edu:6060/axis2/services/VirtualLabs?wsdl');

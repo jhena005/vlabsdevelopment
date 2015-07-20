@@ -555,7 +555,8 @@ function sto_getItemDescription($itemid){
 	session_start(); 
 	$userId = $_SESSION["userid"]; 
 	$item = refactored_db_getItem($itemid);
-	$timeZoneId = db_getUserTimeZone($userId)->data;	
+    $userdb = db_getUserTimeZone($userId);
+	$timeZoneId = $userdb['timezone'];
 	$description = "";
 	
 	if($item['type']=="PACKAGE"){

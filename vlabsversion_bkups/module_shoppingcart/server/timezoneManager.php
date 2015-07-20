@@ -15,8 +15,9 @@ else
 session_start(); 
 $userId = $_SESSION["userid"];
 $userRole = $_SESSION["role"];
-$username = db_getUserName($userId)->username;
-$timeZoneId = db_getUserTimeZone($userId)->data; 	
+$userdb = db_getUserName($userId);
+$username = $userdb['login'];
+$timeZoneId = $userdb['timezone'];
     
     
 //Handle the available actions

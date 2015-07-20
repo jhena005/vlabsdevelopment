@@ -3,6 +3,7 @@
 $dirname = '/opt/lamp';
 $filename = 'module_vlabs_shoppingcart_data.sql';
 
+
 require_once((dirname(dirname(dirname(dirname(__FILE__))))).'/libraries/configuration.php');
 
 session_start();
@@ -62,6 +63,7 @@ class module_shoppingcart extends EfrontModule {
 	 }
 
     public function onInstall() {
+
         eF_executeQuery("drop table if exists module_vlabs_shoppingcart");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_payment_method");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_user_payment");
@@ -191,7 +193,7 @@ class module_shoppingcart extends EfrontModule {
 
 */
 
-	$output = shell_exec('mysql -u root -ppassword -D efront  </home/jhenao/development/vLabs/Code/WebSite/efront/www/modules/module_vlabs_shoppingcart_data.sql');
+	$output = shell_exec('mysql -u '.G_DBUSER.' -p'.G_DBPASSWD.' -D efront  <'. G_ROOTPATH .'www/modules/module_vlabs_shoppingcart_data.sql');
 
     	  return true;
  }   
@@ -207,7 +209,8 @@ class module_shoppingcart extends EfrontModule {
 	 * @see libraries/EfrontModule#onUninstall()
 	 */
     public function onUninstall() {
-
+	$base_dir  = __DIR__;
+	echo "base_dir is: " . $base_dir;
 	 /*
 	 echo '<script type="text/javascript">alert("dir and file name: '.$dirname.'/'.$filename.'")</script>';
 	 if (file_exists($dirname)) {
@@ -223,7 +226,7 @@ class module_shoppingcart extends EfrontModule {
 	}
    */
 
-	 	$output = shell_exec('mysqldump -u root -ppassword --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log >/home/jhenao/development/vLabs/Code/WebSite/efront/www/modules/module_vlabs_shoppingcart_data.sql');
+	 	$output = shell_exec('mysqldump -u '.G_DBUSER.' -p'.G_DBPASSWD.' --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log >'. G_ROOTPATH .'www/modules/module_vlabs_shoppingcart_data.sql');
 
         eF_executeQuery("drop table if exists module_vlabs_shoppingcart");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_payment_method");

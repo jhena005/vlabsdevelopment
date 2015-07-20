@@ -95,6 +95,20 @@ function reloadStoreFront()
 		  //alert("before Pre-assignment, pre_load() call");
         pre_reload();
 
+        //vLabs DB Administration
+        $("#tabs ul").append('<li><a href="#dbadminTab"><span>vLabs DB Administration</span></a></li>');
+        var div = '<div id="dbadminTab">';
+        div+='			<div id="dbadminWrapper"class="container">';
+        div+='				<p class="tableTop">';
+        div+='					<span class="page-title">vLabs DB Administration</span>';
+        div+='				</p>';
+        div+='				<div id="dbadminContainer"></div>';
+        div+='			</div>';
+        div+='			<div id="dbadminWrapper" class="container"></div>';
+        div+='	</div>';
+        $("#tabs").append(div);
+        //alert("before Pre-assignment, pre_load() call");
+        dbadmin_reload();
 
 
     }else{

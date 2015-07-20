@@ -1025,6 +1025,26 @@ function db_getUserName($userId){
     }	
 }
 
+function db_getModules(){
+
+    $sql = "SELECT * FROM module_vlabs_shoppingcart_dbadmin";
+    $modules_array = array();
+    $modules = eF_executeQuery($sql);
+    if($modules!=null){
+        foreach($modules as $m){
+            $m_array = array($m['id'],
+                $m['module'],
+                $m['description']);
+        array_push($modules_array,$m_array);
+        }
+        return $modules_array;
+    }else{
+
+    }
+    return $modules;
+}
+
+
 
 
 ?>

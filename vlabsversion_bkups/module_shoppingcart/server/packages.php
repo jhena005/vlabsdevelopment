@@ -348,7 +348,7 @@ if ($action == "reloadPackages") {
 	$packageItems = db_getPackageItems($packageid);
 	$empty = !(is_array($packageItems)); 
 	
-	if(package!=null){
+	if($package!=null){
 		
 		$p = array("id"=>$package->id,
 			"name"=>$package->name,

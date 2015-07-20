@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="8" />
-    <option name="CUSTOM_SCOPE_NAME" value="Current File" />
+    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c3c692-0eb2-4bd4-a47b-b0750e8d0498" name="Default" comment="" />
+    <list default="true" id="dde25725-10b9-4c39-97d9-427a88f759c1" name="Default" comment="" />
     <ignored path="module_shoppingcart.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -29,194 +28,118 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="store.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/store.php">
+      <file leaf-file-name="dbadmin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dbadmin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="14630">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.857143" vertical-offset="1144" max-vertical-offset="1716">
+              <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tabs.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/tabs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="53.642857" vertical-offset="3988" max-vertical-offset="4818">
+              <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
               <folding>
-                <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-                <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-                <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+                <marker date="1437429492148" expanded="true" signature="1506:1518" placeholder="..." />
+                <marker date="1437429492148" expanded="true" signature="2242:2254" placeholder="..." />
+                <marker date="1437429492148" expanded="true" signature="3124:3136" placeholder="..." />
+                <marker date="1437429492148" expanded="true" signature="5689:5701" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webserviceconfig.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/ws/webserviceconfig.php">
+      <file leaf-file-name="saved.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/saved.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26268658" vertical-offset="0" max-vertical-offset="6248">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="-31.428572" vertical-offset="2970" max-vertical-offset="5566">
+              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="timezoneManager.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/timezoneManager.php">
+      <file leaf-file-name="validation.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/validation.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.392858" vertical-offset="259" max-vertical-offset="1298">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="330">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/db/db.php">
+      <file leaf-file-name="orders.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/orders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.78571427" vertical-offset="0" max-vertical-offset="22792">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.285714" vertical-offset="3900" max-vertical-offset="13266">
+              <caret line="184" column="51" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
               <folding>
-                <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-                <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-                <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-                <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-                <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-                <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-                <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-                <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-                <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-                <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-                <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-                <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-                <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-                <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-                <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-                <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-                <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-                <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-                <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-                <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-                <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-                <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-                <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-                <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-                <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-                <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-                <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-                <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-                <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-                <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-                <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-                <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-                <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-                <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1437253823306" expanded="true" signature="8430:8444" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upgrade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/upgrade.php">
+      <file leaf-file-name="dbadmin.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/dbadmin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="3080">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="install.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/install.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3586">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="module_shoppingcart.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module_shoppingcart.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7744">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2695" max-vertical-offset="4224">
+              <caret line="120" column="71" selection-start-line="120" selection-start-column="71" selection-end-line="120" selection-end-column="71" />
               <folding>
-                <marker date="1437069688774" expanded="true" signature="1694:1740" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="1765:1826" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="1851:1910" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="1935:1995" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="2020:2082" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="2107:2167" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="2194:2256" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="2281:2333" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="2358:2408" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10135:10181" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10206:10267" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10292:10351" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10376:10436" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10461:10523" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10548:10608" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10635:10697" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10722:10774" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="10799:10849" placeholder="drop table i..." />
-                <marker date="1437069688774" expanded="true" signature="11073:11155" placeholder="ALTER TABLE module_vlabs_shoppingcart..." />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.php">
+      <file leaf-file-name="preassignment.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/preassignment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.785714" vertical-offset="13052" max-vertical-offset="13552">
+              <caret line="607" column="0" selection-start-line="607" selection-start-column="0" selection-end-line="607" selection-end-column="28" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loading.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/loading.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1540">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="11" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="store.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/store.js">
+      <file leaf-file-name="manageSchema.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/forms/manageSchema.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="418" max-vertical-offset="14696">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.5676856" vertical-offset="136" max-vertical-offset="748">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+              <folding>
+                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#2;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="orders.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/orders.php">
+      <file leaf-file-name="createPreassignment.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/forms/createPreassignment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="8338" max-vertical-offset="23386">
-              <caret line="380" column="22" selection-start-line="380" selection-start-column="22" selection-end-line="380" selection-end-column="22" />
+            <state vertical-scroll-proportion="-10.071428" vertical-offset="268" max-vertical-offset="814">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="28" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -227,20 +150,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/packages.php" />
-        <option value="$PROJECT_DIR$/server/checkout/nopayment_checkout/lib/genericitem.php" />
-        <option value="$PROJECT_DIR$/server/shoppingcart.php" />
-        <option value="$PROJECT_DIR$/server/shoppingcart_utilities.php" />
-        <option value="$PROJECT_DIR$/server/checkout/nopayment_checkout/checkout.php" />
-        <option value="$PROJECT_DIR$/server/transactions.php" />
-        <option value="$PROJECT_DIR$/server/store.php" />
+        <option value="$PROJECT_DIR$/server/dbadmin.php" />
+        <option value="$PROJECT_DIR$/saved.php" />
         <option value="$PROJECT_DIR$/server/db/db.php" />
-        <option value="$PROJECT_DIR$/server/mailing.php" />
-        <option value="$PROJECT_DIR$/server/test.php" />
-        <option value="$PROJECT_DIR$/test.php" />
-        <option value="$PROJECT_DIR$/server/preassignment.php" />
-        <option value="$PROJECT_DIR$/server/ws/webserviceconfig.php" />
-        <option value="$PROJECT_DIR$/server/orders.php" />
+        <option value="$PROJECT_DIR$/js/tabs.js" />
+        <option value="$PROJECT_DIR$/js/dbadmin.js" />
+        <option value="$PROJECT_DIR$/forms/manageSchema.html" />
       </list>
     </option>
   </component>
@@ -249,10 +164,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-4" />
-    <option name="width" value="1303" />
-    <option name="height" value="669" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1615" />
+    <option name="height" value="922" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -277,7 +192,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -306,7 +220,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -320,38 +234,43 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
+              <option name="myItemId" value="jquery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module_shoppingcart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module_shoppingcart" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
+              <option name="myItemId" value="forms" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.lastSelected" value="preferences.sourceCode" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FullScreen" value="false" />
-    <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/forms" />
+      <recent name="$PROJECT_DIR$/js" />
+      <recent name="$PROJECT_DIR$/server" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.test.php">
-    <configuration default="false" name="test.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/module_shoppingcart/server/test.php">
-      <RunnerSettings RunnerId="JavascriptDebugRunner" />
-      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
       <method />
@@ -366,64 +285,69 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.test.php" />
-    </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.test.php" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f5c3c692-0eb2-4bd4-a47b-b0750e8d0498" name="Default" comment="" />
-      <created>1436324263913</created>
+      <changelist id="dde25725-10b9-4c39-97d9-427a88f759c1" name="Default" comment="" />
+      <created>1437423634420</created>
       <option name="number" value="Default" />
-      <updated>1436324263913</updated>
+      <updated>1437423634420</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1303" height="669" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1615" height="922" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15526518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3181818" sideWeight="0.49961567" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3181818" sideWeight="0.50038433" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2495356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39929742" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2495356" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -443,872 +367,224 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/store.php">
+    <entry file="file://$PROJECT_DIR$/server/orders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11462" max-vertical-offset="14630">
-          <caret line="532" column="28" selection-start-line="532" selection-start-column="28" selection-end-line="532" selection-end-column="28" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13816">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-14.928572" vertical-offset="2310" max-vertical-offset="23364">
+          <caret line="124" column="20" selection-start-line="124" selection-start-column="9" selection-end-line="124" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/db/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11525" max-vertical-offset="17402">
-          <caret line="542" column="5" selection-start-line="542" selection-start-column="5" selection-end-line="542" selection-end-column="5" />
+        <state vertical-scroll-proportion="-6.857143" vertical-offset="22512" max-vertical-offset="23232">
+          <caret line="1032" column="23" selection-start-line="1032" selection-start-column="23" selection-end-line="1032" selection-end-column="23" />
           <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..courses..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..courses..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..courses..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT id FR..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT timez..users..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="UPDATE modul..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT usern..module_vlabs_user..." />
+            <marker date="1437428211000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..module_vlabs_shoppingcart_dbadmin..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
+    <entry file="file://$PROJECT_DIR$/jquery/jquery-ui-themes/themes/default/theme.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4728" max-vertical-offset="23826">
-          <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11462" max-vertical-offset="14630">
-          <caret line="532" column="28" selection-start-line="532" selection-start-column="28" selection-end-line="532" selection-end-column="28" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6015" max-vertical-offset="13728">
-          <caret line="296" column="35" selection-start-line="296" selection-start-column="35" selection-end-line="296" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17072">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4728" max-vertical-offset="23826">
-          <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11462" max-vertical-offset="14630">
-          <caret line="532" column="28" selection-start-line="532" selection-start-column="28" selection-end-line="532" selection-end-column="28" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13728">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11108" max-vertical-offset="17072">
-          <caret line="522" column="57" selection-start-line="522" selection-start-column="57" selection-end-line="522" selection-end-column="57" />
-          <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4728" max-vertical-offset="23826">
-          <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7422" max-vertical-offset="14322">
-          <caret line="345" column="32" selection-start-line="345" selection-start-column="32" selection-end-line="345" selection-end-column="32" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="13442">
-          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10584" max-vertical-offset="15950">
-          <caret line="498" column="24" selection-start-line="498" selection-start-column="24" selection-end-line="498" selection-end-column="24" />
-          <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23826">
+        <state vertical-scroll-proportion="1.0" vertical-offset="28" max-vertical-offset="9152">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
+    <entry file="file://$PROJECT_DIR$/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14432">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1990" max-vertical-offset="13442">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12920" max-vertical-offset="15686">
-          <caret line="591" column="9" selection-start-line="591" selection-start-column="7" selection-end-line="591" selection-end-column="9" />
-          <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3454" max-vertical-offset="23826">
-          <caret line="158" column="27" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14190">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3454" max-vertical-offset="23826">
-          <caret line="158" column="27" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="20458" max-vertical-offset="25124">
-          <caret line="935" column="9" selection-start-line="935" selection-start-column="9" selection-end-line="935" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/checkout/google_checkout/lib/googleitem.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.75" vertical-offset="350" max-vertical-offset="5214">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/checkout/nopayment_checkout/lib/genericitem.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="594">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/checkout/nopayment_checkout/lib/genericcart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.642857" vertical-offset="180" max-vertical-offset="1738">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/orders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33136094" vertical-offset="7720" max-vertical-offset="13266">
-          <caret line="356" column="28" selection-start-line="356" selection-start-column="21" selection-end-line="356" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="19118" max-vertical-offset="24596">
-          <caret line="971" column="6" selection-start-line="971" selection-start-column="6" selection-end-line="971" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/mailing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1320" max-vertical-offset="2222">
-          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="154">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/preassignment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="9988">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/checkout/nopayment_checkout/checkout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5124" max-vertical-offset="7062">
-          <caret line="245" column="19" selection-start-line="245" selection-start-column="19" selection-end-line="245" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/transactions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.178572" vertical-offset="97" max-vertical-offset="5170">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/shoppingcart_utilities.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-74.64286" vertical-offset="0" max-vertical-offset="5346">
-          <caret line="95" column="1" selection-start-line="95" selection-start-column="1" selection-end-line="95" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/cart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2332">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/lib.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="5038">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/packages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-480.07144" vertical-offset="0" max-vertical-offset="14036">
-          <caret line="611" column="1" selection-start-line="611" selection-start-column="1" selection-end-line="611" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/shoppingcart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.357143" vertical-offset="0" max-vertical-offset="3542">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="154">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/store.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="14630">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <marker date="1436914973093" expanded="true" signature="9146:9198" placeholder="UPDATE modul..." />
-            <marker date="1436914973093" expanded="true" signature="10750:10803" placeholder="DELETE FROM ..." />
-            <marker date="1436914973093" expanded="true" signature="11654:11722" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973093" expanded="true" signature="11751:11821" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/upgrade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="3080">
+        <state vertical-scroll-proportion="1.0" vertical-offset="28" max-vertical-offset="6072">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/install.xml">
+    <entry file="file://$PROJECT_DIR$/css/validation.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3586">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib.php">
+    <entry file="file://$PROJECT_DIR$/jquery/jquery-ui-themes/themes/default/demo_table_jui.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5038">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33187774" vertical-offset="5546" max-vertical-offset="10692">
+          <caret line="259" column="10" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jquery/jquery-ui-themes/themes/default/jquery-ui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.285714" vertical-offset="16374" max-vertical-offset="27610">
+          <caret line="751" column="58" selection-start-line="751" selection-start-column="55" selection-end-line="751" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/saved.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24780977" vertical-offset="0" max-vertical-offset="3014">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="-31.428572" vertical-offset="2970" max-vertical-offset="5566">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module_shoppingcart.class.php">
+    <entry file="file://$PROJECT_DIR$/js/tabs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7744">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="53.642857" vertical-offset="3988" max-vertical-offset="4818">
+          <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
           <folding>
-            <marker date="1437069688774" expanded="true" signature="1694:1740" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="1765:1826" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="1851:1910" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="1935:1995" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="2020:2082" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="2107:2167" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="2194:2256" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="2281:2333" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="2358:2408" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10135:10181" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10206:10267" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10292:10351" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10376:10436" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10461:10523" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10548:10608" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10635:10697" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10722:10774" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="10799:10849" placeholder="drop table i..." />
-            <marker date="1437069688774" expanded="true" signature="11073:11155" placeholder="ALTER TABLE module_vlabs_shoppingcart..." />
+            <marker date="1437429492148" expanded="true" signature="1506:1518" placeholder="..." />
+            <marker date="1437429492148" expanded="true" signature="2242:2254" placeholder="..." />
+            <marker date="1437429492148" expanded="true" signature="3124:3136" placeholder="..." />
+            <marker date="1437429492148" expanded="true" signature="5689:5701" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.php">
+    <entry file="file://$PROJECT_DIR$/server/dbadmin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="827">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-7.857143" vertical-offset="1144" max-vertical-offset="1716">
+          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/store.js">
+    <entry file="file://$PROJECT_DIR$/js/orders.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="418" max-vertical-offset="14696">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8338" max-vertical-offset="23386">
-          <caret line="380" column="22" selection-start-line="380" selection-start-column="22" selection-end-line="380" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/timezoneManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.392858" vertical-offset="259" max-vertical-offset="1298">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78571427" vertical-offset="0" max-vertical-offset="22792">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.285714" vertical-offset="3900" max-vertical-offset="13266">
+          <caret line="184" column="51" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
           <folding>
-            <marker date="1436914973089" expanded="true" signature="436:471" placeholder="..." />
-            <marker date="1436914973089" expanded="true" signature="970:1041" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2107:2191" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2403:2464" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="2570:2638" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="2830:3163" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="3477:3888" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4118:4356" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="4478:4652" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="4747:4854" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5086:5190" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5302:5462" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5586:5661" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="5780:5868" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="5978:6066" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6196:6314" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="6412:6477" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7137:7225" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="7346:7420" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="7551:7621" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7736:7806" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order_summary..." />
-            <marker date="1436914973089" expanded="true" signature="7932:7974" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8303:8345" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="8620:8688" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8731:8786" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="8880:8957" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="9078:9152" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9297:9371" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="9849:9904" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="11080:11429" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="11565:11617" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12102:12185" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="12275:12341" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="12733:12821" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="12931:13014" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="13143:13233" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="13676:13750" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="13891:13958" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14537:14639" placeholder="SELECT * FRO..module_vlabs_shoppingcart_package_summary..." />
-            <marker date="1436914973089" expanded="true" signature="14820:14873" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="15174:15293" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="15591:15721" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="16473:16611" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="17311:17377" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="18250:18316" placeholder="SELECT * FRO..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19242:19350" placeholder="SELECT * fro..module_vlabs_shoppingcart_store_inventory..." />
-            <marker date="1436914973089" expanded="true" signature="19932:19986" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="20682:20751" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20839:20886" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="20986:21016" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="21126:21182" placeholder="SELECT * FRO..module_vlabs_shoppingcart_order..." />
-            <marker date="1436914973089" expanded="true" signature="21346:21595" placeholder="INSERT INTO ..." />
-            <marker date="1436914973089" expanded="true" signature="21740:21939" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22026:22104" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="22187:22257" placeholder="DELETE FROM ..." />
-            <marker date="1436914973089" expanded="true" signature="22353:22423" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="22533:22586" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="23951:24023" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24145:24266" placeholder="SELECT * FRO..module_vlabs_shoppingcart_preassignment..." />
-            <marker date="1436914973089" expanded="true" signature="24674:24695" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="24787:24808" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="25394:25426" placeholder="SELECT * FRO..courses..." />
-            <marker date="1436914973089" expanded="true" signature="26304:26356" placeholder="SELECT id FR..users..." />
-            <marker date="1436914973089" expanded="true" signature="26447:26498" placeholder="SELECT * FRO..users..." />
-            <marker date="1436914973089" expanded="true" signature="26747:26801" placeholder="SELECT timez..users..." />
-            <marker date="1436914973089" expanded="true" signature="27401:27506" placeholder="UPDATE modul..." />
-            <marker date="1436914973089" expanded="true" signature="27682:27732" placeholder="SELECT usern..module_vlabs_user..." />
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1437253823306" expanded="true" signature="8430:8444" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/ws/webserviceconfig.php">
+    <entry file="file://$PROJECT_DIR$/js/loading.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26268658" vertical-offset="0" max-vertical-offset="6248">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1540">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="11" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <entry file="file://$PROJECT_DIR$/js/preassignment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.785714" vertical-offset="13052" max-vertical-offset="13552">
+          <caret line="607" column="0" selection-start-line="607" selection-start-column="0" selection-end-line="607" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/dbadmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2695" max-vertical-offset="4224">
+          <caret line="120" column="71" selection-start-line="120" selection-start-column="71" selection-end-line="120" selection-end-column="71" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/createPreassignment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.071428" vertical-offset="268" max-vertical-offset="814">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="28" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forms/manageSchema.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5676856" vertical-offset="136" max-vertical-offset="748">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#2;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

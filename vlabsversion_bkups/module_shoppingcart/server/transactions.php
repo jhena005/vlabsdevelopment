@@ -82,7 +82,7 @@ function saveTransaction($orderid, $payment) {
 
                 $item = refactored_db_getItem($packageitem['itemid']);
 
-                $quantity = $orderitem['quantity']*$packageitem_quantity;   
+                $quantity = $orderitem['quantity']*$packageitem['quantity'];
                 array_push($packageItemsArr, array("creditTypeId"=>$item['referenceid'],
 									                "quantity"=>$quantity, 
 									                "purchaseId"=>$order_ordernumber."".$orderitem['itemid'], 

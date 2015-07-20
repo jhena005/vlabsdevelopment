@@ -331,7 +331,7 @@ if ($action == "reload") {
     //echo "refactored db call preassignment array is: " . PHP_EOL;
     //var_dump($preassignment);
 
-	if($item->type=="PACKAGE"){
+	if($item['type']=="PACKAGE"){
 		$packageItems = db_getPackageItems($item['id']);
 		foreach($packageItems as $pi){
 			$item = refactored_db_getItem($pi['itemid']);
@@ -389,11 +389,11 @@ if ($action == "reload") {
 	}
 	
 	$preassignment = db_getPreassignmentById($id);
-	$item = db_getItem($preassignment->itemid);
+	$item = db_getItem($preassignment['itemid']);
     $purchaseId = $id."".$item->id;
 	$assignments = array();
 		
-    $quantity = $preassignment->quantity;
+    $quantity = $preassignment['quantity'];
 
 	
 	if($item->type=="PACKAGE"){
