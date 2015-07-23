@@ -26,7 +26,7 @@ class module_shoppingcart extends EfrontModule {
 	 */
     public function getName() {
     	//This is a language tag, defined in the file lang-<your language>.php
-        return shoppingcart;
+        return _MODULE_SHOPPINGCART;
     }
 
 	/**
@@ -73,6 +73,7 @@ class module_shoppingcart extends EfrontModule {
 	     eF_executeQuery("drop table if exists module_vlabs_shoppingcart_store_inventory");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_order");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_log");
+         eF_executeQuery("drop table if exists module_vlabs_shoppingcart_dbadmin");
         eF_executeQuery("CREATE TABLE `module_vlabs_shoppingcart` (
   `id` bigint(10) unsigned NOT NULL auto_increment,
   `course` bigint(10) unsigned NOT NULL default '0',
@@ -171,7 +172,7 @@ class module_shoppingcart extends EfrontModule {
   REFERENCES module_vlabs_shoppingcart_store_inventory(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COMMENT='This table will contain the packages items';");
 
-		  ef_ExecuteQuery("CREATE TABLE `module_vlabs_shoppingcart_preassignment` (
+		  eF_ExecuteQuery("CREATE TABLE `module_vlabs_shoppingcart_preassignment` (
   `id` varchar(20) NOT NULL default '',
   `courseid` bigint(10) unsigned NOT NULL default '0',
   `itemid` mediumint(6) unsigned NOT NULL default '0',
@@ -184,6 +185,14 @@ class module_shoppingcart extends EfrontModule {
   FOREIGN KEY itemid_fk_3(itemid)
   REFERENCES module_vlabs_shoppingcart_store_inventory(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table will contain the assignments of items to courses';");
+
+        eF_ExecuteQuery("CREATE TABLE IF NOT EXISTS `module_vlabs_shoppingcart_dbadmin` (
+        `id` int(11) NOT NULL,
+        `module` varchar(15) NOT NULL,
+        `description` varchar(30) NOT NULL,
+        `moduleprefix` varchar(50) NOT NULL,
+        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 /* jh problem with the ending apostrophy
   	if (file_exists($dirname.'/'.$filename)){
@@ -226,7 +235,7 @@ class module_shoppingcart extends EfrontModule {
 	}
    */
 
-	 	$output = shell_exec('mysqldump -u '.G_DBUSER.' -p'.G_DBPASSWD.' --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log >'. G_ROOTPATH .'www/modules/module_vlabs_shoppingcart_data.sql');
+	 	$output = shell_exec('mysqldump -u '.G_DBUSER.' -p'.G_DBPASSWD.' --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log module_vlabs_shoppingcart_dbadmin >'. G_ROOTPATH .'www/modules/module_vlabs_shoppingcart_data.sql');
 
         eF_executeQuery("drop table if exists module_vlabs_shoppingcart");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_payment_method");
@@ -237,6 +246,7 @@ class module_shoppingcart extends EfrontModule {
 	     eF_executeQuery("drop table if exists module_vlabs_shoppingcart_store_inventory");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_order");
 		  eF_executeQuery("drop table if exists module_vlabs_shoppingcart_log");
+         eF_executeQuery("drop table if exists module_vlabs_shoppingcart_dbadmin");
     	return true;
     }
 
@@ -273,37 +283,29 @@ class module_shoppingcart extends EfrontModule {
 		//?stu_id=$data[stu_id]&dept_id=$data[dept_id]'  currentUser=$currentUserId&currentRole=$currentRole
         
 
-		$theme="";
-		$tid = $_SESSION['s_theme'];
-		//echo '<script type="text/javascript">alert("Current theme number is: ' . $tid . '")</script>';
-		switch($tid){
-			case '1':
-			case '2':
-			case '7':
+		$tid = eF_getTableData('themes', 'name', 'id='. $_SESSION['s_theme']);
+
+		//echo '<script type="text/javascript">alert("Current theme  is: ' . $tid[0]['name'] . '")</script>';
+		switch($tid[0]['name'] ){
+			case 'default':
 				//default
  				$theme="default";	
 				break;
-			case '3':
+			case 'green':
 				//green
 				$theme="green";	
 				break;
-			case '4':
+			case 'blue':
 				//blue
 				$theme="blue";	
 				break;
-			case '5':
-
-			case '10':
+			case 'blue_html5':
 				//bluehtml
 				$theme="bluehtml";	
 				break;
-			case '6':
-				//green
-				$theme="green";	
-				break;
-			case '11':
+			case 'enterprise':
 				//flatgrey
-				$theme="flatgrey";	
+				$theme="flatgrey";
 				break;
 			default:
 				$theme="default";	

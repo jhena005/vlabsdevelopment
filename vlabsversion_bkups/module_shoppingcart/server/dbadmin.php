@@ -68,5 +68,105 @@ if ($action == "getModules") {
 	//Reload all orders of all users. Only used for administartor view
 }
 
+if ($action =="exportData"){
+
+$moduleId ="";
+$outputfile = "NEW_module_vlabs_shoppingcart_data.sql";
+if (isset($_POST['modId'])) {
+    $moduleId = $_POST['modId'];
+} else {
+    $moduleId = "";
+}
+
+
+//echo "moduleId is: " .$moduleId . PHP_EOL;
+
+    if($moduleId!=""){
+        $modulePrefix = eF_getTableData('module_vlabs_shoppingcart_dbadmin', 'moduleprefix', 'id='. $moduleId);
+
+        //echo '<script type="text/javascript">alert("Current theme  is: ' . $tid[0]['name'] . '")</script>';
+/*jh this is a good Idea but since the order in which tables are exported
+and exported matters due to referential contraints, this can be done
+as a second phase since time is of the escence now!
+
+        $tableList ="";
+
+        $sql = 'select TABLE_NAME from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "' . $modulePrefix[0]['moduleprefix'] .'%"';
+        $result = eF_executeQuery($sql);
+        $tables_array = array();
+        if($result!=null){
+            foreach($result as $r){
+                $t_array = array(
+                    "tableName"=>$r['TABLE_NAME']
+                );
+                array_push($tables_array,$t_array);
+                $tableList .= $r['TABLE_NAME'] . " ";
+            }
+
+
+        }
+        //echo "list of tables: " .PHP_EOL;
+        //echo $tableList;
+        //var_dump($tables_array);
+        $output = shell_exec('mysqldump -u '.G_DBUSER.' -p'.G_DBPASSWD.' --no-create-info efront ' . $tableList .' >'. G_ROOTPATH .'www/modules/NEW_module_vlabs_shoppingcart_data.sql');
+*/
+        $output = shell_exec('mysqldump -u '.G_DBUSER.' -p'.G_DBPASSWD.' --no-create-info efront module_vlabs_shoppingcart module_vlabs_shoppingcart_store_inventory module_vlabs_shoppingcart_order module_vlabs_shoppingcart_payment_method module_vlabs_shoppingcart_user_payment module_vlabs_shoppingcart_order_summary module_vlabs_shoppingcart_package_summary module_vlabs_shoppingcart_preassignment module_vlabs_shoppingcart_log module_vlabs_shoppingcart_dbadmin >'. G_ROOTPATH .'www/modules/'.$outputfile);
+
+        echo "pass";
+    }else{
+       echo "failed";
+    }
+}
+
+if ($action =="deleteData"){
+
+    $moduleId ="";
+    $outputfile = "NEW_module_vlabs_shoppingcart_data.sql";
+    if (isset($_POST['modId'])) {
+        $moduleId = $_POST['modId'];
+    } else {
+        $moduleId = "";
+    }
+
+    $passfail = "";
+//echo "moduleId is: " .$moduleId . PHP_EOL;
+
+    if($moduleId!=""){
+        $modulePrefix = eF_getTableData('module_vlabs_shoppingcart_dbadmin', 'moduleprefix', 'id='. $moduleId);
+
+
+
+                $sql = 'select TABLE_NAME from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "' . $modulePrefix[0]['moduleprefix'] .'%"';
+                $result = eF_executeQuery($sql);
+                if($result!=null){
+                    foreach($result as $r) {
+                        //jh NOTE: this needs to be changed once used in the vlabs module
+                        //so that it works for all modules! so the table should be named
+                        //module_vlabs_dbadmin instead.
+                        if ($r['TABLE_NAME'] != "module_vlabs_shoppingcart_dbadmin") {
+                            $sql = 'DELETE ' . $r['TABLE_NAME'] . ' FROM ' . $r['TABLE_NAME'];
+                            $result = eF_executeQuery($sql);
+                            //echo "data deletion action result is: " .PHP_EOL;
+                            //var_dump($result);
+                            if ($result != null) {
+                                $passfail = "pass";
+                            } else {
+                                $passfail = "fail";
+                                break;
+                            }
+                        }
+                    }
+
+                }
+                //echo "list of tables: " .PHP_EOL;
+                //echo $tableList;
+                //var_dump($tables_array);
+
+
+        echo $passfail;
+    }else{
+        echo "fail";
+    }
+}
 
 ?>

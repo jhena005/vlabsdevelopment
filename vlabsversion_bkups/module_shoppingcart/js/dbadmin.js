@@ -7,6 +7,7 @@
 var dbadmin_table;
 var dbadminphpURL = "/modules/module_shoppingcart/server/dbadmin.php";   //jh original"../server/orders.php";
 
+var dbadmin_open_validation_forms = new Array();
 
 
 function openDbadminTab(){
@@ -114,12 +115,14 @@ function dbadmin_openDetailsRow(nTr){
 	jQuery("#schemaFunctions"+aData[0]).click(function(){  //jh here is the event handler for this button!!
         $(nTr).css("font-weight","bold");
         $(containerId).empty();
-        schemaFunctions_load(containerId, nTr, aData[0]);
+        schemaFunctions_load(containerId, nTr, aData[0],aData[2]);
 	});
 
     jQuery("#dataFunctions"+aData[0]).button();
     jQuery("#dataFunctions"+aData[0]).click(function(){  //jh here is the event handler for this button!!
-        dataFunctions_load(aData[0]);
+        $(nTr).css("font-weight","bold");
+        $(containerId).empty();
+        dataFunctions_load(containerId,nTr,aData[0],aData[2]);
     });
 
 
@@ -146,41 +149,240 @@ function dbadmin_formatDetails ( oTable, nTr )
 
 
 
-function schemaFunctions_load(containerId, nTr, id)
+function schemaFunctions_load(containerId, nTr, id,moduleName)
 {
+
         $(containerId).empty();
         $(containerId).hide();
 
         $(containerId).load("forms/manageSchema.html", function(){
-
-        $(containerId).show();
-
-                                $(containerId+" .cancel").click(function(){
-                                    $(containerId).slideUp(400, function(){
-                                        $(containerId).empty();
-                                        $(nTr).css("color","");
-                                        dbadmin_table.fnClose( nTr );
-                                        pre_removeValidationForm(containerId);
-                                    });
-                                });
+            $(containerId).show();
+                $(containerId+" .cancel").click(function(){
+                    $(containerId).slideUp(400, function(){
+                        $(containerId).empty();
+                        $(nTr).css("font-weight","normal");
+                        dbadmin_table.fnClose( nTr );
+                    });
+                });
+            $(containerId+" .cancel").click(function(){
+                $(containerId).slideUp(400, function(){
+                    $(containerId).empty();
+                    $(nTr).css("font-weight","normal");
+                    window.alert("id is: " + id );
+                    dbadmin_table.fnClose( nTr );
+                });
+            });
         });
 }
 
-function dataFunctions_load(moduleid)
+function dataFunctions_load(containerId, nTr, id,moduleName)
 {
 
-    return 0;
+    $(containerId).empty();
+    $(containerId).hide();
+
+    $(containerId).load("forms/manageData.html", function(){
+
+        $(containerId+" .cancel").button();
+        $(containerId+" .exportD").button();
+        $(containerId+" .importD").button();
+        $(containerId+" .deleteD").button();
+        //$(containerId+" .inputFile").input();
+        $(containerId).show();
+
+
+        $(containerId+" .importD").click(function(){
+            /*alert("in dataFunctions_load");*/
+            //alert("It works!");
+                //$(containerId+" .inputF").click();
+
+             document.getElementById("inputF").click();
+            //document.getElementById("inputF").click();
+            var control = document.getElementById("inputF");
+
+            control.addEventListener("change", function(event) {
+
+                // When the control has changed, there are new files
+
+                var i = 0,
+                    files = control.files,
+                    len = files.length;
+
+                for (; i < len; i++) {
+                    alert("Filename: " + files[i].name);
+                    console.log("Filename: " + files[i].name);
+                    alert("Type: " + files[i].type);
+                    alert("Size: " + files[i].size + " bytes");
+                }
+
+            }, false);
+
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var contents = event.target.result;
+                console.log("File contents: " + contents);
+            };
+
+            reader.onerror = function(event) {
+                console.error("File could not be read! Code " + event.target.error.code);
+            };
+
+            reader.readAsText(control);
+            //alert("wala!");
+/*
+            if (fullPath) {
+                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                var filename = fullPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                alert(filename);
+            }
+*/
+
+            //dbadmin_importData(id,moduleName);
+        });
+
+        $(containerId+" .exportD").click(function(){
+            /*alert("in dataFunctions_load");*/
+            dbadmin_exportData(id,moduleName);
+        });
+
+        $(containerId+" .deleteD").click(function(){
+            /*alert("in dataFunctions_load");*/
+            dbadmin_deleteData(id,moduleName);
+        });
+
+        $(containerId+" .cancel").click(function(){
+            $(containerId).slideUp(400, function(){
+                $(containerId).empty();
+                $(nTr).css("font-weight","normal");
+                dbadmin_table.fnClose( nTr );
+                pre_removeValidationForm(containerId);
+            });
+             /*alert("in dataFunctions_load");*/
+        });
+    });
+
 }
 
-function createLoadingDivAfter(containerId, message){
+function dbadmin_exportData(id,moduleName)
+{
+    var role = $("#role").val();
+    //window.alert("userid = " + userid +  " role is: " + role);
+    //var userid = "admin";  //jh changed:$("#userid").val()
+    //var role = "admin";  //jh changed:$("#role").val();
 
-    var msg = message || "Loading";
-    var loadingDivId = containerId.substring(1)+"_loading";
-    var div ='<div id="'+loadingDivId+'" class="message">';
-    div+= '<span class="image"><img alt="loading" src="/modules/css/loading_1.gif" /></span>';
-    div+= '<p class="loading">'+msg+'</p>';
-    div+='</div>';
+    var action = 'exportData';
 
-    $(containerId).after(div);
+    //window.alert("BEFORE ajax section role= "+ role);
+    if(role=="administrator") {
+        $.ajax({
+            type: 'POST',
+            url: dbadminphpURL,
+            dataType: 'text',
+            data: {
+                action:action,
+                modId:id
+            },
+            success: function (data) {
+                //window.alert("in ajax section within success function");
+                if(data=='pass'){
+                    alert("Data export successful!");
+                }else{
+                    alert("Data export failed!");
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                removeLoadingDivAfter("#dbadminContainer");
+                displayError("#dbadminContainer", errorThrown);
+            }
+        });
+
+    }
+
 }
 
+function dbadmin_deleteData(id,moduleName)
+{
+    var role = $("#role").val();
+    //window.alert("userid = " + userid +  " role is: " + role);
+    //var userid = "admin";  //jh changed:$("#userid").val()
+    //var role = "admin";  //jh changed:$("#role").val();
+
+    var action = 'deleteData';
+
+    //window.alert("BEFORE ajax section role= "+ role);
+    if(role=="administrator") {
+
+        var r = confirm("Deleting data for module: " + moduleName + " Make sure you have a backup of the data and confirm.");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: dbadminphpURL,
+                dataType: 'text',
+                data: {
+                    action:action,
+                    modId:id
+                },
+                success: function (data) {
+                    //window.alert("in ajax section within success function");
+                    if (data == 'pass') {
+                        alert("Data deletion successful!");
+                    } else {
+                        alert("Data deletion failed!");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    removeLoadingDivAfter("#dbadminContainer");
+                    displayError("#dbadminContainer", errorThrown);
+                }
+            });
+
+        }
+    }
+}
+
+
+function dbadmin_importData(id,moduleName)
+{
+    var role = $("#role").val();
+    //window.alert("userid = " + userid +  " role is: " + role);
+    //var userid = "admin";  //jh changed:$("#userid").val()
+    //var role = "admin";  //jh changed:$("#role").val();
+
+    var action = 'importData';
+
+    //window.alert("BEFORE ajax section role= "+ role);
+    if(role=="administrator") {
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: dbadminphpURL,
+                dataType: 'text',
+                data: {
+                    action:action,
+                    modId:id
+                },
+                success: function (data) {
+                    //window.alert("in ajax section within success function");
+                    if (data == 'pass') {
+                        alert("Data deletion successful!");
+                    } else {
+                        alert("Data deletion failed!");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    removeLoadingDivAfter("#dbadminContainer");
+                    displayError("#dbadminContainer", errorThrown);
+                }
+            });
+
+        }
+
+}

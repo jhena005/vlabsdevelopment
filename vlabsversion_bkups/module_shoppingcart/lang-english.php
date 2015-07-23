@@ -1,4 +1,4 @@
 <?php
-define("_MODULE_EMPTY_MODULEEMPTY", "Empty module");
+define("_MODULE_SHOPPINGCART", "shoppingcart");
 
 ?>

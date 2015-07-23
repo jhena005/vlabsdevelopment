@@ -96,11 +96,11 @@ function reloadStoreFront()
         pre_reload();
 
         //vLabs DB Administration
-        $("#tabs ul").append('<li><a href="#dbadminTab"><span>vLabs DB Administration</span></a></li>');
+        $("#tabs ul").append('<li><a href="#dbadminTab"><span>vLabs DB Admin</span></a></li>');
         var div = '<div id="dbadminTab">';
         div+='			<div id="dbadminWrapper"class="container">';
         div+='				<p class="tableTop">';
-        div+='					<span class="page-title">vLabs DB Administration</span>';
+        div+='					<span class="page-title">vLabs DB Admin</span>';
         div+='				</p>';
         div+='				<div id="dbadminContainer"></div>';
         div+='			</div>';

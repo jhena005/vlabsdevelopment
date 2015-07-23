@@ -4,7 +4,7 @@ function createLoadingDivAfter(containerId, message){
 	var msg = message || "Loading";
 	var loadingDivId = containerId.substring(1)+"_loading";
     var div ='<div id="'+loadingDivId+'" class="message">';
-    div+= '<span class="image"><img alt="loading" src="/modules/css/loading_1.gif" /></span>';
+    div+= '<span class="image"><img alt="loading" src="../css/loading_1.gif" /></span>';
     div+= '<p class="loading">'+msg+'</p>';
     div+='</div>';
 
