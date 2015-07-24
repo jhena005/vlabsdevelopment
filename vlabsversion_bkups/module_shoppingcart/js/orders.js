@@ -18,6 +18,8 @@ function ord_reload()
 {
 
 
+
+
 	$("#orderItemsWrapper").hide();
 
     $("#ordersWrapper").show();

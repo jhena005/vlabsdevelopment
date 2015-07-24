@@ -19,6 +19,16 @@ if (isset($_POST['action'])) {
 
 if ($action == "reload") {
 
+    $sql = 'SELECT COUNT(*) FROM information_schema.tables  WHERE table_schema = "efront"  AND table_name = "module_vlabs_shoppingcart_order"';
+    $tcount = eF_executeQuery($sql);
+    //echo "checking if orders table exists: " . PHP_EOL;
+    //var_dump($tcount);
+    foreach($tcount as $t){
+        if($t['COUNT(*)'] < 1 ) {
+            echo json_encode(array());
+            return;
+        }
+    }
 	
 
 

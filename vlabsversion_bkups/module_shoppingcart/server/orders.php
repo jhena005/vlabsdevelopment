@@ -75,7 +75,7 @@ if (isset($_POST['email'])) {
 if ($action == "reloadOrders") {
 
 	//echo '<script type="text/javascript">alert("In reloadOrders")</script>';
-	
+
 	if (isset($_POST['userid'])) {
 		$userid = $_POST['userid'];
 	} else {
@@ -126,7 +126,18 @@ if ($action == "reloadOrders") {
 
 	//Reload all orders of all users. Only used for administartor view
 } else if ($action == "reloadOrdersAll") {	//jh original:  $action == "reloadOrdersAll"
-		
+
+    $sql = 'SELECT COUNT(*) FROM information_schema.tables  WHERE table_schema = "efront"  AND table_name = "module_vlabs_shoppingcart_order"';
+    $tcount = eF_executeQuery($sql);
+    //echo "checking if orders table exists: " . PHP_EOL;
+    //var_dump($tcount);
+    foreach($tcount as $t){
+        if($t['COUNT(*)'] < 1 ) {
+            echo json_encode(array());
+            return;
+        }
+    }
+
 	//$adminId = "admin"; //jh 
 	//$adminId = $_SESSION["userid"];
 	//echo "adminId is: " . $adminId;

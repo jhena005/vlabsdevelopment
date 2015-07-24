@@ -156,23 +156,83 @@ function schemaFunctions_load(containerId, nTr, id,moduleName)
         $(containerId).hide();
 
         $(containerId).load("forms/manageSchema.html", function(){
+
+            $(containerId+" .cancel").button();
+            $(containerId+" .exportS").button();
+            $(containerId+" .importS").button();
+            $(containerId+" .deleteS").button();
+
             $(containerId).show();
-                $(containerId+" .cancel").click(function(){
-                    $(containerId).slideUp(400, function(){
-                        $(containerId).empty();
-                        $(nTr).css("font-weight","normal");
-                        dbadmin_table.fnClose( nTr );
-                    });
-                });
+
+            $(containerId+" .importS").click(function(){
+
+                // jh code before ajax
+                document.getElementById("inputS").click();
+                //document.getElementById("inputF").click();
+                var control = document.getElementById("inputS");
+
+                control.addEventListener("change", function(event) {
+                    /*
+                     var i = 0,
+                     files = control.files,
+                     len = files.length;
+
+                     for (; i < len; i++) {
+                     //alert("Filename: " + files[i].name);
+                     //console.log("Filename: " + files[i].name);
+                     //alert("Type: " + files[i].type);
+                     //alert("Size: " + files[i].size + " bytes");
+                     }
+                     */
+
+                    var file = control.files[0];
+                    var fData = new FormData();
+                    fData.append('selectedfile', this.files[0]);
+
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var contents = event.target.result;
+                        //console.log("File contents: " + contents);
+                        var xhr = new XMLHttpRequest;
+                        xhr.open('POST', '/modules/module_shoppingcart/server/datahandlerS.php', true);
+                        xhr.send(contents);
+                        alert("Schema import Successful!");
+                    };
+
+                    reader.onerror = function(event) {
+                        alert("File could not be read! Code " + event.target.error.code);
+                    };
+
+                    reader.readAsText(this.files[0]);
+
+                    console.log("HELLO!! File contents: " + contents);
+
+                }, false);
+
+                //dbadmin_importData(id,moduleName);
+            });
+
+            $(containerId+" .exportS").click(function(){
+                /*alert("in dataFunctions_load");*/
+                dbadmin_exportSchema(id,moduleName);
+            });
+
+            $(containerId+" .deleteS").click(function(){
+                /*alert("in dataFunctions_load");*/
+                dbadmin_deleteSchema(id,moduleName);
+            });
+
             $(containerId+" .cancel").click(function(){
                 $(containerId).slideUp(400, function(){
                     $(containerId).empty();
                     $(nTr).css("font-weight","normal");
-                    window.alert("id is: " + id );
                     dbadmin_table.fnClose( nTr );
+                    pre_removeValidationForm(containerId);
                 });
+                /*alert("in dataFunctions_load");*/
             });
         });
+
 }
 
 function dataFunctions_load(containerId, nTr, id,moduleName)
@@ -192,65 +252,6 @@ function dataFunctions_load(containerId, nTr, id,moduleName)
 
 
         $(containerId+" .importD").click(function(){
-            /*alert("in dataFunctions_load");*/
-            //alert("It works!");
-                //$(containerId+" .inputF").click();
-
-            /*
-            var form = document.getElementById("file-form");
-            var fileSelect = document.getElementById("file-select");
-            var uploadButton = document.getElementById("upload-button");
-
-
-            form.onsubmit = function(event) {
-                event.preventDefault();
-
-                // Update button text.
-                uploadButton.innerHTML = 'Uploading...';
-
-                // The rest of the code will go here...
-                // Get the selected files from the input.
-                var files = fileSelect.files;
-                // Create a new FormData object.
-                var formData = new FormData();
-                // Loop through each of the selected files.
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-
-                    // Check the file type.
-                    if (!file.type.match('test.*')) {
-                        continue;
-                    }
-
-                    // Add the file to the request.
-                    formData.append('photos[]', String);
-
-                }
-
-                // Set up the request.
-                var xhr = new XMLHttpRequest();
-                // Open the connection.
-                xhr.open('POST', '/modules/module_shoppingcart/server/datahandler.php', true);
-
-                // Set up a handler for when the request finishes.
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        // File(s) uploaded.
-                        uploadButton.innerHTML = 'Upload';
-                    } else {
-                        alert('An error occurred!');
-                    }
-                };
-
-                // Send the Data.
-                xhr.send(formData);
-
-
-
-            }
-
-            */
-
 
             // jh code before ajax
             document.getElementById("inputF").click();
@@ -258,9 +259,7 @@ function dataFunctions_load(containerId, nTr, id,moduleName)
             var control = document.getElementById("inputF");
 
             control.addEventListener("change", function(event) {
-
-                // When the control has changed, there are new files
-
+/*
                 var i = 0,
                     files = control.files,
                     len = files.length;
@@ -271,90 +270,31 @@ function dataFunctions_load(containerId, nTr, id,moduleName)
                     //alert("Type: " + files[i].type);
                     //alert("Size: " + files[i].size + " bytes");
                 }
+*/
 
-                //var myFile = control.prop('files');
                 var file = control.files[0];
                 var fData = new FormData();
                 fData.append('selectedfile', this.files[0]);
-/* reads file but cannot output contents
-                //var r = new FileReader();
-                r.readAsText(this.files[0]);
-*/
-                //alert(r.result);
 
                 var reader = new FileReader();
                 reader.onload = function(event) {
                     var contents = event.target.result;
                     //console.log("File contents: " + contents);
                     var xhr = new XMLHttpRequest;
-                    xhr.open('POST', '/modules/module_shoppingcart/server/datahandler.php', true);
+                    xhr.open('POST', '/modules/module_shoppingcart/server/datahandlerD.php', true);
                     xhr.send(contents);
+                    alert("Data import Successful!");
                 };
 
                 reader.onerror = function(event) {
-                    console.error("File could not be read! Code " + event.target.error.code);
+                    alert("File could not be read! Code " + event.target.error.code);
                 };
 
                 reader.readAsText(this.files[0]);
 
                 console.log("HELLO!! File contents: " + contents);
 
-/*
-                $.ajax({
-                    type: 'POST',
-                    url: '/modules/module_shoppingcart/server/datahandler.php',
-                    dataType: 'text',
-                    data: {
-                        filedata: fData
-                    },
-                    success: function (data) {
-                        //window.alert("in ajax section within success function");
-                        if (data == 'pass') {
-                            alert("Data export successful!");
-                        } else {
-                            alert("Data export failed!");
-                        }
-
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        removeLoadingDivAfter("#dbadminContainer");
-                        displayError("#dbadminContainer", errorThrown);
-                    }
-                });
-*/
-                /*
-                $.ajax({
-                    type: "POST",             // Type of request to be send, called as method
-                    url: '/modules/module_shoppingcart/server/datahandler.php', // Url to which the request is send
-                    data: fData, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-                    contentType: false,       // The content type used when sending data to the server.
-                    cache: false,             // To unable request pages to be cached
-                    processData: false,        // To send DOMDocument or non processed data file it is set to false
-                    success: function(data)   // A function to be called if request succeeds
-                    {
-                        //$('#loading').hide();
-                        //$("#message").html(data);
-                    }
-                });
-                */
-
-
             }, false);
-
-
-
-
-            //alert("wala!");
-/*
-            if (fullPath) {
-                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-                var filename = fullPath.substring(startIndex);
-                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                    filename = filename.substring(1);
-                }
-                alert(filename);
-            }
-*/
 
             //dbadmin_importData(id,moduleName);
         });
@@ -420,6 +360,87 @@ function dbadmin_exportData(id,moduleName)
 
 }
 
+function dbadmin_exportSchema(id,moduleName)
+{
+    var role = $("#role").val();
+    //window.alert("userid = " + userid +  " role is: " + role);
+    //var userid = "admin";  //jh changed:$("#userid").val()
+    //var role = "admin";  //jh changed:$("#role").val();
+
+    var action = 'exportSchema';
+
+    //window.alert("BEFORE ajax section role= "+ role);
+    if(role=="administrator") {
+        $.ajax({
+            type: 'POST',
+            url: dbadminphpURL,
+            dataType: 'text',
+            data: {
+                action:action,
+                modId:id
+            },
+            success: function (data) {
+                //window.alert("in ajax section within success function");
+                if(data=='pass'){
+                    alert("Schema export successful!");
+                }else{
+                    alert("Schema export failed!");
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                removeLoadingDivAfter("#dbadminContainer");
+                displayError("#dbadminContainer", errorThrown);
+            }
+        });
+
+    }
+
+}
+
+function dbadmin_deleteSchema(id,moduleName){
+
+    var role = $("#role").val();
+    //window.alert("userid = " + userid +  " role is: " + role);
+    //var userid = "admin";  //jh changed:$("#userid").val()
+    //var role = "admin";  //jh changed:$("#role").val();
+
+    var action = 'deleteSchema';
+
+    //window.alert("BEFORE ajax section role= "+ role);
+    if(role=="administrator") {
+
+        var r = confirm("Deleting schema for module: " + moduleName + " Make sure you have a backup of the data/schema and confirm.");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: dbadminphpURL,
+                dataType: 'text',
+                data: {
+                    action:action,
+                    modId:id
+                },
+                success: function (data) {
+                    //window.alert("in ajax section within success function");
+                    if (data == 'pass') {
+                        alert("Schema deletion successful!");
+                    } else {
+                        alert("Schema deletion failed!");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    removeLoadingDivAfter("#dbadminContainer");
+                    displayError("#dbadminContainer", errorThrown);
+                }
+            });
+
+        }
+    }
+
+
+}
+
 function dbadmin_deleteData(id,moduleName)
 {
     var role = $("#role").val();
@@ -461,7 +482,10 @@ function dbadmin_deleteData(id,moduleName)
     }
 }
 
+function dbadmin_importSchema(id,moduleName){
 
+}
+/*
 function dbadmin_importData(id,moduleName)
 {
     var role = $("#role").val();
@@ -502,3 +526,4 @@ function dbadmin_importData(id,moduleName)
         }
 
 }
+*/

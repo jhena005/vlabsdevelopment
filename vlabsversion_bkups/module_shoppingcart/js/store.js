@@ -96,8 +96,7 @@ function sto_reloadStore()
 //Store Manager
 
 function sto_reloadStoreManager()
-{	
-
+{
 
 
 	$("#storeManagerContainer").html("");
