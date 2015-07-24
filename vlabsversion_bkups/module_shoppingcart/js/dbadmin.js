@@ -196,7 +196,64 @@ function dataFunctions_load(containerId, nTr, id,moduleName)
             //alert("It works!");
                 //$(containerId+" .inputF").click();
 
-             document.getElementById("inputF").click();
+            /*
+            var form = document.getElementById("file-form");
+            var fileSelect = document.getElementById("file-select");
+            var uploadButton = document.getElementById("upload-button");
+
+
+            form.onsubmit = function(event) {
+                event.preventDefault();
+
+                // Update button text.
+                uploadButton.innerHTML = 'Uploading...';
+
+                // The rest of the code will go here...
+                // Get the selected files from the input.
+                var files = fileSelect.files;
+                // Create a new FormData object.
+                var formData = new FormData();
+                // Loop through each of the selected files.
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    // Check the file type.
+                    if (!file.type.match('test.*')) {
+                        continue;
+                    }
+
+                    // Add the file to the request.
+                    formData.append('photos[]', String);
+
+                }
+
+                // Set up the request.
+                var xhr = new XMLHttpRequest();
+                // Open the connection.
+                xhr.open('POST', '/modules/module_shoppingcart/server/datahandler.php', true);
+
+                // Set up a handler for when the request finishes.
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // File(s) uploaded.
+                        uploadButton.innerHTML = 'Upload';
+                    } else {
+                        alert('An error occurred!');
+                    }
+                };
+
+                // Send the Data.
+                xhr.send(formData);
+
+
+
+            }
+
+            */
+
+
+            // jh code before ajax
+            document.getElementById("inputF").click();
             //document.getElementById("inputF").click();
             var control = document.getElementById("inputF");
 
@@ -209,25 +266,84 @@ function dataFunctions_load(containerId, nTr, id,moduleName)
                     len = files.length;
 
                 for (; i < len; i++) {
-                    alert("Filename: " + files[i].name);
-                    console.log("Filename: " + files[i].name);
-                    alert("Type: " + files[i].type);
-                    alert("Size: " + files[i].size + " bytes");
+                    //alert("Filename: " + files[i].name);
+                    //console.log("Filename: " + files[i].name);
+                    //alert("Type: " + files[i].type);
+                    //alert("Size: " + files[i].size + " bytes");
                 }
+
+                //var myFile = control.prop('files');
+                var file = control.files[0];
+                var fData = new FormData();
+                fData.append('selectedfile', this.files[0]);
+/* reads file but cannot output contents
+                //var r = new FileReader();
+                r.readAsText(this.files[0]);
+*/
+                //alert(r.result);
+
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var contents = event.target.result;
+                    //console.log("File contents: " + contents);
+                    var xhr = new XMLHttpRequest;
+                    xhr.open('POST', '/modules/module_shoppingcart/server/datahandler.php', true);
+                    xhr.send(contents);
+                };
+
+                reader.onerror = function(event) {
+                    console.error("File could not be read! Code " + event.target.error.code);
+                };
+
+                reader.readAsText(this.files[0]);
+
+                console.log("HELLO!! File contents: " + contents);
+
+/*
+                $.ajax({
+                    type: 'POST',
+                    url: '/modules/module_shoppingcart/server/datahandler.php',
+                    dataType: 'text',
+                    data: {
+                        filedata: fData
+                    },
+                    success: function (data) {
+                        //window.alert("in ajax section within success function");
+                        if (data == 'pass') {
+                            alert("Data export successful!");
+                        } else {
+                            alert("Data export failed!");
+                        }
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        removeLoadingDivAfter("#dbadminContainer");
+                        displayError("#dbadminContainer", errorThrown);
+                    }
+                });
+*/
+                /*
+                $.ajax({
+                    type: "POST",             // Type of request to be send, called as method
+                    url: '/modules/module_shoppingcart/server/datahandler.php', // Url to which the request is send
+                    data: fData, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+                    contentType: false,       // The content type used when sending data to the server.
+                    cache: false,             // To unable request pages to be cached
+                    processData: false,        // To send DOMDocument or non processed data file it is set to false
+                    success: function(data)   // A function to be called if request succeeds
+                    {
+                        //$('#loading').hide();
+                        //$("#message").html(data);
+                    }
+                });
+                */
+
 
             }, false);
 
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var contents = event.target.result;
-                console.log("File contents: " + contents);
-            };
 
-            reader.onerror = function(event) {
-                console.error("File could not be read! Code " + event.target.error.code);
-            };
 
-            reader.readAsText(control);
+
             //alert("wala!");
 /*
             if (fullPath) {
